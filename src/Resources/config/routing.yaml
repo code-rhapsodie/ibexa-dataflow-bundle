@@ -1,0 +1,3 @@
+coderhapsodie.ibexa_dataflow.controllers:
+    resource: '../../Controller/'
+    type: annotation

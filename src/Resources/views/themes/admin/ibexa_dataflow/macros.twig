@@ -1,0 +1,11 @@
+{% macro translateStatus(status) %}
+    {% if status == 0 %}
+        {{ 'coderhapsodie.ibexa_dataflow.job.status.pending'|trans }}
+    {% elseif status == 1 %}
+        {{ 'coderhapsodie.ibexa_dataflow.job.status.running'|trans }}
+    {% elseif status == 2 %}
+        {{ 'coderhapsodie.ibexa_dataflow.job.status.complete'|trans }}
+    {% else %}
+        {{ 'coderhapsodie.ibexa_dataflow.job.status.unknown'|trans }}
+    {% endif %}
+{% endmacro %}
