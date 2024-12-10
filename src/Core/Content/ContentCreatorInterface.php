@@ -11,3 +11,4 @@ interface ContentCreatorInterface
 {
     public function createFromStructure(ContentCreateStructure $structure): Content;
 }
+class_alias(ContentCreatorInterface::class, 'CodeRhapsodie\EzDataflowBundle\Core\Content\ContentCreatorInterface');

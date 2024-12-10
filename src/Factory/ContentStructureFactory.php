@@ -59,3 +59,4 @@ final class ContentStructureFactory implements ContentStructureFactoryInterface
         );
     }
 }
+class_alias(ContentStructureFactory::class, 'CodeRhapsodie\EzDataflowBundle\Factory\ContentStructureFactory');

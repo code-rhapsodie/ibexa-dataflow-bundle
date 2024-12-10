@@ -13,3 +13,4 @@ class UrlFieldComparator extends AbstractFieldComparator
         return $currentValue->link === $newValue->link && $currentValue->text === $newValue->text;
     }
 }
+class_alias(UrlFieldComparator::class, 'CodeRhapsodie\EzDataflowBundle\Core\FieldComparator\UrlFieldComparator');

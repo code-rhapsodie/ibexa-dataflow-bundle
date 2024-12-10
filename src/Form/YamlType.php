@@ -56,3 +56,4 @@ class YamlType extends AbstractType
         return 'coderhapsodie_port_yaml';
     }
 }
+class_alias(YamlType::class, 'CodeRhapsodie\EzDataflowBundle\Form\YamlType');

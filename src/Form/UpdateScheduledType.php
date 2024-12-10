@@ -45,3 +45,4 @@ class UpdateScheduledType extends AbstractType
         ]);
     }
 }
+class_alias(UpdateScheduledType::class, 'CodeRhapsodie\EzDataflowBundle\Form\UpdateScheduledType');

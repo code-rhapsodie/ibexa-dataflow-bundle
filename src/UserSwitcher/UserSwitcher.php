@@ -55,3 +55,4 @@ class UserSwitcher implements UserSwitcherInterface
         $this->permissionResolver->setCurrentUserReference(array_pop($this->userStack));
     }
 }
+class_alias(UserSwitcher::class, 'CodeRhapsodie\EzDataflowBundle\UserSwitcher\UserSwitcher');

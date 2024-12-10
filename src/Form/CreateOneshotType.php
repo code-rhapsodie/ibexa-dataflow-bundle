@@ -43,3 +43,4 @@ class CreateOneshotType extends AbstractType
         ]);
     }
 }
+class_alias(CreateOneshotType::class, 'CodeRhapsodie\EzDataflowBundle\Form\CreateOneshotType');

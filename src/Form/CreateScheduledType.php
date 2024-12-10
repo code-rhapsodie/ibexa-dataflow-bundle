@@ -55,3 +55,4 @@ class CreateScheduledType extends AbstractType
         ]);
     }
 }
+class_alias(CreateScheduledType::class, 'CodeRhapsodie\EzDataflowBundle\Form\CreateScheduledType');

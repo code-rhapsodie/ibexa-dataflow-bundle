@@ -15,3 +15,4 @@ interface FieldValueCreatorInterface
      */
     public function createValue(string $fieldTypeIdentifier, $hash): Value;
 }
+class_alias(FieldValueCreatorInterface::class, 'CodeRhapsodie\EzDataflowBundle\Core\Field\FieldValueCreatorInterface');

@@ -46,3 +46,4 @@ class LocationMatcher implements LocationMatcherInterface
         throw new NoMatchFoundException('No location matched provided value');
     }
 }
+class_alias(LocationMatcher::class, 'CodeRhapsodie\EzDataflowBundle\Matcher\LocationMatcher');

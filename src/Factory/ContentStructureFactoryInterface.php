@@ -18,3 +18,4 @@ interface ContentStructureFactoryInterface
      */
     public function transform(array $data, string $remoteId, string $language, string $contentType, $parentLocations, int $mode = ContentStructureFactoryInterface::MODE_INSERT_OR_UPDATE);
 }
+class_alias(ContentStructureFactoryInterface::class, 'CodeRhapsodie\EzDataflowBundle\Factory\ContentStructureFactoryInterface');

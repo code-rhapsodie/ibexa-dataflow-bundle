@@ -62,3 +62,4 @@ class ContentUpdater implements ContentUpdaterInterface
         return $this->contentService->publishVersion($draft->versionInfo);
     }
 }
+class_alias(ContentUpdater::class, 'CodeRhapsodie\EzDataflowBundle\Core\Content\ContentUpdater');

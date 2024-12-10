@@ -29,3 +29,4 @@ class UserTimezoneAwareDateTimeType extends AbstractType
         $builder->addModelTransformer(new UserTimezoneAwareDateTimeTransformer($this->userPreferenceService));
     }
 }
+class_alias(UserTimezoneAwareDateTimeType::class, 'CodeRhapsodie\EzDataflowBundle\Form\UserTimezoneAwareDateTimeType');

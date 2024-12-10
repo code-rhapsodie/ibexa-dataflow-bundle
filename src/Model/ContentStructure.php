@@ -30,3 +30,4 @@ abstract class ContentStructure
         return $this->fields;
     }
 }
+class_alias(ContentStructure::class, 'CodeRhapsodie\EzDataflowBundle\Model\ContentStructure');

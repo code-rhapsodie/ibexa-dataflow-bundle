@@ -11,3 +11,4 @@ interface ContentUpdaterInterface
 {
     public function updateFromStructure(ContentUpdateStructure $structure): Content;
 }
+class_alias(ContentUpdaterInterface::class, 'CodeRhapsodie\EzDataflowBundle\Core\Content\ContentUpdaterInterface');

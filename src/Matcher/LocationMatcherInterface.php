@@ -13,3 +13,4 @@ interface LocationMatcherInterface
      */
     public function matchLocation($valueToMatch): Location;
 }
+class_alias(LocationMatcherInterface::class, 'CodeRhapsodie\EzDataflowBundle\Matcher\LocationMatcherInterface');

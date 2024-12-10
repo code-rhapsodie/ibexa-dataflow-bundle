@@ -36,3 +36,4 @@ class ContentUpdateStructure extends ContentStructure
         return $this->id;
     }
 }
+class_alias(ContentUpdateStructure::class, 'CodeRhapsodie\EzDataflowBundle\Model\ContentUpdateStructure');

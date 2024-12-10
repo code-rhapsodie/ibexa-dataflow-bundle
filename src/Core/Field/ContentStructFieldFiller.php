@@ -60,3 +60,4 @@ class ContentStructFieldFiller implements ContentStructFieldFillerInterface
         throw UnsupportedFieldTypeException::create($fieldTypeIdentifier);
     }
 }
+class_alias(ContentStructFieldFiller::class, 'CodeRhapsodie\EzDataflowBundle\Core\Field\ContentStructFieldFiller');

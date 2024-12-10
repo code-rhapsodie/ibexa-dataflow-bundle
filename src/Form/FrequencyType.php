@@ -22,3 +22,4 @@ class FrequencyType extends AbstractType
         return 'coderhapsodie_port_frequency';
     }
 }
+class_alias(FrequencyType::class, 'CodeRhapsodie\EzDataflowBundle\Form\FrequencyType');

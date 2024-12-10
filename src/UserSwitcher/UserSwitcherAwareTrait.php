@@ -14,3 +14,5 @@ trait UserSwitcherAwareTrait
         $this->userSwitcher = $userSwitcher;
     }
 }
+
+class_alias(UserSwitcherAwareTrait::class, 'CodeRhapsodie\EzDataflowBundle\UserSwitcher\UserSwitcherAwareTrait');

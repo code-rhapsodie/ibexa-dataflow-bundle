@@ -67,3 +67,4 @@ class ContentCreateStructure extends ContentStructure
         $this->locations = $locations;
     }
 }
+class_alias(ContentCreateStructure::class, 'CodeRhapsodie\EzDataflowBundle\Model\ContentCreateStructure');

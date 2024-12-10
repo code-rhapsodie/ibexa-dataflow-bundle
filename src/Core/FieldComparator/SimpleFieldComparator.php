@@ -13,3 +13,4 @@ class SimpleFieldComparator extends AbstractFieldComparator
         return (string) $currentValue === (string) $newValue;
     }
 }
+class_alias(SimpleFieldComparator::class, 'CodeRhapsodie\EzDataflowBundle\Core\FieldComparator\SimpleFieldComparator');

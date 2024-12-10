@@ -27,3 +27,4 @@ class DefaultFieldValueCreator implements FieldValueCreatorInterface
         return $this->fieldTypeService->getFieldType($fieldTypeIdentifier)->fromHash($hash);
     }
 }
+class_alias(DefaultFieldValueCreator::class, 'CodeRhapsodie\EzDataflowBundle\Core\Field\DefaultFieldValueCreator');

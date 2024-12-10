@@ -14,3 +14,4 @@ class UnsupportedFieldTypeException extends \Exception
         ));
     }
 }
+class_alias(UnsupportedFieldTypeException::class, 'CodeRhapsodie\EzDataflowBundle\Exception\UnsupportedFieldTypeException');

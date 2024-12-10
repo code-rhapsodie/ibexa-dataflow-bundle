@@ -59,3 +59,4 @@ final class JobGateway
         $this->jobRepository->save($job);
     }
 }
+class_alias(JobGateway::class, 'CodeRhapsodie\EzDataflowBundle\Gateway\JobGateway');

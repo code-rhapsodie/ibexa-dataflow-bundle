@@ -22,3 +22,4 @@ abstract class RepositoryWriter implements WriterInterface, UserSwitcherAwareInt
         $this->userSwitcher->switchBack();
     }
 }
+class_alias(RepositoryWriter::class, 'CodeRhapsodie\EzDataflowBundle\Writer\RepositoryWriter');

@@ -49,3 +49,4 @@ class UserTimezoneAwareDateTimeTransformer implements DataTransformerInterface
         return new \DateTimeZone($tz);
     }
 }
+class_alias(UserTimezoneAwareDateTimeTransformer::class, 'CodeRhapsodie\EzDataflowBundle\Form\UserTimezoneAwareDateTimeTransformer');

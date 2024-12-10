@@ -71,3 +71,4 @@ class ContentWriter extends RepositoryWriter implements DelegateWriterInterface
         $this->logger->log($level, $message, $context);
     }
 }
+class_alias(ContentWriter::class, 'CodeRhapsodie\EzDataflowBundle\Writer\ContentWriter');

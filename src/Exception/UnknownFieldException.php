@@ -15,3 +15,4 @@ class UnknownFieldException extends \Exception
         ));
     }
 }
+class_alias(UnknownFieldException::class, 'CodeRhapsodie\EzDataflowBundle\Exception\UnknownFieldException');

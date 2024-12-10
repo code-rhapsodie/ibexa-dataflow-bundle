@@ -68,3 +68,4 @@ class NotModifiedContentFilter
         $this->logger->log($level, $message, $context);
     }
 }
+class_alias(NotModifiedContentFilter::class, 'CodeRhapsodie\EzDataflowBundle\Filter\NotModifiedContentFilter');

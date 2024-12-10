@@ -30,3 +30,4 @@ abstract class AbstractFieldComparator implements FieldComparatorInterface
      */
     abstract protected function compareValues(Value $currentValue, Value $newValue): bool;
 }
+class_alias(AbstractFieldComparator::class, 'CodeRhapsodie\EzDataflowBundle\Core\FieldComparator\AbstractFieldComparator');

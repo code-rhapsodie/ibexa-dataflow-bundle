@@ -24,3 +24,4 @@ class NovaSEOMetasFieldComparator extends AbstractFieldComparator
         return count($currentValue->metas) === count($newValue->metas);
     }
 }
+class_alias(NovaSEOMetasFieldComparator::class, 'CodeRhapsodie\EzDataflowBundle\Core\FieldComparator\NovaSEOMetasFieldComparator');

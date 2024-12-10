@@ -36,3 +36,4 @@ class DataflowTypeChoiceType extends AbstractType
         ]);
     }
 }
+class_alias(DataflowTypeChoiceType::class, 'CodeRhapsodie\EzDataflowBundle\Form\DataflowTypeChoiceType');

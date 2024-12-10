@@ -31,3 +31,4 @@ class CodeRhapsodieIbexaDataflowBundle extends Bundle
         $ibexaExtension->addPolicyProvider(new PolicyProvider());
     }
 }
+class_alias(CodeRhapsodieIbexaDataflowBundle::class, 'CodeRhapsodie\EzDataflowBundle\CodeRhapsodieIbexaDataflowBundle');
