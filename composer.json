@@ -1,5 +1,8 @@
 {
-    "name": "code-rhapsodie/ezdataflow-bundle",
+    "name": "code-rhapsodie/ibexa-dataflow-bundle",
+    "replace": {
+        "code-rhapsodie/ezdataflow-bundle": "*"
+    },
     "description": "Import/export bundle for Ibexa based on Code-Rhapsodie Dataflow",
     "type": "symfony-bundle",
     "keywords": ["dataflow", "import", "export", "data processing", "ibexa"],
@@ -61,10 +64,7 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "4.x-dev",
-            "dev-v3.x": "3.x-dev",
-            "dev-v2.x": "2.x-dev",
-            "dev-v1.x": "1.x-dev"
+            "dev-v4.x": "4.x-dev"
         }
     }
 }
