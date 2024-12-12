@@ -1,0 +1,70 @@
+{
+    "name": "code-rhapsodie/ezdataflow-bundle",
+    "description": "Import/export bundle for Ibexa based on Code-Rhapsodie Dataflow",
+    "type": "symfony-bundle",
+    "keywords": ["dataflow", "import", "export", "data processing", "ibexa"],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Jérémy J.",
+            "email": "jeremy@code-rhapsodie.fr",
+            "role": "Developer"
+        },
+        {
+            "name": "Jean-Baptiste Nahan",
+            "email": "jean-baptiste@code-rhapsodie.fr",
+            "role": "Developer"
+        },
+        {
+            "name": "Manuel Farrica",
+            "email": "manuel@code-rhapsodie.fr",
+            "role": "Developer"
+        },
+        {
+            "name": "Code Rhapsodie",
+            "homepage": "https://www.code-rhapsodie.fr/"
+        },
+        {
+            "name": "Other contributors",
+            "homepage": "https://github.com/code-rhapsodie/ezdataflow-bundle/graphs/contributors"
+        }
+
+    ],
+    "autoload": {
+        "psr-4": {
+            "CodeRhapsodie\\EzDataflowBundle\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "CodeRhapsodie\\EzDataflowBundle\\Tests\\": "tests/"
+        }
+    },
+    "require": {
+        "php": "^7.4||^8.0",
+        "code-rhapsodie/dataflow-bundle": "^3.0||^4.0",
+        "http-interop/http-factory-guzzle": "^1.2",
+        "ibexa/admin-ui": "^4.0",
+        "ibexa/core": "^4.0"
+    },
+    "require-dev": {
+        "doctrine/dbal": "^2.0|^3.0",
+        "phpunit/phpunit": "^7||^8||^9"
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "config": {
+        "sort-packages": true,
+        "allow-plugins": {
+            "php-http/discovery": true
+        }
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "4.x-dev",
+            "dev-v3.x": "3.x-dev",
+            "dev-v2.x": "2.x-dev",
+            "dev-v1.x": "1.x-dev"
+        }
+    }
+}

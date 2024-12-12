@@ -1,0 +1,60 @@
+{%- block content -%}
+    {% set choices = [
+        {
+            'value': 0,
+            'label': 'coderhapsodie.ezdataflow.history.filter.none'|trans,
+        },
+        {
+            'value': 1,
+            'label': 'coderhapsodie.ezdataflow.history.filter.non_empty_only'|trans,
+        },
+    ] %}
+
+    {% set source %}
+        <select id="ezdataflow_history_filter" class="form-control ibexa-input">
+            {% for choice in choices %}
+                <option value="{{ choice.value }}">
+                    {{ choice.label }}
+                </option>
+            {% endfor %}
+        </select>
+    {% endset %}
+
+    {% set actions %}
+        {{ include('@ibexadesign/ui/component/dropdown/dropdown.html.twig', {
+            source: source,
+            choices: choices,
+            value: filter,
+        }) }}
+    {% endset %}
+
+    {{ include('@ibexadesign/ezdataflow/parts/tab/job_list.html.twig', {
+        identifier: 'ezdataflow_history_results',
+        paginate_route: 'coderhapsodie.ezdataflow.history',
+        paginate_params: {'filter': filter},
+        headline: 'coderhapsodie.ezdataflow.history.title'|trans,
+        actions: actions
+    }) }}
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Manage ajax pagination
+            document.getElementById('ezdataflow_history_filter').addEventListener('change', function (e) {
+                e.preventDefault();
+                const loading = document.getElementById('loading_ezdataflow_history_results');
+                const results = document.getElementById('ezdataflow_history_results').querySelector('.ibexa-table');
+                loading.hidden = false;
+                results.innerHTML = '';
+                fetch('{{ path('coderhapsodie.ezdataflow.history') }}?filter=' + this.value)
+                    .then((r) => r.text())
+                    .then((content) => {
+                        const node = document.createElement('div');
+                        node.innerHTML = content;
+                        results.innerHTML = node.querySelector('#ezdataflow_history_results .ibexa-table').innerHTML;
+                        loading.hidden = true;
+                    })
+                ;
+            });
+        })
+    </script>
+{%- endblock -%}

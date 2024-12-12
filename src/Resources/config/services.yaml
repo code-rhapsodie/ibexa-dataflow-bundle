@@ -1,0 +1,177 @@
+imports:
+    - { resource: services/comparators.yaml }
+
+services:
+    _defaults:
+        public: false
+
+    coderhapsodie.dataflow.connection: "@ibexa.persistence.connection"
+
+    CodeRhapsodie\EzDataflowBundle\Controller\DashboardController:
+        public: true
+        tags:
+            - { name: controller.service_arguments }
+        arguments:
+            $jobGateway: '@CodeRhapsodie\EzDataflowBundle\Gateway\JobGateway'
+            $scheduledDataflowGateway: '@CodeRhapsodie\EzDataflowBundle\Gateway\ScheduledDataflowGateway'
+        calls:
+            - ['setContainer', ['@service_container']]
+            - ['performAccessCheck', []]
+
+    CodeRhapsodie\EzDataflowBundle\Controller\ScheduledDataflowController:
+        public: true
+        tags:
+            - { name: controller.service_arguments }
+        arguments:
+            $notificationHandler: '@Ibexa\Contracts\AdminUi\Notification\NotificationHandlerInterface'
+            $scheduledDataflowGateway: '@CodeRhapsodie\EzDataflowBundle\Gateway\ScheduledDataflowGateway'
+            $translator: '@translator'
+        calls:
+            - [ 'setContainer', [ '@service_container' ] ]
+            - [ 'performAccessCheck', [ ] ]
+
+    CodeRhapsodie\EzDataflowBundle\Controller\JobController:
+        public: true
+        tags:
+            - { name: controller.service_arguments }
+        arguments:
+            $jobGateway: '@CodeRhapsodie\EzDataflowBundle\Gateway\JobGateway'
+            $notificationHandler: '@Ibexa\Contracts\AdminUi\Notification\NotificationHandlerInterface'
+            $translator: '@translator'
+        calls:
+            - [ 'setContainer', [ '@service_container' ] ]
+            - [ 'performAccessCheck', [ ] ]
+
+    CodeRhapsodie\EzDataflowBundle\Writer\RepositoryWriter:
+        abstract: true
+        calls:
+            - ['setUserSwitcher', ['@CodeRhapsodie\EzDataflowBundle\UserSwitcher\UserSwitcherInterface']]
+
+    CodeRhapsodie\EzDataflowBundle\Writer\ContentWriter:
+        parent: 'CodeRhapsodie\EzDataflowBundle\Writer\RepositoryWriter'
+        public: false
+        arguments:
+            $creator: '@CodeRhapsodie\EzDataflowBundle\Core\Content\ContentCreatorInterface'
+            $updater: '@CodeRhapsodie\EzDataflowBundle\Core\Content\ContentUpdaterInterface'
+
+    CodeRhapsodie\EzDataflowBundle\UserSwitcher\UserSwitcherInterface: '@CodeRhapsodie\EzDataflowBundle\UserSwitcher\UserSwitcher'
+    CodeRhapsodie\EzDataflowBundle\UserSwitcher\UserSwitcher:
+        arguments:
+            $permissionResolver: '@Ibexa\Contracts\Core\Repository\PermissionResolver'
+            $userService: '@Ibexa\Contracts\Core\Repository\UserService'
+            $adminLoginOrId: '%coderhapsodie.ezdataflow.admin_login_or_id%'
+
+    CodeRhapsodie\EzDataflowBundle\Core\Content\ContentCreatorInterface: '@CodeRhapsodie\EzDataflowBundle\Core\Content\ContentCreator'
+    CodeRhapsodie\EzDataflowBundle\Core\Content\ContentCreator:
+        arguments:
+            $contentService: '@Ibexa\Contracts\Core\Repository\ContentService'
+            $contentTypeService: '@Ibexa\Contracts\Core\Repository\ContentTypeService'
+            $filler: '@CodeRhapsodie\EzDataflowBundle\Core\Field\ContentStructFieldFillerInterface'
+            $matcher: '@CodeRhapsodie\EzDataflowBundle\Matcher\LocationMatcherInterface'
+
+    CodeRhapsodie\EzDataflowBundle\Core\Content\ContentUpdaterInterface: '@CodeRhapsodie\EzDataflowBundle\Core\Content\ContentUpdater'
+    CodeRhapsodie\EzDataflowBundle\Core\Content\ContentUpdater:
+        arguments:
+            $contentService: '@Ibexa\Contracts\Core\Repository\ContentService'
+            $contentTypeService: '@Ibexa\Contracts\Core\Repository\ContentTypeService'
+            $filler: '@CodeRhapsodie\EzDataflowBundle\Core\Field\ContentStructFieldFillerInterface'
+
+    CodeRhapsodie\EzDataflowBundle\Core\Field\ContentStructFieldFillerInterface: '@CodeRhapsodie\EzDataflowBundle\Core\Field\ContentStructFieldFiller'
+    CodeRhapsodie\EzDataflowBundle\Core\Field\ContentStructFieldFiller:
+        arguments:
+            $fieldValueCreators: !tagged 'coderhapsodie.ezdataflow.field_value_creator'
+
+    CodeRhapsodie\EzDataflowBundle\Matcher\LocationMatcherInterface: '@CodeRhapsodie\EzDataflowBundle\Matcher\LocationMatcher'
+    CodeRhapsodie\EzDataflowBundle\Matcher\LocationMatcher:
+        arguments:
+            $locationService: '@Ibexa\Contracts\Core\Repository\LocationService'
+
+    CodeRhapsodie\EzDataflowBundle\Core\Field\DefaultFieldValueCreator:
+        arguments:
+            $fieldTypeService: '@Ibexa\Contracts\Core\Repository\FieldTypeService'
+        tags:
+            - { name: 'coderhapsodie.ezdataflow.field_value_creator', priority: -1000 }
+
+    CodeRhapsodie\EzDataflowBundle\EventSubscriber\MenuSubscriber:
+        tags: ['kernel.event_subscriber']
+
+    CodeRhapsodie\EzDataflowBundle\Factory\ContentStructureFactoryInterface: '@CodeRhapsodie\EzDataflowBundle\Factory\ContentStructureFactory'
+
+    CodeRhapsodie\EzDataflowBundle\Factory\ContentStructureFactory:
+        arguments:
+            $contentService: '@Ibexa\Contracts\Core\Repository\ContentService'
+
+    CodeRhapsodie\EzDataflowBundle\Form\DataflowTypeChoiceType:
+        arguments:
+            $registry: '@CodeRhapsodie\DataflowBundle\Registry\DataflowTypeRegistryInterface'
+        tags: ['form.type']
+
+    CodeRhapsodie\EzDataflowBundle\Form\CreateScheduledType:
+        tags: ['form.type']
+
+    CodeRhapsodie\EzDataflowBundle\Form\UpdateScheduledType:
+        tags: ['form.type']
+
+    CodeRhapsodie\EzDataflowBundle\Form\CreateOneshotType:
+        tags: ['form.type']
+
+    CodeRhapsodie\EzDataflowBundle\Form\UserTimezoneAwareDateTimeType:
+        arguments:
+            $userPreferenceService: '@Ibexa\Contracts\Core\Repository\UserPreferenceService'
+        tags: ['form.type']
+
+    CodeRhapsodie\EzDataflowBundle\Gateway\ScheduledDataflowGateway:
+        arguments:
+            $scheduledDataflowRepository: '@CodeRhapsodie\DataflowBundle\Repository\ScheduledDataflowRepository'
+
+    CodeRhapsodie\EzDataflowBundle\Gateway\JobGateway:
+        arguments:
+            $jobRepository: '@CodeRhapsodie\DataflowBundle\Repository\JobRepository'
+
+    CodeRhapsodie\EzDataflowBundle\Tab\RepeatingTab:
+        parent: Ibexa\Contracts\AdminUi\Tab\AbstractTab
+        public: false
+        arguments:
+            $httpKernelRuntime: '@twig.runtime.httpkernel'
+        tags:
+            - {name: ibexa.admin_ui.tab, group: coderhapsodie-ezdataflow}
+
+    CodeRhapsodie\EzDataflowBundle\Tab\OneshotTab:
+        parent: Ibexa\Contracts\AdminUi\Tab\AbstractTab
+        public: false
+        arguments:
+            $httpKernelRuntime: '@twig.runtime.httpkernel'
+        tags:
+            - {name: ibexa.admin_ui.tab, group: coderhapsodie-ezdataflow}
+
+    CodeRhapsodie\EzDataflowBundle\Tab\HistoryTab:
+        parent: Ibexa\Contracts\AdminUi\Tab\AbstractTab
+        public: false
+        arguments:
+            $httpKernelRuntime: '@twig.runtime.httpkernel'
+        tags:
+            - {name: ibexa.admin_ui.tab, group: coderhapsodie-ezdataflow}
+
+
+    CodeRhapsodie\EzDataflowBundle\Filter\NotModifiedContentFilter:
+        arguments:
+            $contentService: '@Ibexa\Contracts\Core\Repository\ContentService'
+            $comparator: '@CodeRhapsodie\EzDataflowBundle\Core\FieldComparator\FieldComparatorInterface'
+
+    CodeRhapsodie\EzDataflowBundle\Core\FieldComparator\FieldComparatorInterface: '@CodeRhapsodie\EzDataflowBundle\Core\FieldComparator\DelegatorFieldComparator'
+    CodeRhapsodie\EzDataflowBundle\Core\FieldComparator\DelegatorFieldComparator:
+
+    CodeRhapsodie\EzDataflowBundle\Core\FieldComparator\AbstractFieldComparator:
+        arguments:
+            $fieldTypeService: '@Ibexa\Contracts\Core\Repository\FieldTypeService'
+        abstract: true
+
+    _cr.admin_tabs.ezdataflow_group:
+        parent: Ibexa\AdminUi\Component\TabsComponent
+        autowire: true
+        autoconfigure: false
+        public: false
+        arguments:
+            $groupIdentifier: 'coderhapsodie-ezdataflow'
+        tags:
+            - { name: ibexa.admin_ui.component, group: 'coderhapsodie-ezdataflow' }

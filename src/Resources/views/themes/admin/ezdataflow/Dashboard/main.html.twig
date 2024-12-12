@@ -1,0 +1,85 @@
+{% extends "@ibexadesign/ui/layout.html.twig" %}
+
+{% block body_class %}ibexa-ezdataflow{% endblock %}
+
+{% block breadcrumbs %}
+    {% include '@ibexadesign/ui/breadcrumbs.html.twig' with { items: [
+        { value: 'breadcrumb.admin'|trans(domain='messages')|desc('Admin') },
+        { value: 'coderhapsodie.ezdataflow'|trans|desc('EzDataflow') }
+    ]} %}
+{% endblock %}
+
+{% block header %}
+    {% include '@ibexadesign/ui/page_title.html.twig' with {
+        title: 'coderhapsodie.ezdataflow'|trans|desc('EzDataflow'),
+    } %}
+{% endblock %}
+
+{% block content %}
+    {{ ibexa_render_component_group('coderhapsodie-ezdataflow', {'filter': app.request.query.get('filter', 0)}) }}
+
+    {% embed '@ibexadesign/ui/component/modal/modal.html.twig' with {
+        id: 'modal-history-details',
+        attr_dialog: {'style': 'max-width: 75vw;'},
+        title: 'coderhapsodie.ezdataflow.history.job.title'|trans,
+    } %}
+        {% block body_content '' %}
+    {% endembed %}
+
+    {% embed '@ibexadesign/ui/component/modal/modal.html.twig' with {
+        id: 'modal-history-log',
+        attr_dialog: {'style': 'max-width: 75vw;'},
+        title: 'coderhapsodie.ezdataflow.workflow.log.title'|trans,
+    } %}
+        {% block body_content '' %}
+    {% endembed %}
+
+    {% embed '@ibexadesign/ui/component/modal/modal.html.twig' with {
+        id: 'modal-history',
+        attr_dialog: {'style': 'max-width: 75vw;'},
+        title: 'coderhapsodie.ezdataflow.workflow.history.title'|trans,
+    } %}
+        {% block body_content '' %}
+    {% endembed %}
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const bindModalLinks = (modalId, linkSelector) => {
+                const modal = document.getElementById(modalId);
+                const modalBody = modal.querySelector('.modal-body');
+                document.addEventListener('click', (e) => {
+                    const link = e.target.closest(linkSelector);
+                    if (link) {
+                        e.preventDefault();
+                        modalBody.innerHTML = '';
+                        fetch(link.href)
+                            .then((r) => r.text())
+                            .then((content) => {
+                                modalBody.innerHTML = content;
+                            })
+                        ;
+
+                        return;
+                    }
+                })
+            }
+            bindModalLinks('modal-history-details', '.modal-history-details');
+            bindModalLinks('modal-history-log', '.modal-history-log');
+            bindModalLinks('modal-history', '.modal-history');
+
+            const labels = document.getElementById('ibexa-tab-label-coderhapsodie-ezdataflow-code-rhapsodie-ezdataflow-repeating')
+                .closest('ul').querySelectorAll('li.ibexa-tabs__tab');
+            const tabs = document.getElementById('ibexa-tab-coderhapsodie-ezdataflow-code-rhapsodie-ezdataflow-repeating')
+                .closest('.tab-content').querySelectorAll('.tab-pane');
+        });
+    </script>
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <style>
+        .ezdataflow-date .ibexa-dropdown {
+            min-width: 0;
+        }
+    </style>
+{% endblock %}
