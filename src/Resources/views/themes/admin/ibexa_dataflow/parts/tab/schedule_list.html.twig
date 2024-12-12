@@ -1,4 +1,4 @@
-{% set id = identifier|default('ezdataflow_schedule_results') %}
+{% set id = identifier|default('ibexa_dataflow_schedule_results') %}
 
 <div id="loading_{{ id }}" class="text-center" hidden>
     <svg class="ez-icon ez-icon--extra-large">
@@ -16,13 +16,13 @@
             {content: item.label},
             {content: item.frequency},
             {content: date(item.next)|ibexa_short_datetime},
-            {content: ('coderhapsodie.ezdataflow.' ~ (item.enabled ? 'yes' : 'no'))|trans},
+            {content: ('coderhapsodie.ibexa_dataflow.' ~ (item.enabled ? 'yes' : 'no'))|trans},
         ]) %}
 
         {% set col_raw %}
-            <a href="{{ path('coderhapsodie.ezdataflow.history.workflow', {id: item.id}) }}"
+            <a href="{{ path('coderhapsodie.ibexa_dataflow.history.workflow', {id: item.id}) }}"
                class="btn ibexa-btn ibexa-btn--ghost ibexa-btn--no-text modal-history"
-               title="{{ 'coderhapsodie.ezdataflow.workflow.list.history'|trans }}"
+               title="{{ 'coderhapsodie.ibexa_dataflow.workflow.list.history'|trans }}"
                data-bs-toggle="modal"
                data-bs-target="#modal-history"
             >
@@ -30,9 +30,9 @@
                     <use xlink:href="{{ ibexa_icon_path('history') }}"></use>
                 </svg>
             </a>
-            <a href="{{ path('coderhapsodie.ezdataflow.workflow.edit', {id: item.id}) }}"
+            <a href="{{ path('coderhapsodie.ibexa_dataflow.workflow.edit', {id: item.id}) }}"
                class="btn ibexa-btn ibexa-btn--ghost ibexa-btn--no-text modal-edit"
-               title="{{ 'coderhapsodie.ezdataflow.workflow.list.edit'|trans }}"
+               title="{{ 'coderhapsodie.ibexa_dataflow.workflow.list.edit'|trans }}"
                data-bs-toggle="modal"
                data-bs-target="#modal-edit-scheduled"
             >
@@ -41,27 +41,27 @@
                 </svg>
             </a>
             {% if item.enabled %}
-                <a href="{{ path('coderhapsodie.ezdataflow.workflow.disable', {id: item.id}) }}"
+                <a href="{{ path('coderhapsodie.ibexa_dataflow.workflow.disable', {id: item.id}) }}"
                    class="btn ibexa-btn ibexa-btn--ghost ibexa-btn--no-text"
-                   title="{{ 'coderhapsodie.ezdataflow.workflow.list.disable'|trans }}"
+                   title="{{ 'coderhapsodie.ibexa_dataflow.workflow.list.disable'|trans }}"
                 >
                     <svg class="ibexa-icon ibexa-icon--small ibexa-icon--logout" style="fill: #f7d000;">
                         <use xlink:href="{{ ibexa_icon_path('logout') }}"></use>
                     </svg>
                 </a>
             {% else %}
-                <a href="{{ path('coderhapsodie.ezdataflow.workflow.enable', {id: item.id}) }}"
+                <a href="{{ path('coderhapsodie.ibexa_dataflow.workflow.enable', {id: item.id}) }}"
                    class="btn ibexa-btn ibexa-btn--ghost ibexa-btn--no-text"
-                   title="{{ 'coderhapsodie.ezdataflow.workflow.list.enable'|trans }}"
+                   title="{{ 'coderhapsodie.ibexa_dataflow.workflow.list.enable'|trans }}"
                 >
                     <svg class="ibexa-icon ibexa-icon--small ibexa-icon--logout" style="fill: #00825c;">
                         <use xlink:href="{{ ibexa_icon_path('approved') }}"></use>
                     </svg>
                 </a>
             {% endif %}
-            <a href="{{ path('coderhapsodie.ezdataflow.workflow.delete', {id: item.id}) }}"
+            <a href="{{ path('coderhapsodie.ibexa_dataflow.workflow.delete', {id: item.id}) }}"
                class="btn ibexa-btn ibexa-btn--ghost ibexa-btn--no-text modal-delete"
-               title="{{ 'coderhapsodie.ezdataflow.workflow.list.delete'|trans }}"
+               title="{{ 'coderhapsodie.ibexa_dataflow.workflow.list.delete'|trans }}"
                data-name="{{ item.label }}"
                data-bs-toggle="modal"
                data-bs-target="#modal-delete-confirm"
@@ -81,16 +81,16 @@
     {% endfor %}
 
     {% embed '@ibexadesign/ui/component/table/table.html.twig' with {
-        headline: 'coderhapsodie.ezdataflow.workflow.list.title'|trans,
+        headline: 'coderhapsodie.ibexa_dataflow.workflow.list.title'|trans,
         head_cols: [
-            { content: 'coderhapsodie.ezdataflow.workflow.list.name'|trans },
-            { content: 'coderhapsodie.ezdataflow.workflow.list.frequency'|trans },
-            { content: 'coderhapsodie.ezdataflow.workflow.list.next_execution'|trans },
-            { content: 'coderhapsodie.ezdataflow.workflow.list.enabled'|trans },
+            { content: 'coderhapsodie.ibexa_dataflow.workflow.list.name'|trans },
+            { content: 'coderhapsodie.ibexa_dataflow.workflow.list.frequency'|trans },
+            { content: 'coderhapsodie.ibexa_dataflow.workflow.list.next_execution'|trans },
+            { content: 'coderhapsodie.ibexa_dataflow.workflow.list.enabled'|trans },
             { },
         ],
         body_rows,
-        empty_table_info_text: 'coderhapsodie.ezdataflow.workflow.list.empty'|trans,
+        empty_table_info_text: 'coderhapsodie.ibexa_dataflow.workflow.list.empty'|trans,
     } %}
         {% block header %}
             {% embed '@ibexadesign/ui/component/table/table_header.html.twig' %}
@@ -105,7 +105,7 @@
                             <use xlink:href="{{ ibexa_icon_path('create') }}"></use>
                         </svg>
                         <span class="ibexa-btn__label">
-                            {{ 'coderhapsodie.ezdataflow.workflow.new.submit'|trans|desc('Create') }}
+                            {{ 'coderhapsodie.ibexa_dataflow.workflow.new.submit'|trans|desc('Create') }}
                         </span>
                     </button>
                 {% endblock %}

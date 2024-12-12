@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace CodeRhapsodie\EzDataflowBundle\Writer;
+namespace CodeRhapsodie\IbexaDataflowBundle\Writer;
 
 use CodeRhapsodie\DataflowBundle\DataflowType\Writer\WriterInterface;
-use CodeRhapsodie\EzDataflowBundle\UserSwitcher\UserSwitcherAwareInterface;
-use CodeRhapsodie\EzDataflowBundle\UserSwitcher\UserSwitcherAwareTrait;
+use CodeRhapsodie\IbexaDataflowBundle\UserSwitcher\UserSwitcherAwareInterface;
+use CodeRhapsodie\IbexaDataflowBundle\UserSwitcher\UserSwitcherAwareTrait;
 
 abstract class RepositoryWriter implements WriterInterface, UserSwitcherAwareInterface
 {
@@ -22,3 +22,4 @@ abstract class RepositoryWriter implements WriterInterface, UserSwitcherAwareInt
         $this->userSwitcher->switchBack();
     }
 }
+class_alias(RepositoryWriter::class, 'CodeRhapsodie\EzDataflowBundle\Writer\RepositoryWriter');

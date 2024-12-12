@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace CodeRhapsodie\EzDataflowBundle\UserSwitcher;
+namespace CodeRhapsodie\IbexaDataflowBundle\UserSwitcher;
 
 use Ibexa\Contracts\Core\Repository\PermissionResolver;
 use Ibexa\Contracts\Core\Repository\UserService;
@@ -55,3 +55,4 @@ class UserSwitcher implements UserSwitcherInterface
         $this->permissionResolver->setCurrentUserReference(array_pop($this->userStack));
     }
 }
+class_alias(UserSwitcher::class, 'CodeRhapsodie\EzDataflowBundle\UserSwitcher\UserSwitcher');

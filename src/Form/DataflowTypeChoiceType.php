@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace CodeRhapsodie\EzDataflowBundle\Form;
+namespace CodeRhapsodie\IbexaDataflowBundle\Form;
 
 use CodeRhapsodie\DataflowBundle\Registry\DataflowTypeRegistryInterface;
 use Symfony\Component\Form\AbstractType;
@@ -36,3 +36,4 @@ class DataflowTypeChoiceType extends AbstractType
         ]);
     }
 }
+class_alias(DataflowTypeChoiceType::class, 'CodeRhapsodie\EzDataflowBundle\Form\DataflowTypeChoiceType');

@@ -8,15 +8,12 @@ Ibexa Dataflow bundle is intended to manage content imports from external data s
 > Note: before using this bundle, please read
 > the [Code Rhapsodie Dataflow bundle documentation](https://github.com/code-rhapsodie/dataflow-bundle/blob/master/README.md).
 
-> Command line notice: When you use Dataflow commands, **use `--siteaccess` instead of `--connection`** expect
+> Command line notice: When you use Dataflow commands, **use `--siteaccess` instead of `--connection`** except
 > for `code-rhapsodie:dataflow:dump-schema` command.
 
-| Ibexa Dataflow Version | Ibexa Content Version | Status                       |
-|---------------------|-----------------------|------------------------------|
-| 4.x                 | 4.x                   | :white_check_mark: Maintened |
-| 3.x                 | 3.x                   | :white_check_mark: Maintened |
-| 2.x                 | eZ Platform 2.5       | :x: Not maintened            |
-| 1.x                 | eZ Platform 2.5       | :x: Not maintained           |
+| Ibexa Dataflow Version | Ibexa Content Version | Status                        |
+|------------------------|-----------------------|-------------------------------|
+| 1.x                    | 4.x                   | :white_check_mark: Maintained |
 
 ## User Interface (UI)
 
@@ -32,12 +29,12 @@ Processes can be set to run either:
 ### Step 1: Install the bundle via composer
 
 ```shell script
-$ composer require code-rhapsodie/ezdataflow-bundle
+$ composer require code-rhapsodie/ibexa-dataflow-bundle
 ```
 
 ### Step 2: Enable the bundle
 
-> Note: The loading order between the Dataflow bundle and Ez Dataflow bundle is important. Dataflow must be loaded
+> Note: The loading order between the Dataflow bundle and Ibexa Dataflow bundle is important. Dataflow must be loaded
 > first.
 
 Add those two lines in the `config/bundles.php` file:
@@ -48,7 +45,7 @@ Add those two lines in the `config/bundles.php` file:
 return [
      // ...
     CodeRhapsodie\DataflowBundle\CodeRhapsodieDataflowBundle::class => ['all' => true],
-    CodeRhapsodie\EzDataflowBundle\CodeRhapsodieEzDataflowBundle::class => ['all' => true],
+    CodeRhapsodie\IbexaDataflowBundle\CodeRhapsodieIbexaDataflowBundle::class => ['all' => true],
     // ...
 ];
 ```
@@ -56,10 +53,10 @@ return [
 ### Step 3: Import bundle routing file
 
 ```yaml
-# config/routing/ezdataflow.yaml
+# config/routing/ibexa_dataflow.yaml
 
-_cr.dataflow:
-  resource: '@CodeRhapsodieEzDataflowBundle/Resources/config/routing.yaml'
+_cr.ibexa_dataflow:
+  resource: '@CodeRhapsodieIbexaDataflowBundle/Resources/config/routing.yaml'
 ```
 
 ### Step 4: Update the database schema
@@ -78,9 +75,9 @@ By default, the `ContentWriter` will publish contents using the `admin` user. If
 sufficient permissions), you can configure it like this:
 
 ```yaml
-# config/packages/code_rhapsodie_ez_dataflow.yaml
+# config/packages/code_rhapsodie_ibexa_dataflow.yaml
 
-code_rhapsodie_ez_dataflow:
+code_rhapsodie_ibexa_dataflow:
   # Integer values are assumed to be user ids, non-integer values are assumed to be user logins
   admin_login_or_id: webmaster
 ```
@@ -92,7 +89,7 @@ to [Code-Rhapsodie Dataflow type documentation](https://github.com/code-rhapsodi
 
 ## Use the ContentWriter
 
-To add or update Ibexa contents, you can use the `CodeRhapsodie\EzDataflowBundle\Writer\ContentWriter` writer.
+To add or update Ibexa contents, you can use the `CodeRhapsodie\IbexaDataflowBundle\Writer\ContentWriter` writer.
 
 ### Step 1: Inject the dependencies and add the writer
 
@@ -102,21 +99,15 @@ list like this:
 ```php
 // In your DataflowType
 
-use CodeRhapsodie\EzDataflowBundle\Writer\ContentWriter;
+use CodeRhapsodie\IbexaDataflowBundle\Writer\ContentWriter;
 use CodeRhapsodie\DataflowBundle\DataflowType\AbstractDataflowType;
 [...]
 
 class MyDataflowType extends AbstractDataflowType
 {
     //[...]
-    /**
-     * @var ContentWriter
-     */
-    private $contentWriter;
-
-    public function __construct(ContentWriter $contentWriter)
+    public function __construct(private readonly ContentWriter $contentWriter)
     {
-        $this->contentWriter = $contentWriter;
     }
     //[...]
     protected function buildDataflow(DataflowBuilder $builder, array $options): void
@@ -156,36 +147,26 @@ In this example, I have added a new folder to store all articles.
 To get the location id of the parent Ibexa content, go to the admin UI and select the future parent content, click on
 the details tabs, and read the "Location id" like this:
 
-![parent folder](src/Resources/doc/dest_folder.jpg)
+![parent folder](src/Resources/doc/dest_folder.png)
 
-> Note: the best practice is to define this parent id in your `parameters.yml` file or your `.env.local` file for each
+> Note: the best practice is to define this parent id in your `parameters.yaml` file or your `.env.local` file for each
 > execution environment.
 
 ```php
 // In your DataflowType
 
-use CodeRhapsodie\EzDataflowBundle\Factory\ContentStructureFactory;
-use CodeRhapsodie\EzDataflowBundle\Writer\ContentWriter;
+use CodeRhapsodie\IbexaDataflowBundle\Factory\ContentStructureFactory;
+use CodeRhapsodie\IbexaDataflowBundle\Writer\ContentWriter;
 use CodeRhapsodie\DataflowBundle\DataflowType\AbstractDataflowType;
 [...]
 
 class MyDataflowType extends AbstractDataflowType
 {
     //[...]
-    /**
-     * @var ContentWriter
-     */
-    private $contentWriter;
-
-    /**
-     * @var ContentStructureFactory
-     */
-    private $contentStructureFactory;
-
-    public function __construct(ContentWriter $contentWriter, ContentStructureFactory $contentStructureFactory)
-    {
-        $this->contentWriter = $contentWriter;
-        $this->contentStructureFactory = $contentStructureFactory;
+    public function __construct(
+        private readonly ContentWriter $contentWriter,
+        private readonly ContentStructureFactory $contentStructureFactory
+    ) {
     }
     //[...]
     protected function buildDataflow(DataflowBuilder $builder, array $options): void
@@ -200,13 +181,13 @@ class MyDataflowType extends AbstractDataflowType
             unset($data['id']);
 
             return $this->contentStructureFactory->transform(
-                    $data,
-                    $remoteId,
-                    'eng-GB',
-                    'article2',
-                    54, //Parent location id
-                    ContentStructureFactoryInterface::MODE_INSERT_OR_UPDATE //Optional value. Other choice : ContentStructureFactoryInterface::MODE_INSERT_ONLY or ContentStructureFactoryInterface::MODE_UPDATE_ONLY
-                );
+                $data,
+                $remoteId,
+                'eng-GB',
+                'article2',
+                54, //Parent location id
+                ContentStructureFactoryInterface::MODE_INSERT_OR_UPDATE //Optional value. Other choice : ContentStructureFactoryInterface::MODE_INSERT_ONLY or ContentStructureFactoryInterface::MODE_UPDATE_ONLY
+            );
         });
         // If you want the writer log
         $this->contentWriter->setLogger($this->logger);
@@ -280,7 +261,7 @@ If you want to add support for a field type, simply create your own comparator.
 ```php
 <?php
 
-use CodeRhapsodie\EzDataflowBundle\Core\FieldComparator\AbstractFieldComparator;
+use CodeRhapsodie\IbexaDataflowBundle\Core\FieldComparator\AbstractFieldComparator;
 use Ibexa\Core\FieldType\Value;
 //[...]
 
@@ -298,9 +279,9 @@ class MyFieldComparator extends AbstractFieldComparator
 ```yaml
 # Service declaration
 App\FieldComparator\MyFieldComparator:
-  parent: 'CodeRhapsodie\EzDataflowBundle\Core\FieldComparator\AbstractFieldComparator'
+  parent: 'CodeRhapsodie\IbexaDataflowBundle\Core\FieldComparator\AbstractFieldComparator'
   tags:
-    - { name: 'coderhapsodie.ezdataflow.field_comparator', fieldType: 'my_field_type_identifier' }
+    - { name: 'coderhapsodie.ibexa_dataflow.field_comparator', fieldType: 'my_field_type_identifier' }
 ```
 
 # Admin UI
@@ -309,16 +290,16 @@ App\FieldComparator\MyFieldComparator:
 
 You can access the Ibexa Dataflow administration UI from your Ibexa admin back-office.
 
-![Admin menu](src/Resources/doc/ez_dataflow_admin_menu.jpg)
+![Admin menu](src/Resources/doc/admin_menu.png)
 
 1. Click to "Admin"
 1. Click to "Ibexa Dataflow"
 
 ## Scheduled dataflow list
 
-When you access to the Ibexa Dataflow administration UI, you going here:
+When you access to the Ibexa Dataflow administration UI, you arrive on the scheduled dataflow list page:
 
-![Scheduled dataflow list](src/Resources/doc/scheduled_list.jpg)
+![Scheduled dataflow list](src/Resources/doc/scheduled_list.png)
 
 1. Scheduled dataflow list
 1. Button to add a new scheduled dataflow
@@ -336,7 +317,7 @@ Go to the Ibexa Dataflow admin, and click on the "+" orange button.
 
 In the new popin, fill in the fields:
 
-![Add a new schedule](src/Resources/doc/add_new_schedule.jpg)
+![Add a new schedule](src/Resources/doc/add_new_schedule.png)
 
 1. Type the Dataflow schedule name
 1. Select the Dataflow type. The list is automatically generated from the list of Symfony services with the
@@ -356,15 +337,17 @@ Finally, click on the "Create" button.
 When you click on the "History" tab in the Ibexa Dataflow admin UI, the job history for all Dataflow configured and
 executed is displayed.
 
-![History list](src/Resources/doc/history_list.jpg)
+![History list](src/Resources/doc/history_list.png)
 
 1. The history list
-1. This column shows the number of objects that have been processed.
-1. Click on the question mark to display the job details.
+1. A summary of each job dates and number of items processed.
+1. Click on the question mark icon to display the job details.
+1. Click on the text icon to display the job exception log.
+1. Switch between displaying all jobs, or only non-empty jobs (at least 1 item was processed)
 
 Details of one scheduled job:
 
-![Job execution details](src/Resources/doc/job_successful.jpg)
+![Job execution details](src/Resources/doc/job_successful.png)
 
 ## One-shot job
 
@@ -372,23 +355,24 @@ If you don't want to run a Dataflow periodically, you can add a single execution
 
 Go to the Ibexa Dataflow admin UI and click on the "Oneshot" tab.
 
-![Oneshot list](src/Resources/doc/oneshot_list.jpg)
+![Oneshot list](src/Resources/doc/oneshot_list.png)
 
-1. This button allows you to define the one-shot job (see below).
-1. This column shows the number of objects that have been processed.
-1. Click on the question mark to display the job details.
+1. This button allows you to create a new one-shot job (see below).
+1. A summary of each job dates and number of items processed.
+1. Click on the question mark icon to display the job details.
+1. Click on the text icon to display the job exception log.
 
 Details of one-shot job:
 
-![onshot details](src/Resources/doc/job_fail.jpg)
+![onshot details](src/Resources/doc/job_failed.png)
 
 Here the job has fail.
 
 ## Add a one-shot job
 
-Go to the Ibexa Dataflow admin UI and click on the "Oneshot" tab. Click on the "+" orange button to open the adding popin.
+Go to the Ibexa Dataflow admin UI and click on the "Oneshot" tab. Click on the "+ Create" button to open the add popin.
 
-![The add one-shot popin](src/Resources/doc/one_shot_job.jpg)
+![The add one-shot popin](src/Resources/doc/one_shot_job.png)
 
 1. Type the Dataflow job name
 1. Select the Dataflow type. The list is automatically generated from the list of Symfony services with the
@@ -407,13 +391,13 @@ and `Ibexa Dataflow / View` policies in one of their roles.
 
 # Issues and feature requests
 
-Please report issues and request features at https://github.com/code-rhapsodie/ezdataflow-bundle/issues.
+Please report issues and request features at https://github.com/code-rhapsodie/ibexa-dataflow-bundle/issues.
 
 # Contributing
 
 Contributions are very welcome. Please see [CONTRIBUTING.md](CONTRIBUTING.md) for
 details. Thanks
-to [everyone who has contributed](https://github.com/code-rhapsodie/ezdataflow-bundle/graphs/contributors)
+to [everyone who has contributed](https://github.com/code-rhapsodie/ibexa-dataflow-bundle/graphs/contributors)
 already.
 
 # License

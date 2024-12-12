@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace CodeRhapsodie\EzDataflowBundle\Core\Content;
+namespace CodeRhapsodie\IbexaDataflowBundle\Core\Content;
 
-use CodeRhapsodie\EzDataflowBundle\Core\Field\ContentStructFieldFillerInterface;
-use CodeRhapsodie\EzDataflowBundle\Matcher\LocationMatcherInterface;
-use CodeRhapsodie\EzDataflowBundle\Model\ContentCreateStructure;
+use CodeRhapsodie\IbexaDataflowBundle\Core\Field\ContentStructFieldFillerInterface;
+use CodeRhapsodie\IbexaDataflowBundle\Matcher\LocationMatcherInterface;
+use CodeRhapsodie\IbexaDataflowBundle\Model\ContentCreateStructure;
 use Ibexa\Contracts\Core\Repository\ContentService;
 use Ibexa\Contracts\Core\Repository\ContentTypeService;
 use Ibexa\Contracts\Core\Repository\Values\Content\Content;
@@ -20,10 +20,10 @@ class ContentCreator implements ContentCreatorInterface
     /** @var \Ibexa\Contracts\Core\Repository\ContentTypeService */
     private $contentTypeService;
 
-    /** @var \CodeRhapsodie\EzDataflowBundle\Core\Field\ContentStructFieldFillerInterface */
+    /** @var \CodeRhapsodie\IbexaDataflowBundle\Core\Field\ContentStructFieldFillerInterface */
     private $filler;
 
-    /** @var \CodeRhapsodie\EzDataflowBundle\Matcher\LocationMatcherInterface */
+    /** @var \CodeRhapsodie\IbexaDataflowBundle\Matcher\LocationMatcherInterface */
     private $matcher;
 
     public function __construct(ContentService $contentService, ContentTypeService $contentTypeService, ContentStructFieldFillerInterface $filler, LocationMatcherInterface $matcher)
@@ -75,3 +75,4 @@ class ContentCreator implements ContentCreatorInterface
         return $locationCreateStructs;
     }
 }
+class_alias(ContentCreator::class, 'CodeRhapsodie\EzDataflowBundle\Core\Content\ContentCreator');

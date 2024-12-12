@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace CodeRhapsodie\EzDataflowBundle\UserSwitcher;
+namespace CodeRhapsodie\IbexaDataflowBundle\UserSwitcher;
 
 trait UserSwitcherAwareTrait
 {
@@ -14,3 +14,5 @@ trait UserSwitcherAwareTrait
         $this->userSwitcher = $userSwitcher;
     }
 }
+
+class_alias(UserSwitcherAwareTrait::class, 'CodeRhapsodie\EzDataflowBundle\UserSwitcher\UserSwitcherAwareTrait');

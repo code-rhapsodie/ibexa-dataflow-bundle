@@ -1,42 +1,42 @@
 services:
-    CodeRhapsodie\EzDataflowBundle\Core\FieldComparator\SimpleFieldComparator:
-        parent: 'CodeRhapsodie\EzDataflowBundle\Core\FieldComparator\AbstractFieldComparator'
+    CodeRhapsodie\IbexaDataflowBundle\Core\FieldComparator\SimpleFieldComparator:
+        parent: 'CodeRhapsodie\IbexaDataflowBundle\Core\FieldComparator\AbstractFieldComparator'
         tags:
-            - { name: 'coderhapsodie.ezdataflow.field_comparator', fieldType: 'ezauthor' }
-            - { name: 'coderhapsodie.ezdataflow.field_comparator', fieldType: 'ezboolean' }
-            - { name: 'coderhapsodie.ezdataflow.field_comparator', fieldType: 'ezcountry' }
-            - { name: 'coderhapsodie.ezdataflow.field_comparator', fieldType: 'ezdate' }
-            - { name: 'coderhapsodie.ezdataflow.field_comparator', fieldType: 'ezdatetime' }
-            - { name: 'coderhapsodie.ezdataflow.field_comparator', fieldType: 'ezemail' }
-            - { name: 'coderhapsodie.ezdataflow.field_comparator', fieldType: 'ezfloat' }
-            - { name: 'coderhapsodie.ezdataflow.field_comparator', fieldType: 'ezinteger' }
-            - { name: 'coderhapsodie.ezdataflow.field_comparator', fieldType: 'ezisbn' }
-            - { name: 'coderhapsodie.ezdataflow.field_comparator', fieldType: 'ezkeyword' }
-            - { name: 'coderhapsodie.ezdataflow.field_comparator', fieldType: 'ezobjectrelation' }
-            - { name: 'coderhapsodie.ezdataflow.field_comparator', fieldType: 'ezobjectrelationlist' }
-            - { name: 'coderhapsodie.ezdataflow.field_comparator', fieldType: 'ezrichtext' }
-            - { name: 'coderhapsodie.ezdataflow.field_comparator', fieldType: 'ezselection' }
-            - { name: 'coderhapsodie.ezdataflow.field_comparator', fieldType: 'eztext' }
-            - { name: 'coderhapsodie.ezdataflow.field_comparator', fieldType: 'ezstring' }
-            - { name: 'coderhapsodie.ezdataflow.field_comparator', fieldType: 'eztime' }
-            - { name: 'coderhapsodie.ezdataflow.field_comparator', fieldType: 'eztags' }
+            - { name: 'coderhapsodie.ibexa_dataflow.field_comparator', fieldType: 'ezauthor' }
+            - { name: 'coderhapsodie.ibexa_dataflow.field_comparator', fieldType: 'ezboolean' }
+            - { name: 'coderhapsodie.ibexa_dataflow.field_comparator', fieldType: 'ezcountry' }
+            - { name: 'coderhapsodie.ibexa_dataflow.field_comparator', fieldType: 'ezdate' }
+            - { name: 'coderhapsodie.ibexa_dataflow.field_comparator', fieldType: 'ezdatetime' }
+            - { name: 'coderhapsodie.ibexa_dataflow.field_comparator', fieldType: 'ezemail' }
+            - { name: 'coderhapsodie.ibexa_dataflow.field_comparator', fieldType: 'ezfloat' }
+            - { name: 'coderhapsodie.ibexa_dataflow.field_comparator', fieldType: 'ezinteger' }
+            - { name: 'coderhapsodie.ibexa_dataflow.field_comparator', fieldType: 'ezisbn' }
+            - { name: 'coderhapsodie.ibexa_dataflow.field_comparator', fieldType: 'ezkeyword' }
+            - { name: 'coderhapsodie.ibexa_dataflow.field_comparator', fieldType: 'ezobjectrelation' }
+            - { name: 'coderhapsodie.ibexa_dataflow.field_comparator', fieldType: 'ezobjectrelationlist' }
+            - { name: 'coderhapsodie.ibexa_dataflow.field_comparator', fieldType: 'ezrichtext' }
+            - { name: 'coderhapsodie.ibexa_dataflow.field_comparator', fieldType: 'ezselection' }
+            - { name: 'coderhapsodie.ibexa_dataflow.field_comparator', fieldType: 'eztext' }
+            - { name: 'coderhapsodie.ibexa_dataflow.field_comparator', fieldType: 'ezstring' }
+            - { name: 'coderhapsodie.ibexa_dataflow.field_comparator', fieldType: 'eztime' }
+            - { name: 'coderhapsodie.ibexa_dataflow.field_comparator', fieldType: 'eztags' }
 
-    CodeRhapsodie\EzDataflowBundle\Core\FieldComparator\UrlFieldComparator:
-        parent: 'CodeRhapsodie\EzDataflowBundle\Core\FieldComparator\AbstractFieldComparator'
+    CodeRhapsodie\IbexaDataflowBundle\Core\FieldComparator\UrlFieldComparator:
+        parent: 'CodeRhapsodie\IbexaDataflowBundle\Core\FieldComparator\AbstractFieldComparator'
         tags:
-            - { name: 'coderhapsodie.ezdataflow.field_comparator', fieldType: 'ezurl' }
+            - { name: 'coderhapsodie.ibexa_dataflow.field_comparator', fieldType: 'ezurl' }
 
-    CodeRhapsodie\EzDataflowBundle\Core\FieldComparator\NovaSEOMetasFieldComparator:
-        parent: 'CodeRhapsodie\EzDataflowBundle\Core\FieldComparator\AbstractFieldComparator'
+    CodeRhapsodie\IbexaDataflowBundle\Core\FieldComparator\NovaSEOMetasFieldComparator:
+        parent: 'CodeRhapsodie\IbexaDataflowBundle\Core\FieldComparator\AbstractFieldComparator'
         tags:
-            - { name: 'coderhapsodie.ezdataflow.field_comparator', fieldType: 'novaseometas' }
+            - { name: 'coderhapsodie.ibexa_dataflow.field_comparator', fieldType: 'novaseometas' }
 
-    CodeRhapsodie\EzDataflowBundle\Core\FieldComparator\MatrixFieldComparator:
-        parent: 'CodeRhapsodie\EzDataflowBundle\Core\FieldComparator\AbstractFieldComparator'
+    CodeRhapsodie\IbexaDataflowBundle\Core\FieldComparator\MatrixFieldComparator:
+        parent: 'CodeRhapsodie\IbexaDataflowBundle\Core\FieldComparator\AbstractFieldComparator'
         tags:
-            - { name: 'coderhapsodie.ezdataflow.field_comparator', fieldType: 'ezmatrix' }
+            - { name: 'coderhapsodie.ibexa_dataflow.field_comparator', fieldType: 'ezmatrix' }
 
-    CodeRhapsodie\EzDataflowBundle\Core\FieldComparator\MapLocationFieldComparator:
-        parent: 'CodeRhapsodie\EzDataflowBundle\Core\FieldComparator\AbstractFieldComparator'
+    CodeRhapsodie\IbexaDataflowBundle\Core\FieldComparator\MapLocationFieldComparator:
+        parent: 'CodeRhapsodie\IbexaDataflowBundle\Core\FieldComparator\AbstractFieldComparator'
         tags:
-            - { name: 'coderhapsodie.ezdataflow.field_comparator', fieldType: 'ezgmaplocation' }
+            - { name: 'coderhapsodie.ibexa_dataflow.field_comparator', fieldType: 'ezgmaplocation' }

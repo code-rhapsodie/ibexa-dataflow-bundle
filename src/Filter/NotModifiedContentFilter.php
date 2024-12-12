@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace CodeRhapsodie\EzDataflowBundle\Filter;
+namespace CodeRhapsodie\IbexaDataflowBundle\Filter;
 
-use CodeRhapsodie\EzDataflowBundle\Core\FieldComparator\FieldComparatorInterface;
-use CodeRhapsodie\EzDataflowBundle\Model\ContentUpdateStructure;
+use CodeRhapsodie\IbexaDataflowBundle\Core\FieldComparator\FieldComparatorInterface;
+use CodeRhapsodie\IbexaDataflowBundle\Model\ContentUpdateStructure;
 use Ibexa\Contracts\Core\Repository\ContentService;
 use Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException;
 use Psr\Log\LoggerAwareTrait;
@@ -20,7 +20,7 @@ class NotModifiedContentFilter
     /** @var \Ibexa\Contracts\Core\Repository\ContentService */
     private $contentService;
 
-    /** @var \CodeRhapsodie\EzDataflowBundle\Core\FieldComparator\FieldComparatorInterface */
+    /** @var \CodeRhapsodie\IbexaDataflowBundle\Core\FieldComparator\FieldComparatorInterface */
     private $comparator;
 
     public function __construct(ContentService $contentService, FieldComparatorInterface $comparator)
@@ -68,3 +68,4 @@ class NotModifiedContentFilter
         $this->logger->log($level, $message, $context);
     }
 }
+class_alias(NotModifiedContentFilter::class, 'CodeRhapsodie\EzDataflowBundle\Filter\NotModifiedContentFilter');

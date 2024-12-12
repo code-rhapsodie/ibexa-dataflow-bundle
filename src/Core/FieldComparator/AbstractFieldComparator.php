@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace CodeRhapsodie\EzDataflowBundle\Core\FieldComparator;
+namespace CodeRhapsodie\IbexaDataflowBundle\Core\FieldComparator;
 
 use Ibexa\Contracts\Core\FieldType\Value;
 use Ibexa\Contracts\Core\Repository\FieldTypeService;
@@ -30,3 +30,4 @@ abstract class AbstractFieldComparator implements FieldComparatorInterface
      */
     abstract protected function compareValues(Value $currentValue, Value $newValue): bool;
 }
+class_alias(AbstractFieldComparator::class, 'CodeRhapsodie\EzDataflowBundle\Core\FieldComparator\AbstractFieldComparator');

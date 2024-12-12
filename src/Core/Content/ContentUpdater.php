@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace CodeRhapsodie\EzDataflowBundle\Core\Content;
+namespace CodeRhapsodie\IbexaDataflowBundle\Core\Content;
 
-use CodeRhapsodie\EzDataflowBundle\Core\Field\ContentStructFieldFillerInterface;
-use CodeRhapsodie\EzDataflowBundle\Exception\NoMatchFoundException;
-use CodeRhapsodie\EzDataflowBundle\Model\ContentUpdateStructure;
+use CodeRhapsodie\IbexaDataflowBundle\Core\Field\ContentStructFieldFillerInterface;
+use CodeRhapsodie\IbexaDataflowBundle\Exception\NoMatchFoundException;
+use CodeRhapsodie\IbexaDataflowBundle\Model\ContentUpdateStructure;
 use Ibexa\Contracts\Core\Repository\ContentService;
 use Ibexa\Contracts\Core\Repository\ContentTypeService;
 use Ibexa\Contracts\Core\Repository\Values\Content\Content;
@@ -19,7 +19,7 @@ class ContentUpdater implements ContentUpdaterInterface
     /** @var \Ibexa\Contracts\Core\Repository\ContentTypeService */
     private $contentTypeService;
 
-    /** @var \CodeRhapsodie\EzDataflowBundle\Core\Field\ContentStructFieldFillerInterface */
+    /** @var \CodeRhapsodie\IbexaDataflowBundle\Core\Field\ContentStructFieldFillerInterface */
     private $filler;
 
     public function __construct(ContentService $contentService, ContentTypeService $contentTypeService, ContentStructFieldFillerInterface $filler)
@@ -30,7 +30,7 @@ class ContentUpdater implements ContentUpdaterInterface
     }
 
     /**
-     * @throws \CodeRhapsodie\EzDataflowBundle\Exception\NoMatchFoundException
+     * @throws \CodeRhapsodie\IbexaDataflowBundle\Exception\NoMatchFoundException
      * @throws \Ibexa\Contracts\Core\Repository\Exceptions\BadStateException
      * @throws \Ibexa\Contracts\Core\Repository\Exceptions\ContentFieldValidationException
      * @throws \Ibexa\Contracts\Core\Repository\Exceptions\ContentValidationException
@@ -62,3 +62,4 @@ class ContentUpdater implements ContentUpdaterInterface
         return $this->contentService->publishVersion($draft->versionInfo);
     }
 }
+class_alias(ContentUpdater::class, 'CodeRhapsodie\EzDataflowBundle\Core\Content\ContentUpdater');

@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace CodeRhapsodie\EzDataflowBundle\Factory;
+namespace CodeRhapsodie\IbexaDataflowBundle\Factory;
 
-use CodeRhapsodie\EzDataflowBundle\Model\ContentCreateStructure;
-use CodeRhapsodie\EzDataflowBundle\Model\ContentUpdateStructure;
+use CodeRhapsodie\IbexaDataflowBundle\Model\ContentCreateStructure;
+use CodeRhapsodie\IbexaDataflowBundle\Model\ContentUpdateStructure;
 use Ibexa\Contracts\Core\Repository\ContentService;
 use Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException;
 
@@ -28,9 +28,9 @@ final class ContentStructureFactory implements ContentStructureFactoryInterface
      * @param mixed $parentLocations
      * @param int   $mode            One of the constant ContentStructureFactoryInterface::MODE_*
      *
-     * @return false|\CodeRhapsodie\EzDataflowBundle\Model\ContentStructure
+     * @return false|\CodeRhapsodie\IbexaDataflowBundle\Model\ContentStructure
      *
-     * @throws \CodeRhapsodie\EzDataflowBundle\Exception\InvalidArgumentTypeException
+     * @throws \CodeRhapsodie\IbexaDataflowBundle\Exception\InvalidArgumentTypeException
      * @throws \Ibexa\Contracts\Core\Repository\Exceptions\UnauthorizedException
      */
     public function transform(array $data, string $remoteId, string $language, string $contentType, $parentLocations, int $mode = ContentStructureFactoryInterface::MODE_INSERT_OR_UPDATE)
@@ -59,3 +59,4 @@ final class ContentStructureFactory implements ContentStructureFactoryInterface
         );
     }
 }
+class_alias(ContentStructureFactory::class, 'CodeRhapsodie\EzDataflowBundle\Factory\ContentStructureFactory');

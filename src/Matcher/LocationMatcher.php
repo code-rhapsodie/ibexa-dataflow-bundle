@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace CodeRhapsodie\EzDataflowBundle\Matcher;
+namespace CodeRhapsodie\IbexaDataflowBundle\Matcher;
 
-use CodeRhapsodie\EzDataflowBundle\Exception\NoMatchFoundException;
+use CodeRhapsodie\IbexaDataflowBundle\Exception\NoMatchFoundException;
 use Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException;
 use Ibexa\Contracts\Core\Repository\LocationService;
 use Ibexa\Contracts\Core\Repository\Values\Content\Location;
@@ -22,7 +22,7 @@ class LocationMatcher implements LocationMatcherInterface
     /**
      * @param mixed $valueToMatch
      *
-     * @throws \CodeRhapsodie\EzDataflowBundle\Exception\NoMatchFoundException
+     * @throws \CodeRhapsodie\IbexaDataflowBundle\Exception\NoMatchFoundException
      * @throws \Ibexa\Contracts\Core\Repository\Exceptions\UnauthorizedException
      */
     public function matchLocation($valueToMatch): Location
@@ -46,3 +46,4 @@ class LocationMatcher implements LocationMatcherInterface
         throw new NoMatchFoundException('No location matched provided value');
     }
 }
+class_alias(LocationMatcher::class, 'CodeRhapsodie\EzDataflowBundle\Matcher\LocationMatcher');

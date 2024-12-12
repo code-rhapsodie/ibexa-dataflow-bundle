@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace CodeRhapsodie\EzDataflowBundle\Core\Field;
+namespace CodeRhapsodie\IbexaDataflowBundle\Core\Field;
 
 use Ibexa\Contracts\Core\FieldType\Value;
 
@@ -15,3 +15,4 @@ interface FieldValueCreatorInterface
      */
     public function createValue(string $fieldTypeIdentifier, $hash): Value;
 }
+class_alias(FieldValueCreatorInterface::class, 'CodeRhapsodie\EzDataflowBundle\Core\Field\FieldValueCreatorInterface');

@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace CodeRhapsodie\EzDataflowBundle\Tests\Filter;
+namespace CodeRhapsodie\IbexaDataflowBundle\Tests\Filter;
 
-use CodeRhapsodie\EzDataflowBundle\Core\FieldComparator\FieldComparatorInterface;
-use CodeRhapsodie\EzDataflowBundle\Filter\NotModifiedContentFilter;
-use CodeRhapsodie\EzDataflowBundle\Model\ContentUpdateStructure;
+use CodeRhapsodie\IbexaDataflowBundle\Core\FieldComparator\FieldComparatorInterface;
+use CodeRhapsodie\IbexaDataflowBundle\Filter\NotModifiedContentFilter;
+use CodeRhapsodie\IbexaDataflowBundle\Model\ContentUpdateStructure;
 use Ibexa\Contracts\Core\Repository\ContentService;
 use Ibexa\Contracts\Core\Repository\Values\Content\Field;
 use Ibexa\Core\Repository\Values\Content\Content;
@@ -18,10 +18,10 @@ class NotModifiedContentFilterTest extends TestCase
     /** @var \Ibexa\Contracts\Core\Repository\ContentService|\PHPUnit\Framework\MockObject\MockObject */
     private $contentServiceMock;
 
-    /** @var \CodeRhapsodie\EzDataflowBundle\Core\FieldComparator\FieldComparatorInterface|\PHPUnit\Framework\MockObject\MockObject */
+    /** @var \CodeRhapsodie\IbexaDataflowBundle\Core\FieldComparator\FieldComparatorInterface|\PHPUnit\Framework\MockObject\MockObject */
     private $comparatorMock;
 
-    /** @var \CodeRhapsodie\EzDataflowBundle\Filter\NotModifiedContentFilter */
+    /** @var \CodeRhapsodie\IbexaDataflowBundle\Filter\NotModifiedContentFilter */
     private $notModifiedContentFilter;
 
     protected function setUp(): void

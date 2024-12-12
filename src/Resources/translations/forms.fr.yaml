@@ -1,4 +1,4 @@
-role.policy.ezdataflow: Ibexa Dataflow
-role.policy.ezdataflow.all_functions: Ibexa Dataflow / Toutes les fonctions
-role.policy.ezdataflow.view: Ibexa Dataflow / Consultation
-role.policy.ezdataflow.edit: Ibexa Dataflow / Modification
+role.policy.ibexa_dataflow: Ibexa Dataflow
+role.policy.ibexa_dataflow.all_functions: Ibexa Dataflow / Toutes les fonctions
+role.policy.ibexa_dataflow.view: Ibexa Dataflow / Consultation
+role.policy.ibexa_dataflow.edit: Ibexa Dataflow / Modification

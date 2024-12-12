@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace CodeRhapsodie\EzDataflowBundle\Form;
+namespace CodeRhapsodie\IbexaDataflowBundle\Form;
 
 use Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException;
 use Ibexa\Contracts\Core\Repository\UserPreferenceService;
@@ -49,3 +49,4 @@ class UserTimezoneAwareDateTimeTransformer implements DataTransformerInterface
         return new \DateTimeZone($tz);
     }
 }
+class_alias(UserTimezoneAwareDateTimeTransformer::class, 'CodeRhapsodie\EzDataflowBundle\Form\UserTimezoneAwareDateTimeTransformer');

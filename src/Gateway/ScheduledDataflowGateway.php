@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace CodeRhapsodie\EzDataflowBundle\Gateway;
+namespace CodeRhapsodie\IbexaDataflowBundle\Gateway;
 
 use CodeRhapsodie\DataflowBundle\Entity\ScheduledDataflow;
 use CodeRhapsodie\DataflowBundle\Repository\ScheduledDataflowRepository;
@@ -42,3 +42,4 @@ final class ScheduledDataflowGateway
         $this->scheduledDataflowRepository->delete($id);
     }
 }
+class_alias(ScheduledDataflowGateway::class, 'CodeRhapsodie\EzDataflowBundle\Gateway\ScheduledDataflowGateway');

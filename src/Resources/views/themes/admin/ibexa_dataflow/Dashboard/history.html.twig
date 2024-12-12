@@ -2,16 +2,16 @@
     {% set choices = [
         {
             'value': 0,
-            'label': 'coderhapsodie.ezdataflow.history.filter.none'|trans,
+            'label': 'coderhapsodie.ibexa_dataflow.history.filter.none'|trans,
         },
         {
             'value': 1,
-            'label': 'coderhapsodie.ezdataflow.history.filter.non_empty_only'|trans,
+            'label': 'coderhapsodie.ibexa_dataflow.history.filter.non_empty_only'|trans,
         },
     ] %}
 
     {% set source %}
-        <select id="ezdataflow_history_filter" class="form-control ibexa-input">
+        <select id="ibexa_dataflow_history_filter" class="form-control ibexa-input">
             {% for choice in choices %}
                 <option value="{{ choice.value }}">
                     {{ choice.label }}
@@ -28,29 +28,29 @@
         }) }}
     {% endset %}
 
-    {{ include('@ibexadesign/ezdataflow/parts/tab/job_list.html.twig', {
-        identifier: 'ezdataflow_history_results',
-        paginate_route: 'coderhapsodie.ezdataflow.history',
+    {{ include('@ibexadesign/ibexa_dataflow/parts/tab/job_list.html.twig', {
+        identifier: 'ibexa_dataflow_history_results',
+        paginate_route: 'coderhapsodie.ibexa_dataflow.history',
         paginate_params: {'filter': filter},
-        headline: 'coderhapsodie.ezdataflow.history.title'|trans,
+        headline: 'coderhapsodie.ibexa_dataflow.history.title'|trans,
         actions: actions
     }) }}
 
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             // Manage ajax pagination
-            document.getElementById('ezdataflow_history_filter').addEventListener('change', function (e) {
+            document.getElementById('ibexa_dataflow_history_filter').addEventListener('change', function (e) {
                 e.preventDefault();
-                const loading = document.getElementById('loading_ezdataflow_history_results');
-                const results = document.getElementById('ezdataflow_history_results').querySelector('.ibexa-table');
+                const loading = document.getElementById('loading_ibexa_dataflow_history_results');
+                const results = document.getElementById('ibexa_dataflow_history_results').querySelector('.ibexa-table');
                 loading.hidden = false;
                 results.innerHTML = '';
-                fetch('{{ path('coderhapsodie.ezdataflow.history') }}?filter=' + this.value)
+                fetch('{{ path('coderhapsodie.ibexa_dataflow.history') }}?filter=' + this.value)
                     .then((r) => r.text())
                     .then((content) => {
                         const node = document.createElement('div');
                         node.innerHTML = content;
-                        results.innerHTML = node.querySelector('#ezdataflow_history_results .ibexa-table').innerHTML;
+                        results.innerHTML = node.querySelector('#ibexa_dataflow_history_results .ibexa-table').innerHTML;
                         loading.hidden = true;
                     })
                 ;

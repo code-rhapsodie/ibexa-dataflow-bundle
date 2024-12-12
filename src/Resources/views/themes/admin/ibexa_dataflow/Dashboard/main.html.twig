@@ -1,27 +1,27 @@
 {% extends "@ibexadesign/ui/layout.html.twig" %}
 
-{% block body_class %}ibexa-ezdataflow{% endblock %}
+{% block body_class %}ibexa-ibexa_dataflow{% endblock %}
 
 {% block breadcrumbs %}
     {% include '@ibexadesign/ui/breadcrumbs.html.twig' with { items: [
         { value: 'breadcrumb.admin'|trans(domain='messages')|desc('Admin') },
-        { value: 'coderhapsodie.ezdataflow'|trans|desc('EzDataflow') }
+        { value: 'coderhapsodie.ibexa_dataflow'|trans|desc('IbexaDataflow') }
     ]} %}
 {% endblock %}
 
 {% block header %}
     {% include '@ibexadesign/ui/page_title.html.twig' with {
-        title: 'coderhapsodie.ezdataflow'|trans|desc('EzDataflow'),
+        title: 'coderhapsodie.ibexa_dataflow'|trans|desc('IbexaDataflow'),
     } %}
 {% endblock %}
 
 {% block content %}
-    {{ ibexa_render_component_group('coderhapsodie-ezdataflow', {'filter': app.request.query.get('filter', 0)}) }}
+    {{ ibexa_render_component_group('coderhapsodie-ibexa_dataflow', {'filter': app.request.query.get('filter', 0)}) }}
 
     {% embed '@ibexadesign/ui/component/modal/modal.html.twig' with {
         id: 'modal-history-details',
         attr_dialog: {'style': 'max-width: 75vw;'},
-        title: 'coderhapsodie.ezdataflow.history.job.title'|trans,
+        title: 'coderhapsodie.ibexa_dataflow.history.job.title'|trans,
     } %}
         {% block body_content '' %}
     {% endembed %}
@@ -29,7 +29,7 @@
     {% embed '@ibexadesign/ui/component/modal/modal.html.twig' with {
         id: 'modal-history-log',
         attr_dialog: {'style': 'max-width: 75vw;'},
-        title: 'coderhapsodie.ezdataflow.workflow.log.title'|trans,
+        title: 'coderhapsodie.ibexa_dataflow.workflow.log.title'|trans,
     } %}
         {% block body_content '' %}
     {% endembed %}
@@ -37,7 +37,7 @@
     {% embed '@ibexadesign/ui/component/modal/modal.html.twig' with {
         id: 'modal-history',
         attr_dialog: {'style': 'max-width: 75vw;'},
-        title: 'coderhapsodie.ezdataflow.workflow.history.title'|trans,
+        title: 'coderhapsodie.ibexa_dataflow.workflow.history.title'|trans,
     } %}
         {% block body_content '' %}
     {% endembed %}
@@ -67,9 +67,9 @@
             bindModalLinks('modal-history-log', '.modal-history-log');
             bindModalLinks('modal-history', '.modal-history');
 
-            const labels = document.getElementById('ibexa-tab-label-coderhapsodie-ezdataflow-code-rhapsodie-ezdataflow-repeating')
+            const labels = document.getElementById('ibexa-tab-label-coderhapsodie-ibexa_dataflow-code-rhapsodie-ibexa_dataflow-repeating')
                 .closest('ul').querySelectorAll('li.ibexa-tabs__tab');
-            const tabs = document.getElementById('ibexa-tab-coderhapsodie-ezdataflow-code-rhapsodie-ezdataflow-repeating')
+            const tabs = document.getElementById('ibexa-tab-coderhapsodie-ibexa_dataflow-code-rhapsodie-ibexa_dataflow-repeating')
                 .closest('.tab-content').querySelectorAll('.tab-pane');
         });
     </script>
@@ -78,7 +78,7 @@
 {% block stylesheets %}
     {{ parent() }}
     <style>
-        .ezdataflow-date .ibexa-dropdown {
+        .ibexa_dataflow-date .ibexa-dropdown {
             min-width: 0;
         }
     </style>

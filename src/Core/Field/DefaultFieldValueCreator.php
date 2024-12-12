@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace CodeRhapsodie\EzDataflowBundle\Core\Field;
+namespace CodeRhapsodie\IbexaDataflowBundle\Core\Field;
 
 use Ibexa\Contracts\Core\FieldType\Value;
 use Ibexa\Contracts\Core\Repository\FieldTypeService;
@@ -27,3 +27,4 @@ class DefaultFieldValueCreator implements FieldValueCreatorInterface
         return $this->fieldTypeService->getFieldType($fieldTypeIdentifier)->fromHash($hash);
     }
 }
+class_alias(DefaultFieldValueCreator::class, 'CodeRhapsodie\EzDataflowBundle\Core\Field\DefaultFieldValueCreator');

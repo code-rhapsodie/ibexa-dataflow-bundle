@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace CodeRhapsodie\EzDataflowBundle\UserSwitcher;
+namespace CodeRhapsodie\IbexaDataflowBundle\UserSwitcher;
 
 interface UserSwitcherInterface
 {
@@ -12,3 +12,4 @@ interface UserSwitcherInterface
 
     public function switchBack(): void;
 }
+class_alias(UserSwitcherInterface::class, 'CodeRhapsodie\EzDataflowBundle\UserSwitcher\UserSwitcherInterface');

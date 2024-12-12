@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace CodeRhapsodie\EzDataflowBundle\Core\FieldComparator;
+namespace CodeRhapsodie\IbexaDataflowBundle\Core\FieldComparator;
 
 use Ibexa\Contracts\Core\FieldType\Value;
 
@@ -16,3 +16,4 @@ class MapLocationFieldComparator extends AbstractFieldComparator
         ;
     }
 }
+class_alias(MapLocationFieldComparator::class, 'CodeRhapsodie\EzDataflowBundle\Core\FieldComparator\MapLocationFieldComparator');

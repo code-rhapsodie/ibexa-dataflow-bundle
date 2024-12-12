@@ -5,6 +5,6 @@
 {%- endblock -%}
 
 {% block datetime_widget -%}
-    {% set attr = attr|merge({class: (attr.class|default('') ~ ' ezdataflow-date')|trim}) %}
+    {% set attr = attr|merge({class: (attr.class|default('') ~ ' ibexa_dataflow-date')|trim}) %}
     {{ parent() }}
 {%- endblock datetime_widget %}

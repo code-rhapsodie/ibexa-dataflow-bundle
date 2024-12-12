@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace CodeRhapsodie\EzDataflowBundle\Exception;
+namespace CodeRhapsodie\IbexaDataflowBundle\Exception;
 
 class UnknownFieldException extends \Exception
 {
@@ -15,3 +15,4 @@ class UnknownFieldException extends \Exception
         ));
     }
 }
+class_alias(UnknownFieldException::class, 'CodeRhapsodie\EzDataflowBundle\Exception\UnknownFieldException');

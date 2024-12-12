@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace CodeRhapsodie\EzDataflowBundle\Core\FieldComparator;
+namespace CodeRhapsodie\IbexaDataflowBundle\Core\FieldComparator;
 
 use Ibexa\Contracts\Core\Repository\Values\Content\Field;
 
@@ -34,3 +34,4 @@ class DelegatorFieldComparator implements FieldComparatorInterface
         $this->delegates[$fieldTypeIdentifier] = $typedFieldComparator;
     }
 }
+class_alias(DelegatorFieldComparator::class, 'CodeRhapsodie\EzDataflowBundle\Core\FieldComparator\DelegatorFieldComparator');

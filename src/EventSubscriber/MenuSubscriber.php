@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace CodeRhapsodie\EzDataflowBundle\EventSubscriber;
+namespace CodeRhapsodie\IbexaDataflowBundle\EventSubscriber;
 
 use Ibexa\AdminUi\Menu\Event\ConfigureMenuEvent;
 use Ibexa\AdminUi\Menu\MainMenuBuilder;
@@ -27,10 +27,10 @@ class MenuSubscriber implements EventSubscriberInterface
         }
 
         $menu[MainMenuBuilder::ITEM_ADMIN]->addChild(
-            'ezdataflow_dashboard',
+            'ibexa_dataflow_dashboard',
             [
-                'label' => 'coderhapsodie.ezdataflow',
-                'route' => 'coderhapsodie.ezdataflow.main',
+                'label' => 'coderhapsodie.ibexa_dataflow',
+                'route' => 'coderhapsodie.ibexa_dataflow.main',
             ]
         );
     }

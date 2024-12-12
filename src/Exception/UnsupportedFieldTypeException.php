@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace CodeRhapsodie\EzDataflowBundle\Exception;
+namespace CodeRhapsodie\IbexaDataflowBundle\Exception;
 
 class UnsupportedFieldTypeException extends \Exception
 {
@@ -14,3 +14,4 @@ class UnsupportedFieldTypeException extends \Exception
         ));
     }
 }
+class_alias(UnsupportedFieldTypeException::class, 'CodeRhapsodie\EzDataflowBundle\Exception\UnsupportedFieldTypeException');

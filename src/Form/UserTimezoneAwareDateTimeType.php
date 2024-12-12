@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace CodeRhapsodie\EzDataflowBundle\Form;
+namespace CodeRhapsodie\IbexaDataflowBundle\Form;
 
 use Ibexa\Contracts\Core\Repository\UserPreferenceService;
 use Symfony\Component\Form\AbstractType;
@@ -29,3 +29,4 @@ class UserTimezoneAwareDateTimeType extends AbstractType
         $builder->addModelTransformer(new UserTimezoneAwareDateTimeTransformer($this->userPreferenceService));
     }
 }
+class_alias(UserTimezoneAwareDateTimeType::class, 'CodeRhapsodie\EzDataflowBundle\Form\UserTimezoneAwareDateTimeType');

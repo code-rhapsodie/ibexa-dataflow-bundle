@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace CodeRhapsodie\EzDataflowBundle\Model;
+namespace CodeRhapsodie\IbexaDataflowBundle\Model;
 
 class ContentUpdateStructure extends ContentStructure
 {
@@ -36,3 +36,4 @@ class ContentUpdateStructure extends ContentStructure
         return $this->id;
     }
 }
+class_alias(ContentUpdateStructure::class, 'CodeRhapsodie\EzDataflowBundle\Model\ContentUpdateStructure');

@@ -14,7 +14,7 @@
     <ini name="error_reporting" value="-1"/>
   </php>
   <testsuites>
-    <testsuite name="EzDataflow tests suite">
+    <testsuite name="Ibexa Dataflow tests suite">
       <directory suffix="Test.php">./tests</directory>
     </testsuite>
   </testsuites>

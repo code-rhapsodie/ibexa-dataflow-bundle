@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace CodeRhapsodie\EzDataflowBundle\Exception;
+namespace CodeRhapsodie\IbexaDataflowBundle\Exception;
 
 class InvalidArgumentTypeException extends \Exception
 {
@@ -30,3 +30,4 @@ class InvalidArgumentTypeException extends \Exception
         ));
     }
 }
+class_alias(InvalidArgumentTypeException::class, 'CodeRhapsodie\EzDataflowBundle\Exception\InvalidArgumentTypeException');

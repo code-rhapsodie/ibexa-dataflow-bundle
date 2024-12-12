@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace CodeRhapsodie\EzDataflowBundle\Model;
+namespace CodeRhapsodie\IbexaDataflowBundle\Model;
 
-use CodeRhapsodie\EzDataflowBundle\Exception\InvalidArgumentTypeException;
+use CodeRhapsodie\IbexaDataflowBundle\Exception\InvalidArgumentTypeException;
 use Ibexa\Contracts\Core\Repository\Values\Content\Location;
 use Ibexa\Contracts\Core\Repository\Values\Content\LocationCreateStruct;
 
@@ -28,7 +28,7 @@ class ContentCreateStructure extends ContentStructure
      *                         <li>a LocationCreateStruct object</li>
      *                         </ul>
      *
-     * @throws \CodeRhapsodie\EzDataflowBundle\Exception\InvalidArgumentTypeException
+     * @throws \CodeRhapsodie\IbexaDataflowBundle\Exception\InvalidArgumentTypeException
      */
     public function __construct(string $contentTypeIdentifier, string $languageCode, array $locations, array $fields, ?string $remoteId = null)
     {
@@ -50,7 +50,7 @@ class ContentCreateStructure extends ContentStructure
     }
 
     /**
-     * @throws \CodeRhapsodie\EzDataflowBundle\Exception\InvalidArgumentTypeException
+     * @throws \CodeRhapsodie\IbexaDataflowBundle\Exception\InvalidArgumentTypeException
      */
     private function setLocations(array $locations)
     {
@@ -67,3 +67,4 @@ class ContentCreateStructure extends ContentStructure
         $this->locations = $locations;
     }
 }
+class_alias(ContentCreateStructure::class, 'CodeRhapsodie\EzDataflowBundle\Model\ContentCreateStructure');

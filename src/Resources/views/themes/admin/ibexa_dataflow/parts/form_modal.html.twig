@@ -1,8 +1,8 @@
-{% form_theme form '@ibexadesign/ezdataflow/form_theme.html.twig' %}
+{% form_theme form '@ibexadesign/ibexa_dataflow/form_theme.html.twig' %}
 
 {% embed '@ibexadesign/ui/component/modal/modal.html.twig' with {
     id: id ?? '',
-    title: ('coderhapsodie.ezdataflow.workflow.'~(mode|default('repeating'))~'.'~(type_action|default('new'))~'.title')|trans,
+    title: ('coderhapsodie.ibexa_dataflow.workflow.'~(mode|default('repeating'))~'.'~(type_action|default('new'))~'.title')|trans,
 } %}
     {% block body_content %}
         {{ form_start(form) }}
@@ -14,10 +14,10 @@
     {% endblock %}
     {% block footer_content %}
         <button class="btn ibexa-btn ibexa-btn--primary ibexa-btn--trigger" data-click="#{{ id ~ '-submit' }}">
-            {{ ('coderhapsodie.ezdataflow.workflow.'~(type_action|default('new'))~'.submit')|trans }}
+            {{ ('coderhapsodie.ibexa_dataflow.workflow.'~(type_action|default('new'))~'.submit')|trans }}
         </button>
         <button type="button" class="btn ibexa-btn ibexa-btn--secondary" data-bs-dismiss="modal">
-            {{ 'coderhapsodie.ezdataflow.workflow.new.cancel'|trans }}
+            {{ 'coderhapsodie.ibexa_dataflow.workflow.new.cancel'|trans }}
         </button>
     {% endblock %}
 {% endembed %}

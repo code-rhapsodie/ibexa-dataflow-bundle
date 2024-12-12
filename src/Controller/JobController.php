@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace CodeRhapsodie\EzDataflowBundle\Controller;
+namespace CodeRhapsodie\IbexaDataflowBundle\Controller;
 
 use CodeRhapsodie\DataflowBundle\Entity\Job;
-use CodeRhapsodie\EzDataflowBundle\Form\CreateOneshotType;
-use CodeRhapsodie\EzDataflowBundle\Gateway\JobGateway;
+use CodeRhapsodie\IbexaDataflowBundle\Form\CreateOneshotType;
+use CodeRhapsodie\IbexaDataflowBundle\Gateway\JobGateway;
 use Ibexa\Contracts\AdminUi\Controller\Controller;
 use Ibexa\Contracts\AdminUi\Notification\NotificationHandlerInterface;
 use Ibexa\Core\MVC\Symfony\Security\Authorization\Attribute;
@@ -18,11 +18,11 @@ use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
- * @Route("/ezdataflow/job")
+ * @Route("/ibexa_dataflow/job")
  */
 class JobController extends Controller
 {
-    /** @var \CodeRhapsodie\EzDataflowBundle\Gateway\JobGateway */
+    /** @var \CodeRhapsodie\IbexaDataflowBundle\Gateway\JobGateway */
     private $jobGateway;
     /** @var \Ibexa\Contracts\AdminUi\Notification\NotificationHandlerInterface */
     private $notificationHandler;
@@ -40,39 +40,39 @@ class JobController extends Controller
     }
 
     /**
-     * @Route("/details/{id}", name="coderhapsodie.ezdataflow.job.details")
+     * @Route("/details/{id}", name="coderhapsodie.ibexa_dataflow.job.details")
      */
     public function displayDetails(int $id): Response
     {
-        $this->denyAccessUnlessGranted(new Attribute('ezdataflow', 'view'));
+        $this->denyAccessUnlessGranted(new Attribute('ibexa_dataflow', 'view'));
 
-        return $this->render('@ibexadesign/ezdataflow/Item/details.html.twig', [
+        return $this->render('@ibexadesign/ibexa_dataflow/Item/details.html.twig', [
             'item' => $this->jobGateway->find($id),
         ]);
     }
 
     /**
-     * @Route("/details/log/{id}", name="coderhapsodie.ezdataflow.job.log")
+     * @Route("/details/log/{id}", name="coderhapsodie.ibexa_dataflow.job.log")
      */
     public function displayLog(int $id): Response
     {
-        $this->denyAccessUnlessGranted(new Attribute('ezdataflow', 'view'));
+        $this->denyAccessUnlessGranted(new Attribute('ibexa_dataflow', 'view'));
         $item = $this->jobGateway->find($id);
         $log = array_map(function ($line) {
             return preg_replace('~#\d+~', "\n$0", $line);
         }, $item->getExceptions());
 
-        return $this->render('@ibexadesign/ezdataflow/Item/log.html.twig', [
+        return $this->render('@ibexadesign/ibexa_dataflow/Item/log.html.twig', [
             'log' => $log,
         ]);
     }
 
     /**
-     * @Route("/create", name="coderhapsodie.ezdataflow.job.create", methods={"POST"})
+     * @Route("/create", name="coderhapsodie.ibexa_dataflow.job.create", methods={"POST"})
      */
     public function create(Request $request): Response
     {
-        $this->denyAccessUnlessGranted(new Attribute('ezdataflow', 'edit'));
+        $this->denyAccessUnlessGranted(new Attribute('ibexa_dataflow', 'edit'));
 
         $newOneshot = new Job();
         $form = $this->createForm(CreateOneshotType::class, $newOneshot);
@@ -84,20 +84,20 @@ class JobController extends Controller
 
             try {
                 $this->jobGateway->save($newOneshot);
-                $this->notificationHandler->success($this->translator->trans('coderhapsodie.ezdataflow.job.create.success'));
+                $this->notificationHandler->success($this->translator->trans('coderhapsodie.ibexa_dataflow.job.create.success'));
             } catch (\Exception $e) {
-                $this->notificationHandler->error($this->translator->trans('coderhapsodie.ezdataflow.job.create.error',
+                $this->notificationHandler->error($this->translator->trans('coderhapsodie.ibexa_dataflow.job.create.error',
                     ['message' => $e->getMessage()]));
             }
 
             return new JsonResponse([
-                'redirect' => $this->generateUrl('coderhapsodie.ezdataflow.main', ['_fragment' => 'ibexa-tab-coderhapsodie-ezdataflow-code-rhapsodie-ezdataflow-oneshot'],
+                'redirect' => $this->generateUrl('coderhapsodie.ibexa_dataflow.main', ['_fragment' => 'ibexa-tab-coderhapsodie-ibexa_dataflow-code-rhapsodie-ibexa_dataflow-oneshot'],
                     UrlGeneratorInterface::ABSOLUTE_URL),
             ]);
         }
 
         return new JsonResponse([
-            'form' => $this->renderView('@ibexadesign/ezdataflow/parts/form_modal.html.twig', [
+            'form' => $this->renderView('@ibexadesign/ibexa_dataflow/parts/form_modal.html.twig', [
                 'form' => $form->createView(),
                 'type_action' => 'new',
                 'mode' => 'oneshot',

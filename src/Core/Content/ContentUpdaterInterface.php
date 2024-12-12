@@ -2,12 +2,13 @@
 
 declare(strict_types=1);
 
-namespace CodeRhapsodie\EzDataflowBundle\Core\Content;
+namespace CodeRhapsodie\IbexaDataflowBundle\Core\Content;
 
-use CodeRhapsodie\EzDataflowBundle\Model\ContentUpdateStructure;
+use CodeRhapsodie\IbexaDataflowBundle\Model\ContentUpdateStructure;
 use Ibexa\Contracts\Core\Repository\Values\Content\Content;
 
 interface ContentUpdaterInterface
 {
     public function updateFromStructure(ContentUpdateStructure $structure): Content;
 }
+class_alias(ContentUpdaterInterface::class, 'CodeRhapsodie\EzDataflowBundle\Core\Content\ContentUpdaterInterface');

@@ -1,18 +1,18 @@
 {%- block content -%}
 
-    {{ include('@ibexadesign/ezdataflow/parts/tab/schedule_list.html.twig', {
-        identifier: 'ezdataflow_schedule_results',
-        paginate_route: 'coderhapsodie.ezdataflow.repeating'
+    {{ include('@ibexadesign/ibexa_dataflow/parts/tab/schedule_list.html.twig', {
+        identifier: 'ibexa_dataflow_schedule_results',
+        paginate_route: 'coderhapsodie.ibexa_dataflow.repeating'
     }) }}
 
-    {{ include('@ibexadesign/ezdataflow/parts/form_modal.html.twig', {
+    {{ include('@ibexadesign/ibexa_dataflow/parts/form_modal.html.twig', {
         'id': 'modal-new-scheduled',
         'form': form
     }) }}
 
     {% embed '@ibexadesign/ui/component/modal/modal.html.twig' with {
         id: 'modal-edit-scheduled',
-        title: 'coderhapsodie.ezdataflow.workflow.repeating.edit.title'|trans,
+        title: 'coderhapsodie.ibexa_dataflow.workflow.repeating.edit.title'|trans,
     } %}
         {% block body_content %}
             <form action="" method="post">
@@ -22,17 +22,17 @@
         {% endblock %}
         {% block footer_content %}
             <button type="button" class="btn ibexa-btn ibexa-btn--primary ibexa-btn--trigger" data-click="#modal-edit-submit">
-                {{ 'coderhapsodie.ezdataflow.workflow.edit.submit'|trans }}
+                {{ 'coderhapsodie.ibexa_dataflow.workflow.edit.submit'|trans }}
             </button>
             <button class="btn ibexa-btn ibexa-btn--secondary" data-bs-dismiss="modal">
-                {{ 'coderhapsodie.ezdataflow.workflow.new.cancel'|trans }}
+                {{ 'coderhapsodie.ibexa_dataflow.workflow.new.cancel'|trans }}
             </button>
         {% endblock %}
     {% endembed %}
 
     {% embed '@ibexadesign/ui/component/modal/modal.html.twig' with {
         id: 'modal-delete-confirm',
-        title: 'coderhapsodie.ezdataflow.workflow.delete'|trans,
+        title: 'coderhapsodie.ibexa_dataflow.workflow.delete'|trans,
     } %}
         {% block body_content %}
             <form action="" method="post">
@@ -42,10 +42,10 @@
         {% endblock %}
         {% block footer_content %}
             <button type="button" class="btn ibexa-btn ibexa-btn--primary ibexa-btn--trigger" data-click="#modal-delete-submit">
-                {{ 'coderhapsodie.ezdataflow.workflow.list.delete'|trans }}
+                {{ 'coderhapsodie.ibexa_dataflow.workflow.list.delete'|trans }}
             </button>
             <button class="btn ibexa-btn ibexa-btn--secondary" data-bs-dismiss="modal">
-                {{ 'coderhapsodie.ezdataflow.workflow.new.cancel'|trans }}
+                {{ 'coderhapsodie.ibexa_dataflow.workflow.new.cancel'|trans }}
             </button>
         {% endblock %}
     {% endembed %}

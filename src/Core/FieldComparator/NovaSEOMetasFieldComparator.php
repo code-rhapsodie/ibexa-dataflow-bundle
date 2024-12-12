@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace CodeRhapsodie\EzDataflowBundle\Core\FieldComparator;
+namespace CodeRhapsodie\IbexaDataflowBundle\Core\FieldComparator;
 
 use Ibexa\Contracts\Core\FieldType\Value;
 
@@ -24,3 +24,4 @@ class NovaSEOMetasFieldComparator extends AbstractFieldComparator
         return count($currentValue->metas) === count($newValue->metas);
     }
 }
+class_alias(NovaSEOMetasFieldComparator::class, 'CodeRhapsodie\EzDataflowBundle\Core\FieldComparator\NovaSEOMetasFieldComparator');

@@ -1,6 +1,6 @@
-{% set id = identifier|default('ezdataflow_history_results') %}
+{% set id = identifier|default('ibexa_dataflow_history_results') %}
 
-{% import '@ibexadesign/ezdataflow/macros.twig' as macros %}
+{% import '@ibexadesign/ibexa_dataflow/macros.twig' as macros %}
 
 <div id="loading_{{ id }}" class="text-center" hidden>
     <svg class="ez-icon ez-icon--extra-large">
@@ -25,9 +25,9 @@
         ]) %}
 
         {% set col_raw %}
-            <a href="{{ path('coderhapsodie.ezdataflow.job.details', {id: job.id}) }}"
+            <a href="{{ path('coderhapsodie.ibexa_dataflow.job.details', {id: job.id}) }}"
                class="btn ibexa-btn ibexa-btn--ghost ibexa-btn--no-text modal-history-details"
-               title="{{ 'coderhapsodie.ezdataflow.history.list.view'|trans }}"
+               title="{{ 'coderhapsodie.ibexa_dataflow.history.list.view'|trans }}"
                data-bs-toggle="modal"
                data-bs-target="#modal-history-details"
             >
@@ -35,11 +35,11 @@
                     <use xlink:href="{{ ibexa_icon_path('about-info') }}"></use>
                 </svg>
             </a>
-            <a href="{{ path('coderhapsodie.ezdataflow.job.log', {id: job.id}) }}"
+            <a href="{{ path('coderhapsodie.ibexa_dataflow.job.log', {id: job.id}) }}"
                class="btn ibexa-btn ibexa-btn--ghost ibexa-btn--no-text modal-history-log"
                data-bs-toggle="modal"
                data-bs-target="#modal-history-log"
-               title="{{ 'coderhapsodie.ezdataflow.history.details.log'|trans }}"
+               title="{{ 'coderhapsodie.ibexa_dataflow.history.details.log'|trans }}"
             >
                 <svg class="ibexa-icon ibexa-icon--small ibexa-icon--article">
                     <use xlink:href="{{ ibexa_icon_path('article') }}"></use>
@@ -58,16 +58,16 @@
     {% embed '@ibexadesign/ui/component/table/table.html.twig' with {
         headline: headline ?? null,
         head_cols: [
-            { content: 'coderhapsodie.ezdataflow.history.list.name'|trans },
-            { content: 'coderhapsodie.ezdataflow.history.list.request'|trans },
-            { content: 'coderhapsodie.ezdataflow.history.list.count'|trans },
-            { content: 'coderhapsodie.ezdataflow.history.list.start'|trans },
-            { content: 'coderhapsodie.ezdataflow.history.list.end'|trans },
-            { content: 'coderhapsodie.ezdataflow.history.list.status'|trans },
+            { content: 'coderhapsodie.ibexa_dataflow.history.list.name'|trans },
+            { content: 'coderhapsodie.ibexa_dataflow.history.list.request'|trans },
+            { content: 'coderhapsodie.ibexa_dataflow.history.list.count'|trans },
+            { content: 'coderhapsodie.ibexa_dataflow.history.list.start'|trans },
+            { content: 'coderhapsodie.ibexa_dataflow.history.list.end'|trans },
+            { content: 'coderhapsodie.ibexa_dataflow.history.list.status'|trans },
             { },
         ],
         body_rows,
-        empty_table_info_text: 'coderhapsodie.ezdataflow.history.list.empty'|trans,
+        empty_table_info_text: 'coderhapsodie.ibexa_dataflow.history.list.empty'|trans,
     } %}
         {% block header %}
             {% embed '@ibexadesign/ui/component/table/table_header.html.twig' %}

@@ -2,24 +2,24 @@
 
 declare(strict_types=1);
 
-namespace CodeRhapsodie\EzDataflowBundle\Writer;
+namespace CodeRhapsodie\IbexaDataflowBundle\Writer;
 
 use CodeRhapsodie\DataflowBundle\DataflowType\Writer\DelegateWriterInterface;
-use CodeRhapsodie\EzDataflowBundle\Core\Content\ContentCreatorInterface;
-use CodeRhapsodie\EzDataflowBundle\Core\Content\ContentUpdaterInterface;
-use CodeRhapsodie\EzDataflowBundle\Model\ContentCreateStructure;
-use CodeRhapsodie\EzDataflowBundle\Model\ContentStructure;
-use CodeRhapsodie\EzDataflowBundle\Model\ContentUpdateStructure;
+use CodeRhapsodie\IbexaDataflowBundle\Core\Content\ContentCreatorInterface;
+use CodeRhapsodie\IbexaDataflowBundle\Core\Content\ContentUpdaterInterface;
+use CodeRhapsodie\IbexaDataflowBundle\Model\ContentCreateStructure;
+use CodeRhapsodie\IbexaDataflowBundle\Model\ContentStructure;
+use CodeRhapsodie\IbexaDataflowBundle\Model\ContentUpdateStructure;
 use Psr\Log\LoggerAwareTrait;
 
 class ContentWriter extends RepositoryWriter implements DelegateWriterInterface
 {
     use LoggerAwareTrait;
 
-    /** @var \CodeRhapsodie\EzDataflowBundle\Core\Content\ContentCreatorInterface */
+    /** @var \CodeRhapsodie\IbexaDataflowBundle\Core\Content\ContentCreatorInterface */
     private $creator;
 
-    /** @var \CodeRhapsodie\EzDataflowBundle\Core\Content\ContentUpdaterInterface */
+    /** @var \CodeRhapsodie\IbexaDataflowBundle\Core\Content\ContentUpdaterInterface */
     private $updater;
 
     public function __construct(ContentCreatorInterface $creator, ContentUpdaterInterface $updater)
@@ -29,7 +29,7 @@ class ContentWriter extends RepositoryWriter implements DelegateWriterInterface
     }
 
     /**
-     * @param \CodeRhapsodie\EzDataflowBundle\Model\ContentStructure $item
+     * @param \CodeRhapsodie\IbexaDataflowBundle\Model\ContentStructure $item
      */
     public function write($item)
     {
@@ -71,3 +71,4 @@ class ContentWriter extends RepositoryWriter implements DelegateWriterInterface
         $this->logger->log($level, $message, $context);
     }
 }
+class_alias(ContentWriter::class, 'CodeRhapsodie\EzDataflowBundle\Writer\ContentWriter');

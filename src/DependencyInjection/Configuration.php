@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace CodeRhapsodie\EzDataflowBundle\DependencyInjection;
+namespace CodeRhapsodie\IbexaDataflowBundle\DependencyInjection;
 
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
@@ -14,7 +14,7 @@ class Configuration implements ConfigurationInterface
      */
     public function getConfigTreeBuilder()
     {
-        $treeBuilder = new TreeBuilder('code_rhapsodie_ez_dataflow');
+        $treeBuilder = new TreeBuilder('code_rhapsodie_ibexa_dataflow');
 
         $rootNode = $treeBuilder->getRootNode();
         $rootNode

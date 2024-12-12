@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace CodeRhapsodie\EzDataflowBundle\Form;
+namespace CodeRhapsodie\IbexaDataflowBundle\Form;
 
 use CodeRhapsodie\DataflowBundle\Entity\Job;
 use Symfony\Component\Form\AbstractType;
@@ -43,3 +43,4 @@ class CreateOneshotType extends AbstractType
         ]);
     }
 }
+class_alias(CreateOneshotType::class, 'CodeRhapsodie\EzDataflowBundle\Form\CreateOneshotType');

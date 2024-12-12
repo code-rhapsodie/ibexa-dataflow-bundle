@@ -1,67 +1,67 @@
-coderhapsodie.ezdataflow: Ibexa Dataflow
-coderhapsodie.ezdataflow.yes: Oui
-coderhapsodie.ezdataflow.no: Non
-coderhapsodie.ezdataflow.repeating: Récurrent
-coderhapsodie.ezdataflow.repeating.title: Récurrent
-coderhapsodie.ezdataflow.oneshot: Ponctuel
-coderhapsodie.ezdataflow.oneshot.title: Ponctuel
-coderhapsodie.ezdataflow.oneshot.list.title: 'Liste des exécutions ponctuelles de dataflow'
-coderhapsodie.ezdataflow.workflow.list.title: 'Liste des programmations des dataflow'
-coderhapsodie.ezdataflow.history: Historique
-coderhapsodie.ezdataflow.workflow.list.name: Nom
-coderhapsodie.ezdataflow.workflow.list.frequency: Fréquence
-coderhapsodie.ezdataflow.workflow.list.next_execution: 'Prochaine exécution'
-coderhapsodie.ezdataflow.workflow.list.enabled: 'Activé ?'
-coderhapsodie.ezdataflow.workflow.list.history: Historique
-coderhapsodie.ezdataflow.workflow.list.edit: Éditer
-coderhapsodie.ezdataflow.workflow.list.disable: Désactiver
-coderhapsodie.ezdataflow.workflow.list.enable: Activer
-coderhapsodie.ezdataflow.history.title: Historique
-coderhapsodie.ezdataflow.history.list.title: 'Liste des exécutions'
-coderhapsodie.ezdataflow.history.list.name: Nom
-coderhapsodie.ezdataflow.history.list.request: 'Demandé le'
-coderhapsodie.ezdataflow.history.list.count: 'Nombre d''objets'
-coderhapsodie.ezdataflow.history.list.error_count: 'Nombre d''erreurs'
-coderhapsodie.ezdataflow.history.list.start: 'Commencé le'
-coderhapsodie.ezdataflow.history.list.end: 'Terminé le'
-coderhapsodie.ezdataflow.history.list.view: 'Voir le détail'
-coderhapsodie.ezdataflow.history.list.status: État
-coderhapsodie.ezdataflow.history.filter.label: Filtrer les résultats
-coderhapsodie.ezdataflow.history.filter.none: Tous les résultats
-coderhapsodie.ezdataflow.history.filter.non_empty_only: Seulement non vides
-coderhapsodie.ezdataflow.history.filter.with_error_only: Seulement avec erreurs
-coderhapsodie.ezdataflow.job.status.pending: 'En attente'
-coderhapsodie.ezdataflow.job.status.running: 'En cours'
-coderhapsodie.ezdataflow.job.status.complete: Terminé
-coderhapsodie.ezdataflow.job.status.unknown: Inconnu
-coderhapsodie.ezdataflow.history.job.title: 'Exécution'
-coderhapsodie.ezdataflow.history.details.title: 'Détails de l''exécution'
-coderhapsodie.ezdataflow.history.details.name: Nom
-coderhapsodie.ezdataflow.history.details.request: 'Demandé le'
-coderhapsodie.ezdataflow.history.details.status: État
-coderhapsodie.ezdataflow.history.details.start: 'Commencé le'
-coderhapsodie.ezdataflow.history.details.end: 'Terminé le'
-coderhapsodie.ezdataflow.history.details.count: 'Nombre d''objets mis à jour'
-coderhapsodie.ezdataflow.history.details.options: 'Options de lancement'
-coderhapsodie.ezdataflow.history.details.errors: Erreurs
-coderhapsodie.ezdataflow.history.details.type: 'Nom du dataflow exécuté'
-coderhapsodie.ezdataflow.history.details.log: 'Voir le log'
-coderhapsodie.ezdataflow.workflow.repeating.new.title: 'Nouvel programmation d''un dataflow récurrent'
-coderhapsodie.ezdataflow.workflow.new.cancel: Annuler
-coderhapsodie.ezdataflow.workflow.new.submit: Créer
-coderhapsodie.ezdataflow.history.list.empty: 'Aucune exécution pour le moment.'
-coderhapsodie.ezdataflow.workflow.list.empty: 'Aucun dataflow n''a été programmé.'
-coderhapsodie.ezdataflow.workflow.history.title: 'Historique des exécutions'
-coderhapsodie.ezdataflow.workflow.log.title: 'Log de l''exécution'
-coderhapsodie.ezdataflow.workflow.list.delete: Supprimer
-coderhapsodie.ezdataflow.workflow.delete: 'Êtes-vous sûr de vouloir supprimer ce dataflow ?'
-coderhapsodie.ezdataflow.workflow.create.success: 'La programmation du dataflow a bien été ajoutée.'
-coderhapsodie.ezdataflow.workflow.create.error: 'Une erreur est survenue lors de l''ajout de la programmation du dataflow : "%message%".'
-coderhapsodie.ezdataflow.workflow.delete.success: 'La programmation du dataflow a bien été supprimée.'
-coderhapsodie.ezdataflow.workflow.delete.error: 'Une erreur est survenue lors de la suppression de la programmation du dataflow : "%message%".'
-coderhapsodie.ezdataflow.workflow.oneshot.new.title: 'Nouvelle exécution ponctuelle'
-coderhapsodie.ezdataflow.job.create.success: 'Votre exécution a bien été ajoutée.'
-coderhapsodie.ezdataflow.job.create.error: 'Une erreur est survenue lors de l''ajout de l''exécution : "%message%".'
+coderhapsodie.ibexa_dataflow: Ibexa Dataflow
+coderhapsodie.ibexa_dataflow.yes: Oui
+coderhapsodie.ibexa_dataflow.no: Non
+coderhapsodie.ibexa_dataflow.repeating: Récurrent
+coderhapsodie.ibexa_dataflow.repeating.title: Récurrent
+coderhapsodie.ibexa_dataflow.oneshot: Ponctuel
+coderhapsodie.ibexa_dataflow.oneshot.title: Ponctuel
+coderhapsodie.ibexa_dataflow.oneshot.list.title: 'Liste des exécutions ponctuelles de dataflow'
+coderhapsodie.ibexa_dataflow.workflow.list.title: 'Liste des programmations des dataflow'
+coderhapsodie.ibexa_dataflow.history: Historique
+coderhapsodie.ibexa_dataflow.workflow.list.name: Nom
+coderhapsodie.ibexa_dataflow.workflow.list.frequency: Fréquence
+coderhapsodie.ibexa_dataflow.workflow.list.next_execution: 'Prochaine exécution'
+coderhapsodie.ibexa_dataflow.workflow.list.enabled: 'Activé ?'
+coderhapsodie.ibexa_dataflow.workflow.list.history: Historique
+coderhapsodie.ibexa_dataflow.workflow.list.edit: Éditer
+coderhapsodie.ibexa_dataflow.workflow.list.disable: Désactiver
+coderhapsodie.ibexa_dataflow.workflow.list.enable: Activer
+coderhapsodie.ibexa_dataflow.history.title: Historique
+coderhapsodie.ibexa_dataflow.history.list.title: 'Liste des exécutions'
+coderhapsodie.ibexa_dataflow.history.list.name: Nom
+coderhapsodie.ibexa_dataflow.history.list.request: 'Demandé le'
+coderhapsodie.ibexa_dataflow.history.list.count: 'Nombre d''objets'
+coderhapsodie.ibexa_dataflow.history.list.error_count: 'Nombre d''erreurs'
+coderhapsodie.ibexa_dataflow.history.list.start: 'Commencé le'
+coderhapsodie.ibexa_dataflow.history.list.end: 'Terminé le'
+coderhapsodie.ibexa_dataflow.history.list.view: 'Voir le détail'
+coderhapsodie.ibexa_dataflow.history.list.status: État
+coderhapsodie.ibexa_dataflow.history.filter.label: Filtrer les résultats
+coderhapsodie.ibexa_dataflow.history.filter.none: Tous les résultats
+coderhapsodie.ibexa_dataflow.history.filter.non_empty_only: Seulement non vides
+coderhapsodie.ibexa_dataflow.history.filter.with_error_only: Seulement avec erreurs
+coderhapsodie.ibexa_dataflow.job.status.pending: 'En attente'
+coderhapsodie.ibexa_dataflow.job.status.running: 'En cours'
+coderhapsodie.ibexa_dataflow.job.status.complete: Terminé
+coderhapsodie.ibexa_dataflow.job.status.unknown: Inconnu
+coderhapsodie.ibexa_dataflow.history.job.title: 'Exécution'
+coderhapsodie.ibexa_dataflow.history.details.title: 'Détails de l''exécution'
+coderhapsodie.ibexa_dataflow.history.details.name: Nom
+coderhapsodie.ibexa_dataflow.history.details.request: 'Demandé le'
+coderhapsodie.ibexa_dataflow.history.details.status: État
+coderhapsodie.ibexa_dataflow.history.details.start: 'Commencé le'
+coderhapsodie.ibexa_dataflow.history.details.end: 'Terminé le'
+coderhapsodie.ibexa_dataflow.history.details.count: 'Nombre d''objets mis à jour'
+coderhapsodie.ibexa_dataflow.history.details.options: 'Options de lancement'
+coderhapsodie.ibexa_dataflow.history.details.errors: Erreurs
+coderhapsodie.ibexa_dataflow.history.details.type: 'Nom du dataflow exécuté'
+coderhapsodie.ibexa_dataflow.history.details.log: 'Voir le log'
+coderhapsodie.ibexa_dataflow.workflow.repeating.new.title: 'Nouvel programmation d''un dataflow récurrent'
+coderhapsodie.ibexa_dataflow.workflow.new.cancel: Annuler
+coderhapsodie.ibexa_dataflow.workflow.new.submit: Créer
+coderhapsodie.ibexa_dataflow.history.list.empty: 'Aucune exécution pour le moment.'
+coderhapsodie.ibexa_dataflow.workflow.list.empty: 'Aucun dataflow n''a été programmé.'
+coderhapsodie.ibexa_dataflow.workflow.history.title: 'Historique des exécutions'
+coderhapsodie.ibexa_dataflow.workflow.log.title: 'Log de l''exécution'
+coderhapsodie.ibexa_dataflow.workflow.list.delete: Supprimer
+coderhapsodie.ibexa_dataflow.workflow.delete: 'Êtes-vous sûr de vouloir supprimer ce dataflow ?'
+coderhapsodie.ibexa_dataflow.workflow.create.success: 'La programmation du dataflow a bien été ajoutée.'
+coderhapsodie.ibexa_dataflow.workflow.create.error: 'Une erreur est survenue lors de l''ajout de la programmation du dataflow : "%message%".'
+coderhapsodie.ibexa_dataflow.workflow.delete.success: 'La programmation du dataflow a bien été supprimée.'
+coderhapsodie.ibexa_dataflow.workflow.delete.error: 'Une erreur est survenue lors de la suppression de la programmation du dataflow : "%message%".'
+coderhapsodie.ibexa_dataflow.workflow.oneshot.new.title: 'Nouvelle exécution ponctuelle'
+coderhapsodie.ibexa_dataflow.job.create.success: 'Votre exécution a bien été ajoutée.'
+coderhapsodie.ibexa_dataflow.job.create.error: 'Une erreur est survenue lors de l''ajout de l''exécution : "%message%".'
 coderhapsodie.dataflow.label: 'Nom de la programmation du dataflow'
 coderhapsodie.dataflow.oneshot.label: 'Nom de l''exécution ponctuelle du dataflow'
 coderhapsodie.dataflow.dataflowType: 'Dataflow à exécuter'
@@ -74,9 +74,9 @@ coderhapsodie.dataflow.frequency.title: 'Entrez un intervalle compatible avec st
 coderhapsodie.dataflow.frequency.placeholder: 'Exemple: 1 year 2 months 3 weeks 4 days 5 hours 6 minutes'
 coderhapsodie.dataflow.create.next: 'Première exécution'
 coderhapsodie.dataflow.create.enabled: 'Activé ?'
-coderhapsodie.ezdataflow.workflow.repeating.edit.title: "Édition de la programmation d'un dataflow"
-coderhapsodie.ezdataflow.workflow.edit.submit: Sauvegarder
+coderhapsodie.ibexa_dataflow.workflow.repeating.edit.title: "Édition de la programmation d'un dataflow"
+coderhapsodie.ibexa_dataflow.workflow.edit.submit: Sauvegarder
 coderhapsodie.dataflow.update.next: 'Prochaine exécution'
-coderhapsodie.ezdataflow.workflow.edit.success: 'La programmation du dataflow a été mise à jour avec succès.'
-coderhapsodie.ezdataflow.workflow.edit.error: 'Une erreur est survenue lors de la modification de la programmation du dataflow : "%message%".'
-coderhapsodie.ezdataflow.notfound: 'Les données demandées sont introuvables'
+coderhapsodie.ibexa_dataflow.workflow.edit.success: 'La programmation du dataflow a été mise à jour avec succès.'
+coderhapsodie.ibexa_dataflow.workflow.edit.error: 'Une erreur est survenue lors de la modification de la programmation du dataflow : "%message%".'
+coderhapsodie.ibexa_dataflow.notfound: 'Les données demandées sont introuvables'

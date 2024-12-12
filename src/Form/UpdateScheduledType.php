@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace CodeRhapsodie\EzDataflowBundle\Form;
+namespace CodeRhapsodie\IbexaDataflowBundle\Form;
 
 use CodeRhapsodie\DataflowBundle\Entity\ScheduledDataflow;
 use Symfony\Component\Form\AbstractType;
@@ -45,3 +45,4 @@ class UpdateScheduledType extends AbstractType
         ]);
     }
 }
+class_alias(UpdateScheduledType::class, 'CodeRhapsodie\EzDataflowBundle\Form\UpdateScheduledType');

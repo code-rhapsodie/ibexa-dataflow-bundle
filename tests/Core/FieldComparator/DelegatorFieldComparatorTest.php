@@ -1,15 +1,15 @@
 <?php
 
-namespace CodeRhapsodie\EzDataflowBundle\Tests\Core\FieldComparator;
+namespace CodeRhapsodie\IbexaDataflowBundle\Tests\Core\FieldComparator;
 
-use CodeRhapsodie\EzDataflowBundle\Core\FieldComparator\DelegatorFieldComparator;
-use CodeRhapsodie\EzDataflowBundle\Core\FieldComparator\FieldComparatorInterface;
+use CodeRhapsodie\IbexaDataflowBundle\Core\FieldComparator\DelegatorFieldComparator;
+use CodeRhapsodie\IbexaDataflowBundle\Core\FieldComparator\FieldComparatorInterface;
 use Ibexa\Contracts\Core\Repository\Values\Content\Field;
 use PHPUnit\Framework\TestCase;
 
 class DelegatorFieldComparatorTest extends TestCase
 {
-    /** @var \CodeRhapsodie\EzDataflowBundle\Core\FieldComparator\DelegatorFieldComparator */
+    /** @var \CodeRhapsodie\IbexaDataflowBundle\Core\FieldComparator\DelegatorFieldComparator */
     private $delegatorFieldComparator;
 
     protected function setUp(): void

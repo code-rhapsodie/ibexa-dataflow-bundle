@@ -1,15 +1,28 @@
-# From v1.0 to v2.0
+In version 5, all references to ezdataflow were replaced by ibexa-dataflow, in namespaces, class names, tags and config keys.
+This requires some changes in your application files.
 
-When you use Dataflow commands, use `--siteaccess` instead of `--connection` except for `code-rhapsodie:dataflow:dump-schema`.
+## Updating source files
 
-[BC] The return of `CodeRhapsodie\EzDataflowBundle\Gateway\JobGateway::findForScheduled` 
-and `CodeRhapsodie\EzDataflowBundle\Gateway\ScheduledDataflowGateway::findAllOrderedByLabel` has been changed. 
-The iterable contains an associative array instead of an object.
+A script is provided to do all the replacing in your project files for you. Pass as arguments all directories where
+replacing is needed.
 
-[BC] In classes `CodeRhapsodie\EzDataflowBundle\Gateway\JobGateway` and 
-`CodeRhapsodie\EzDataflowBundle\Gateway\ScheduledDataflowGateway`, all methods return `Doctrine\ORM\Query` object has 
-changed to return  now a `Doctrine\DBAL\Query\QueryBuilder` 
+```shell
+    php vendor/bin/ibexa-dataflow-namespace-changer.phar src/ config/ templates/ translations/
+```
 
-[BC] The return type of `CodeRhapsodie\EzDataflowBundle\Factory\ContentStructureFactory::transform` has been changed 
-from `CodeRhapsodie\EzDataflowBundle\Model\ContentStructure` to `mixed`. In fact only `false` or 
-`CodeRhapsodie\EzDataflowBundle\Model\ContentStructure` object will be returned.
+You should check all changes performed afterward. Here is the list of all the replacement that should be performed:
+
+- all namespaces starting by `CodeRhapsodie\EzDataflowBundle` should now start by `CodeRhapsodie\IbexaDataflowBundle`, anywhere in PHP sources and services definitions
+- the class `CodeRhapsodieEzDataflowBundle` should be renamed `CodeRhapsodieIbexaDataflowBundle` in `bundles.php`
+- the config key `code_rhapsodie_ezdataflow` should be renamed `code_rhapsodie_ibexa_dataflow` in config files
+- all translation keys starting by `ezdataflow` should now start by `ibexa_dataflow` in translation files
+- the security policy module `ezdataflow` should be renamed `ibexa_dataflow`
+- all template paths containing `ezdataflow` should now contain `ibexa_dataflow`
+
+## Updating database
+
+Run the following command on your database:
+
+```sql
+UPDATE ezpolicy SET module_name = 'ibexa_dataflow' WHERE module_name = 'ezdataflow'
+```

@@ -2,22 +2,22 @@
 
 declare(strict_types=1);
 
-namespace CodeRhapsodie\EzDataflowBundle;
+namespace CodeRhapsodie\IbexaDataflowBundle;
 
-use CodeRhapsodie\EzDataflowBundle\DependencyInjection\CodeRhapsodieEzDataflowExtension;
-use CodeRhapsodie\EzDataflowBundle\DependencyInjection\Compiler\FieldComparatorCompilerPass;
-use CodeRhapsodie\EzDataflowBundle\Security\PolicyProvider;
+use CodeRhapsodie\IbexaDataflowBundle\DependencyInjection\CodeRhapsodieIbexaDataflowExtension;
+use CodeRhapsodie\IbexaDataflowBundle\DependencyInjection\Compiler\FieldComparatorCompilerPass;
+use CodeRhapsodie\IbexaDataflowBundle\Security\PolicyProvider;
 use Ibexa\Bundle\Core\DependencyInjection\IbexaCoreExtension;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
-class CodeRhapsodieEzDataflowBundle extends Bundle
+class CodeRhapsodieIbexaDataflowBundle extends Bundle
 {
-    protected $name = 'CodeRhapsodieEzDataflowBundle';
+    protected $name = 'CodeRhapsodieIbexaDataflowBundle';
 
     public function getContainerExtension()
     {
-        return new CodeRhapsodieEzDataflowExtension();
+        return new CodeRhapsodieIbexaDataflowExtension();
     }
 
     public function build(ContainerBuilder $container)
@@ -31,3 +31,4 @@ class CodeRhapsodieEzDataflowBundle extends Bundle
         $ibexaExtension->addPolicyProvider(new PolicyProvider());
     }
 }
+class_alias(CodeRhapsodieIbexaDataflowBundle::class, 'CodeRhapsodie\EzDataflowBundle\CodeRhapsodieIbexaDataflowBundle');

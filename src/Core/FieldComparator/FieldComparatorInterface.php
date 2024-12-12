@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace CodeRhapsodie\EzDataflowBundle\Core\FieldComparator;
+namespace CodeRhapsodie\IbexaDataflowBundle\Core\FieldComparator;
 
 use Ibexa\Contracts\Core\Repository\Values\Content\Field;
 
@@ -13,3 +13,4 @@ interface FieldComparatorInterface
      */
     public function compare(Field $field, $hash): bool;
 }
+class_alias(FieldComparatorInterface::class, 'CodeRhapsodie\EzDataflowBundle\Core\FieldComparator\FieldComparatorInterface');

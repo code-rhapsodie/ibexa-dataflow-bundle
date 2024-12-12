@@ -10,20 +10,20 @@
                 <use xlink:href="{{ ibexa_icon_path('create') }}"></use>
             </svg>
             <span class="ibexa-btn__label">
-                {{ 'coderhapsodie.ezdataflow.workflow.new.submit'|trans|desc('Create') }}
+                {{ 'coderhapsodie.ibexa_dataflow.workflow.new.submit'|trans|desc('Create') }}
             </span>
         </button>
     {% endset %}
 
-    {{ include('@ibexadesign/ezdataflow/parts/tab/job_list.html.twig', {
-        identifier: 'ezdataflow_oneshot_history',
-        paginate_route: 'coderhapsodie.ezdataflow.oneshot',
-        headline: 'coderhapsodie.ezdataflow.oneshot.title'|trans,
+    {{ include('@ibexadesign/ibexa_dataflow/parts/tab/job_list.html.twig', {
+        identifier: 'ibexa_dataflow_oneshot_history',
+        paginate_route: 'coderhapsodie.ibexa_dataflow.oneshot',
+        headline: 'coderhapsodie.ibexa_dataflow.oneshot.title'|trans,
         actions: actions,
     }) }}
 
     {% if form is defined %}
-        {{ include('@ibexadesign/ezdataflow/parts/form_modal.html.twig', {
+        {{ include('@ibexadesign/ibexa_dataflow/parts/form_modal.html.twig', {
             'id': 'modal-new-oneshot',
             'form': form,
             'mode': 'oneshot'

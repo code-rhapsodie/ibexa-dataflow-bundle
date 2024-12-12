@@ -1,67 +1,67 @@
-coderhapsodie.ezdataflow: Ibexa Dataflow
-coderhapsodie.ezdataflow.yes: Yes
-coderhapsodie.ezdataflow.no: No
-coderhapsodie.ezdataflow.repeating: Repeating
-coderhapsodie.ezdataflow.repeating.title: Repeating
-coderhapsodie.ezdataflow.oneshot: Oneshot
-coderhapsodie.ezdataflow.oneshot.title: Oneshot
-coderhapsodie.ezdataflow.oneshot.list.title: 'Oneshot dataflow list'
-coderhapsodie.ezdataflow.workflow.list.title: 'Scheduled dataflow list'
-coderhapsodie.ezdataflow.history: History
-coderhapsodie.ezdataflow.workflow.list.name: Name
-coderhapsodie.ezdataflow.workflow.list.frequency: Frequency
-coderhapsodie.ezdataflow.workflow.list.next_execution: 'Next execution'
-coderhapsodie.ezdataflow.workflow.list.enabled: 'Enabled?'
-coderhapsodie.ezdataflow.workflow.list.history: History
-coderhapsodie.ezdataflow.workflow.list.edit: Edit
-coderhapsodie.ezdataflow.workflow.list.disable: Disable
-coderhapsodie.ezdataflow.workflow.list.enable: Enable
-coderhapsodie.ezdataflow.history.title: History
-coderhapsodie.ezdataflow.history.list.title: 'Executions list'
-coderhapsodie.ezdataflow.history.list.name: Name
-coderhapsodie.ezdataflow.history.list.request: 'Requested on'
-coderhapsodie.ezdataflow.history.list.count: 'Items count'
-coderhapsodie.ezdataflow.history.list.error_count: 'Errors count'
-coderhapsodie.ezdataflow.history.list.start: 'Started on'
-coderhapsodie.ezdataflow.history.list.end: 'Finished on'
-coderhapsodie.ezdataflow.history.list.view: 'View details'
-coderhapsodie.ezdataflow.history.list.status: Status
-coderhapsodie.ezdataflow.history.filter.label: Filter results
-coderhapsodie.ezdataflow.history.filter.none: All results
-coderhapsodie.ezdataflow.history.filter.non_empty_only: Only non empty
-coderhapsodie.ezdataflow.history.filter.with_error_only: Only with errors
-coderhapsodie.ezdataflow.job.status.pending: Pending
-coderhapsodie.ezdataflow.job.status.running: Running
-coderhapsodie.ezdataflow.job.status.complete: Completed
-coderhapsodie.ezdataflow.job.status.unknown: Unknown
-coderhapsodie.ezdataflow.history.job.title: 'Job'
-coderhapsodie.ezdataflow.history.details.title: 'Job details'
-coderhapsodie.ezdataflow.history.details.name: Name
-coderhapsodie.ezdataflow.history.details.request: 'Requested on'
-coderhapsodie.ezdataflow.history.details.status: Status
-coderhapsodie.ezdataflow.history.details.start: 'Started on'
-coderhapsodie.ezdataflow.history.details.end: 'Finished on'
-coderhapsodie.ezdataflow.history.details.count: 'Items successfully processed'
-coderhapsodie.ezdataflow.history.details.options: 'Run options'
-coderhapsodie.ezdataflow.history.details.errors: Errors
-coderhapsodie.ezdataflow.history.details.type: 'Name of the dataflow executed'
-coderhapsodie.ezdataflow.history.details.log: 'View log'
-coderhapsodie.ezdataflow.workflow.repeating.new.title: 'Add a new repeating dataflow'
-coderhapsodie.ezdataflow.workflow.new.cancel: Cancel
-coderhapsodie.ezdataflow.workflow.new.submit: Create
-coderhapsodie.ezdataflow.history.list.empty: 'No execution yet.'
-coderhapsodie.ezdataflow.workflow.list.empty: 'No repeating workflow configured yet'
-coderhapsodie.ezdataflow.workflow.history.title: 'Execution history'
-coderhapsodie.ezdataflow.workflow.log.title: 'Execution log'
-coderhapsodie.ezdataflow.workflow.list.delete: Delete
-coderhapsodie.ezdataflow.workflow.delete: 'Are you sure you want to delete this dataflow schedule?'
-coderhapsodie.ezdataflow.workflow.create.success: 'Dataflow schedule successfully added.'
-coderhapsodie.ezdataflow.workflow.create.error: 'An error occurred during the dataflow schedule creation: "%message%".'
-coderhapsodie.ezdataflow.workflow.delete.success: 'Dataflow schedule successfully deleted.'
-coderhapsodie.ezdataflow.workflow.delete.error: 'An error occurred during the dataflow schedule deletion: "%message%".'
-coderhapsodie.ezdataflow.workflow.oneshot.new.title: 'New oneshot job'
-coderhapsodie.ezdataflow.job.create.success: 'Job successfully added.'
-coderhapsodie.ezdataflow.job.create.error: 'An error occured during the job creation: "%message%".'
+coderhapsodie.ibexa_dataflow: Ibexa Dataflow
+coderhapsodie.ibexa_dataflow.yes: Yes
+coderhapsodie.ibexa_dataflow.no: No
+coderhapsodie.ibexa_dataflow.repeating: Repeating
+coderhapsodie.ibexa_dataflow.repeating.title: Repeating
+coderhapsodie.ibexa_dataflow.oneshot: Oneshot
+coderhapsodie.ibexa_dataflow.oneshot.title: Oneshot
+coderhapsodie.ibexa_dataflow.oneshot.list.title: 'Oneshot dataflow list'
+coderhapsodie.ibexa_dataflow.workflow.list.title: 'Scheduled dataflow list'
+coderhapsodie.ibexa_dataflow.history: History
+coderhapsodie.ibexa_dataflow.workflow.list.name: Name
+coderhapsodie.ibexa_dataflow.workflow.list.frequency: Frequency
+coderhapsodie.ibexa_dataflow.workflow.list.next_execution: 'Next execution'
+coderhapsodie.ibexa_dataflow.workflow.list.enabled: 'Enabled?'
+coderhapsodie.ibexa_dataflow.workflow.list.history: History
+coderhapsodie.ibexa_dataflow.workflow.list.edit: Edit
+coderhapsodie.ibexa_dataflow.workflow.list.disable: Disable
+coderhapsodie.ibexa_dataflow.workflow.list.enable: Enable
+coderhapsodie.ibexa_dataflow.history.title: History
+coderhapsodie.ibexa_dataflow.history.list.title: 'Executions list'
+coderhapsodie.ibexa_dataflow.history.list.name: Name
+coderhapsodie.ibexa_dataflow.history.list.request: 'Requested on'
+coderhapsodie.ibexa_dataflow.history.list.count: 'Items count'
+coderhapsodie.ibexa_dataflow.history.list.error_count: 'Errors count'
+coderhapsodie.ibexa_dataflow.history.list.start: 'Started on'
+coderhapsodie.ibexa_dataflow.history.list.end: 'Finished on'
+coderhapsodie.ibexa_dataflow.history.list.view: 'View details'
+coderhapsodie.ibexa_dataflow.history.list.status: Status
+coderhapsodie.ibexa_dataflow.history.filter.label: Filter results
+coderhapsodie.ibexa_dataflow.history.filter.none: All results
+coderhapsodie.ibexa_dataflow.history.filter.non_empty_only: Only non empty
+coderhapsodie.ibexa_dataflow.history.filter.with_error_only: Only with errors
+coderhapsodie.ibexa_dataflow.job.status.pending: Pending
+coderhapsodie.ibexa_dataflow.job.status.running: Running
+coderhapsodie.ibexa_dataflow.job.status.complete: Completed
+coderhapsodie.ibexa_dataflow.job.status.unknown: Unknown
+coderhapsodie.ibexa_dataflow.history.job.title: 'Job'
+coderhapsodie.ibexa_dataflow.history.details.title: 'Job details'
+coderhapsodie.ibexa_dataflow.history.details.name: Name
+coderhapsodie.ibexa_dataflow.history.details.request: 'Requested on'
+coderhapsodie.ibexa_dataflow.history.details.status: Status
+coderhapsodie.ibexa_dataflow.history.details.start: 'Started on'
+coderhapsodie.ibexa_dataflow.history.details.end: 'Finished on'
+coderhapsodie.ibexa_dataflow.history.details.count: 'Items successfully processed'
+coderhapsodie.ibexa_dataflow.history.details.options: 'Run options'
+coderhapsodie.ibexa_dataflow.history.details.errors: Errors
+coderhapsodie.ibexa_dataflow.history.details.type: 'Name of the dataflow executed'
+coderhapsodie.ibexa_dataflow.history.details.log: 'View log'
+coderhapsodie.ibexa_dataflow.workflow.repeating.new.title: 'Add a new repeating dataflow'
+coderhapsodie.ibexa_dataflow.workflow.new.cancel: Cancel
+coderhapsodie.ibexa_dataflow.workflow.new.submit: Create
+coderhapsodie.ibexa_dataflow.history.list.empty: 'No execution yet.'
+coderhapsodie.ibexa_dataflow.workflow.list.empty: 'No repeating workflow configured yet'
+coderhapsodie.ibexa_dataflow.workflow.history.title: 'Execution history'
+coderhapsodie.ibexa_dataflow.workflow.log.title: 'Execution log'
+coderhapsodie.ibexa_dataflow.workflow.list.delete: Delete
+coderhapsodie.ibexa_dataflow.workflow.delete: 'Are you sure you want to delete this dataflow schedule?'
+coderhapsodie.ibexa_dataflow.workflow.create.success: 'Dataflow schedule successfully added.'
+coderhapsodie.ibexa_dataflow.workflow.create.error: 'An error occurred during the dataflow schedule creation: "%message%".'
+coderhapsodie.ibexa_dataflow.workflow.delete.success: 'Dataflow schedule successfully deleted.'
+coderhapsodie.ibexa_dataflow.workflow.delete.error: 'An error occurred during the dataflow schedule deletion: "%message%".'
+coderhapsodie.ibexa_dataflow.workflow.oneshot.new.title: 'New oneshot job'
+coderhapsodie.ibexa_dataflow.job.create.success: 'Job successfully added.'
+coderhapsodie.ibexa_dataflow.job.create.error: 'An error occured during the job creation: "%message%".'
 coderhapsodie.dataflow.label: 'Scheduled dataflow name'
 coderhapsodie.dataflow.oneshot.label: 'One-shot job name'
 coderhapsodie.dataflow.dataflowType: 'Select the dataflow to run'
@@ -76,9 +76,9 @@ coderhapsodie.dataflow.frequency.title: 'Enter an interval in a format compatibl
 coderhapsodie.dataflow.frequency.placeholder: 'Example: 1 year 2 months 3 weeks 4 days 5 hours 6 minutes'
 coderhapsodie.dataflow.create.next: 'First run'
 coderhapsodie.dataflow.create.enabled: Enabled?
-coderhapsodie.ezdataflow.workflow.repeating.edit.title: "Dataflow schedule edit"
-coderhapsodie.ezdataflow.workflow.edit.submit: Save
+coderhapsodie.ibexa_dataflow.workflow.repeating.edit.title: "Dataflow schedule edit"
+coderhapsodie.ibexa_dataflow.workflow.edit.submit: Save
 coderhapsodie.dataflow.update.next: 'Next execution'
-coderhapsodie.ezdataflow.workflow.edit.success: 'Dataflow schedule successfully updated.'
-coderhapsodie.ezdataflow.workflow.edit.error: 'An error occurred during the dataflow schedule update: "%message%".'
-coderhapsodie.ezdataflow.notfound: 'Requested data is not found'
+coderhapsodie.ibexa_dataflow.workflow.edit.success: 'Dataflow schedule successfully updated.'
+coderhapsodie.ibexa_dataflow.workflow.edit.error: 'An error occurred during the dataflow schedule update: "%message%".'
+coderhapsodie.ibexa_dataflow.notfound: 'Requested data is not found'

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace CodeRhapsodie\EzDataflowBundle\Gateway;
+namespace CodeRhapsodie\IbexaDataflowBundle\Gateway;
 
 use CodeRhapsodie\DataflowBundle\Entity\Job;
 use CodeRhapsodie\DataflowBundle\Repository\JobRepository;
@@ -59,3 +59,4 @@ final class JobGateway
         $this->jobRepository->save($job);
     }
 }
+class_alias(JobGateway::class, 'CodeRhapsodie\EzDataflowBundle\Gateway\JobGateway');

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace CodeRhapsodie\EzDataflowBundle\Model;
+namespace CodeRhapsodie\IbexaDataflowBundle\Model;
 
 abstract class ContentStructure
 {
@@ -30,3 +30,4 @@ abstract class ContentStructure
         return $this->fields;
     }
 }
+class_alias(ContentStructure::class, 'CodeRhapsodie\EzDataflowBundle\Model\ContentStructure');

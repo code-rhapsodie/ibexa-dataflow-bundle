@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace CodeRhapsodie\EzDataflowBundle\Form;
+namespace CodeRhapsodie\IbexaDataflowBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\CallbackTransformer;
@@ -56,3 +56,4 @@ class YamlType extends AbstractType
         return 'coderhapsodie_port_yaml';
     }
 }
+class_alias(YamlType::class, 'CodeRhapsodie\EzDataflowBundle\Form\YamlType');

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace CodeRhapsodie\EzDataflowBundle\Form;
+namespace CodeRhapsodie\IbexaDataflowBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -22,3 +22,4 @@ class FrequencyType extends AbstractType
         return 'coderhapsodie_port_frequency';
     }
 }
+class_alias(FrequencyType::class, 'CodeRhapsodie\EzDataflowBundle\Form\FrequencyType');

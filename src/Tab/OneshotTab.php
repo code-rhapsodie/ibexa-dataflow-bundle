@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace CodeRhapsodie\EzDataflowBundle\Tab;
+namespace CodeRhapsodie\IbexaDataflowBundle\Tab;
 
-use CodeRhapsodie\EzDataflowBundle\Controller\DashboardController;
+use CodeRhapsodie\IbexaDataflowBundle\Controller\DashboardController;
 use Ibexa\Contracts\AdminUi\Tab\AbstractControllerBasedTab;
 use Ibexa\Contracts\AdminUi\Tab\OrderedTabInterface;
 use Symfony\Component\HttpKernel\Controller\ControllerReference;
@@ -32,7 +32,7 @@ class OneshotTab extends AbstractControllerBasedTab implements OrderedTabInterfa
      */
     public function getIdentifier(): string
     {
-        return 'code-rhapsodie-ezdataflow-oneshot';
+        return 'code-rhapsodie-ibexa_dataflow-oneshot';
     }
 
     /**
@@ -40,6 +40,6 @@ class OneshotTab extends AbstractControllerBasedTab implements OrderedTabInterfa
      */
     public function getName(): string
     {
-        return $this->translator->trans('coderhapsodie.ezdataflow.oneshot');
+        return $this->translator->trans('coderhapsodie.ibexa_dataflow.oneshot');
     }
 }

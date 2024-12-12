@@ -1,3 +1,7 @@
+# Version 5.0.0
+
+* Renamed bundle to IbexaDataflowBundle
+
 # Version 4.1.2
 
 * Fix main menu label

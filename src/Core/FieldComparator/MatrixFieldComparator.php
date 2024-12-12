@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace CodeRhapsodie\EzDataflowBundle\Core\FieldComparator;
+namespace CodeRhapsodie\IbexaDataflowBundle\Core\FieldComparator;
 
 use Ibexa\Contracts\Core\FieldType\Value;
 
@@ -27,3 +27,4 @@ class MatrixFieldComparator extends AbstractFieldComparator
         return true;
     }
 }
+class_alias(MatrixFieldComparator::class, 'CodeRhapsodie\EzDataflowBundle\Core\FieldComparator\MatrixFieldComparator');

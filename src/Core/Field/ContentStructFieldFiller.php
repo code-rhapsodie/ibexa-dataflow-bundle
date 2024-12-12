@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace CodeRhapsodie\EzDataflowBundle\Core\Field;
+namespace CodeRhapsodie\IbexaDataflowBundle\Core\Field;
 
-use CodeRhapsodie\EzDataflowBundle\Exception\UnknownFieldException;
-use CodeRhapsodie\EzDataflowBundle\Exception\UnsupportedFieldTypeException;
+use CodeRhapsodie\IbexaDataflowBundle\Exception\UnknownFieldException;
+use CodeRhapsodie\IbexaDataflowBundle\Exception\UnsupportedFieldTypeException;
 use Ibexa\Contracts\Core\FieldType\Value;
 use Ibexa\Contracts\Core\Repository\Values\Content\ContentStruct;
 use Ibexa\Contracts\Core\Repository\Values\ContentType\ContentType;
@@ -26,8 +26,8 @@ class ContentStructFieldFiller implements ContentStructFieldFillerInterface
     /**
      * {@inheritdoc}
      *
-     * @throws \CodeRhapsodie\EzDataflowBundle\Exception\UnknownFieldException
-     * @throws \CodeRhapsodie\EzDataflowBundle\Exception\UnsupportedFieldTypeException
+     * @throws \CodeRhapsodie\IbexaDataflowBundle\Exception\UnknownFieldException
+     * @throws \CodeRhapsodie\IbexaDataflowBundle\Exception\UnsupportedFieldTypeException
      */
     public function fillFields(ContentType $contentType, ContentStruct $contentStruct, array $fieldHashes): void
     {
@@ -47,7 +47,7 @@ class ContentStructFieldFiller implements ContentStructFieldFillerInterface
     /**
      * @param mixed $hash
      *
-     * @throws \CodeRhapsodie\EzDataflowBundle\Exception\UnsupportedFieldTypeException
+     * @throws \CodeRhapsodie\IbexaDataflowBundle\Exception\UnsupportedFieldTypeException
      */
     private function createFieldValue(string $fieldTypeIdentifier, $hash): Value
     {
@@ -60,3 +60,4 @@ class ContentStructFieldFiller implements ContentStructFieldFillerInterface
         throw UnsupportedFieldTypeException::create($fieldTypeIdentifier);
     }
 }
+class_alias(ContentStructFieldFiller::class, 'CodeRhapsodie\EzDataflowBundle\Core\Field\ContentStructFieldFiller');
