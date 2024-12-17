@@ -11,12 +11,9 @@ Ibexa Dataflow bundle is intended to manage content imports from external data s
 > Command line notice: When you use Dataflow commands, **use `--siteaccess` instead of `--connection`** expect
 > for `code-rhapsodie:dataflow:dump-schema` command.
 
-| Ibexa Dataflow Version | Ibexa Content Version | Status                       |
-|---------------------|-----------------------|------------------------------|
-| 4.x                 | 4.x                   | :white_check_mark: Maintened |
-| 3.x                 | 3.x                   | :white_check_mark: Maintened |
-| 2.x                 | eZ Platform 2.5       | :x: Not maintened            |
-| 1.x                 | eZ Platform 2.5       | :x: Not maintained           |
+| Ibexa Dataflow Version | Ibexa Content Version | Status                        |
+|------------------------|-----------------------|-------------------------------|
+| 4.x                    | 4.x                   | :white_check_mark: Maintained |
 
 ## User Interface (UI)
 
