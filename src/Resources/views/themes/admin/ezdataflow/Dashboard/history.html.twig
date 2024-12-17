@@ -43,14 +43,17 @@
                 e.preventDefault();
                 const loading = document.getElementById('loading_ezdataflow_history_results');
                 const results = document.getElementById('ezdataflow_history_results').querySelector('.ibexa-table');
+                const pagination = document.getElementById('ezdataflow_history_results').querySelector('.pag');
                 loading.hidden = false;
                 results.innerHTML = '';
+                pagination.innerHTML = '';
                 fetch('{{ path('coderhapsodie.ezdataflow.history') }}?filter=' + this.value)
                     .then((r) => r.text())
                     .then((content) => {
                         const node = document.createElement('div');
                         node.innerHTML = content;
                         results.innerHTML = node.querySelector('#ezdataflow_history_results .ibexa-table').innerHTML;
+                        pagination.innerHTML = node.querySelector('#ezdataflow_history_results .pag').innerHTML;
                         loading.hidden = true;
                     })
                 ;

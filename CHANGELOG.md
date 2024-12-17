@@ -1,6 +1,7 @@
 # Version 4.2.0
 
 * Added error count columns to job tables
+* Fixed scheduled job run history pagination
 
 # Version 4.1.2
 

@@ -71,6 +71,33 @@
                 .closest('ul').querySelectorAll('li.ibexa-tabs__tab');
             const tabs = document.getElementById('ibexa-tab-coderhapsodie-ezdataflow-code-rhapsodie-ezdataflow-repeating')
                 .closest('.tab-content').querySelectorAll('.tab-pane');
+
+            // Manage ajax pagination
+            document.addEventListener('click', (e) => {
+                const link = e.target.closest('.ibexa-pagination a');
+                if (!link) {
+                    return;
+                }
+
+                const block = link.closest('.ibexa-pagination').parentNode.parentNode;
+                const display = block.querySelector('.ibexa-table');
+                const pagination = block.querySelector('.pag');
+                const loader = document.querySelector('#' + block.dataset.loader);
+                e.preventDefault();
+                loader.hidden = false;
+                display.innerHTML = '';
+                pagination.innerHTML = '';
+                fetch(link.href)
+                    .then((r) => r.text())
+                    .then((content) => {
+                        const node = document.createElement('div');
+                        node.innerHTML = content;
+                        display.innerHTML = node.querySelector('#' + block.id).querySelector('.ibexa-table').innerHTML;
+                        pagination.innerHTML = node.querySelector('#' + block.id).querySelector('.pag').innerHTML;
+                        loader.hidden = true;
+                    })
+                ;
+            });
         });
     </script>
 {% endblock %}

@@ -9,7 +9,7 @@
     </svg>
 </div>
 
-<div id="{{ id }}" class="history-details-aware">
+<div id="{{ id }}" data-loader="loading_{{ id }}" class="history-details-aware">
 
     {% set body_rows = [] %}
 
@@ -80,40 +80,15 @@
         {% endblock %}
     {% endembed %}
 
-    {% if pager.haveToPaginate %}
-        {% include '@ibexadesign/ui/pagination.html.twig' with {
-            'pager': pager,
-            'paginaton_params': {
-                'routeName': paginate_route,
-                'routeParams': paginate_params|default({})
-            }
-        } %}
-    {% endif %}
+    <div class="pag">
+        {% if pager.haveToPaginate %}
+            {% include '@ibexadesign/ui/pagination.html.twig' with {
+                'pager': pager,
+                'paginaton_params': {
+                    'routeName': paginate_route,
+                    'routeParams': paginate_params|default({})
+                }
+            } %}
+        {% endif %}
+    </div>
 </div>
-
-<script>
-    document.addEventListener('DOMContentLoaded', () => {
-        // Manage ajax pagination
-        const display = document.getElementById('{{ id }}');
-        display.addEventListener('click', (e) => {
-            const link = e.target.closest('.ibexa-pagination a');
-            if (!link) {
-                return;
-            }
-
-            const loader = document.getElementById('loading_{{ id }}');
-            e.preventDefault();
-            loader.hidden = false;
-            display.innerHTML = '';
-            fetch(link.href)
-                .then((r) => r.text())
-                .then((content) => {
-                    const node = document.createElement('div');
-                    node.innerHTML = content;
-                    display.innerHTML = node.querySelector('#{{ id }}').innerHTML;
-                    loader.hidden = true;
-                })
-            ;
-        });
-    });
-</script>
