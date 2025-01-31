@@ -38,7 +38,6 @@ class CreateScheduledType extends AbstractType
                 'label' => 'coderhapsodie.dataflow.frequency',
             ])
             ->add('next', UserTimezoneAwareDateTimeType::class, [
-                'years' => range(date('Y'), date('Y') + 5),
                 'label' => 'coderhapsodie.dataflow.create.next',
             ])
             ->add('enabled', CheckboxType::class, [
