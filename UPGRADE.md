@@ -3,7 +3,7 @@ This requires some changes in your application files.
 
 ## Updating source files
 
-A script is provided to do all the replacing in your project files for you. Pass as arguments all directories where
+A script is provided to do all the replacements in your project files for you. Pass as arguments all directories where
 replacing is needed.
 
 ```shell
