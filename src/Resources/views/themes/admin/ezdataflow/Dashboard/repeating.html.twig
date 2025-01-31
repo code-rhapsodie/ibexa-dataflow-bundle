@@ -1,4 +1,5 @@
 {%- block content -%}
+    {% form_theme update_form '@ibexadesign/ezdataflow/form_theme.html.twig' %}
 
     {{ include('@ibexadesign/ezdataflow/parts/tab/schedule_list.html.twig', {
         identifier: 'ezdataflow_schedule_results',
@@ -15,10 +16,12 @@
         title: 'coderhapsodie.ezdataflow.workflow.repeating.edit.title'|trans,
     } %}
         {% block body_content %}
-            <form action="" method="post">
-                <div class="form-fields"></div>
+            {{ form_start(update_form) }}
+                <div class="form-fields">
+                    {{ form_widget(update_form) }}
+                </div>
                 <button id="modal-edit-submit" type="submit" hidden />
-            </form>
+            {{ form_end(update_form) }}
         {% endblock %}
         {% block footer_content %}
             <button type="button" class="btn ibexa-btn ibexa-btn--primary ibexa-btn--trigger" data-click="#modal-edit-submit">
@@ -52,50 +55,6 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            // $('#ez-modal--edit-scheduled').modal({keyboard: true, show: false});
-            // $('.modal-edit').each(function (index, elem) {
-            //     $(elem).click(function (e) {
-            //         e.preventDefault();
-            //         $('#schedule_edit').html('');
-            //         $('#ez-modal--edit-scheduled').modal('show');
-            //         $.ajax(elem.href, {
-            //             success: function (result) {
-            //                 if (result.redirect) {
-            //                     if (window.location.href === result.redirect) {
-            //                         window.location.reload();
-            //                     }
-            //                     window.location = result.redirect;
-            //                     window.location.reload();
-            //                     return;
-            //                 }
-            //
-            //                 $('#schedule_edit').html(result.form);
-            //             }
-            //         });
-            //     });
-            // });
-            //
-            // $('#ez-modal--edit-scheduled').on('submit', 'form', function (e) {
-            //     e.preventDefault();
-            //     url = $(this).attr('action');
-            //     data = new FormData(this);
-            //     $.ajax({
-            //         'type': 'POST',
-            //         'url': url,
-            //         'data': data,
-            //         processData: false,
-            //         contentType: false,
-            //         success: function (result) {
-            //             if (result.redirect) {
-            //                 window.location = result.redirect;
-            //                 return;
-            //             }
-            //
-            //             $('#schedule_edit').html(result.form);
-            //         }
-            //     });
-            // });
-
             const bindFormSubmit = (modalId) => {
                 document.querySelector('#'+modalId+' form').addEventListener('submit', function (e) {
                     e.preventDefault();
@@ -134,7 +93,13 @@
                             const node = document.createElement('div');
                             node.innerHTML = result.form;
                             editModal.querySelector('form').action = link.href;
-                            editModal.querySelector('.form-fields').innerHTML = node.querySelector('.form-fields').innerHTML;
+                            editModal.querySelector('#update_scheduled_label').value = node.querySelector('#update_scheduled_label').value;
+                            editModal.querySelector('#update_scheduled_options').value = node.querySelector('#update_scheduled_options').value;
+                            editModal.querySelector('#update_scheduled_frequency').value = node.querySelector('#update_scheduled_frequency').value;
+                            editModal.querySelector('#update_scheduled_next').parentNode.parentNode.ibexaInstance.flatpickrInstance.setDate(
+                                new Date(node.querySelector('#update_scheduled_next').value * 1000),
+                                true
+                            );
                         })
                     ;
 

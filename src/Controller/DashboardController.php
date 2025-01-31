@@ -8,6 +8,7 @@ use CodeRhapsodie\DataflowBundle\Entity\Job;
 use CodeRhapsodie\DataflowBundle\Entity\ScheduledDataflow;
 use CodeRhapsodie\EzDataflowBundle\Form\CreateOneshotType;
 use CodeRhapsodie\EzDataflowBundle\Form\CreateScheduledType;
+use CodeRhapsodie\EzDataflowBundle\Form\UpdateScheduledType;
 use CodeRhapsodie\EzDataflowBundle\Gateway\ExceptionJSONDecoderAdapter;
 use CodeRhapsodie\EzDataflowBundle\Gateway\JobGateway;
 use CodeRhapsodie\EzDataflowBundle\Gateway\ScheduledDataflowGateway;
@@ -55,10 +56,12 @@ class DashboardController extends Controller
         $form = $this->createForm(CreateScheduledType::class, $newWorkflow, [
             'action' => $this->generateUrl('coderhapsodie.ezdataflow.workflow.create'),
         ]);
+        $updateForm = $this->createForm(UpdateScheduledType::class);
 
         return $this->render('@ibexadesign/ezdataflow/Dashboard/repeating.html.twig', [
             'pager' => $this->getPager($this->scheduledDataflowGateway->getListQueryForAdmin(), $request),
             'form' => $form->createView(),
+            'update_form' => $updateForm->createView(),
         ]);
     }
 
