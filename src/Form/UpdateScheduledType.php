@@ -32,7 +32,6 @@ class UpdateScheduledType extends AbstractType
                 'label' => 'coderhapsodie.dataflow.frequency',
             ])
             ->add('next', UserTimezoneAwareDateTimeType::class, [
-                'years' => range(date('Y'), date('Y') + 5),
                 'label' => 'coderhapsodie.dataflow.update.next',
             ])
         ;

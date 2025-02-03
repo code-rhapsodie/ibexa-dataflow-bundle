@@ -8,6 +8,7 @@ use CodeRhapsodie\DataflowBundle\Entity\Job;
 use CodeRhapsodie\DataflowBundle\Entity\ScheduledDataflow;
 use CodeRhapsodie\IbexaDataflowBundle\Form\CreateOneshotType;
 use CodeRhapsodie\IbexaDataflowBundle\Form\CreateScheduledType;
+use CodeRhapsodie\IbexaDataflowBundle\Gateway\ExceptionJSONDecoderAdapter;
 use CodeRhapsodie\IbexaDataflowBundle\Gateway\JobGateway;
 use CodeRhapsodie\IbexaDataflowBundle\Gateway\ScheduledDataflowGateway;
 use Doctrine\DBAL\Query\QueryBuilder;
@@ -54,10 +55,12 @@ class DashboardController extends Controller
         $form = $this->createForm(CreateScheduledType::class, $newWorkflow, [
             'action' => $this->generateUrl('coderhapsodie.ibexa_dataflow.workflow.create'),
         ]);
+        $updateForm = $this->createForm(UpdateScheduledType::class);
 
         return $this->render('@ibexadesign/ibexa_dataflow/Dashboard/repeating.html.twig', [
             'pager' => $this->getPager($this->scheduledDataflowGateway->getListQueryForAdmin(), $request),
             'form' => $form->createView(),
+            'update_form' => $updateForm->createView(),
         ]);
     }
 
@@ -141,11 +144,15 @@ class DashboardController extends Controller
 
     private function getPager(QueryBuilder $query, Request $request): Pagerfanta
     {
-        $pager = new Pagerfanta(new QueryAdapter($query, function ($queryBuilder) {
-            return $queryBuilder->select('COUNT(DISTINCT id) AS total_results')
-                ->resetQueryPart('orderBy')
-                ->setMaxResults(1);
-        }));
+        $pager = new Pagerfanta(
+            new ExceptionJSONDecoderAdapter(
+                new QueryAdapter($query, function ($queryBuilder) {
+                    return $queryBuilder->select('COUNT(DISTINCT id) AS total_results')
+                        ->resetQueryPart('orderBy')
+                        ->setMaxResults(1);
+                })
+            )
+        );
         $pager->setMaxPerPage(20);
         $pager->setCurrentPage($request->query->get('page', 1));
 

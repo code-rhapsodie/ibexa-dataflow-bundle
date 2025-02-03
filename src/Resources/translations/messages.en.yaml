@@ -20,8 +20,8 @@ coderhapsodie.ibexa_dataflow.history.title: History
 coderhapsodie.ibexa_dataflow.history.list.title: 'Executions list'
 coderhapsodie.ibexa_dataflow.history.list.name: Name
 coderhapsodie.ibexa_dataflow.history.list.request: 'Requested on'
-coderhapsodie.ibexa_dataflow.history.list.count: 'Items count'
-coderhapsodie.ibexa_dataflow.history.list.error_count: 'Errors count'
+coderhapsodie.ibexa_dataflow.history.list.count: 'Number of successes'
+coderhapsodie.ibexa_dataflow.history.list.errors: 'Number of errors'
 coderhapsodie.ibexa_dataflow.history.list.start: 'Started on'
 coderhapsodie.ibexa_dataflow.history.list.end: 'Finished on'
 coderhapsodie.ibexa_dataflow.history.list.view: 'View details'

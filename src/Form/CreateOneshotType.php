@@ -31,7 +31,6 @@ class CreateOneshotType extends AbstractType
             ])
             ->add('requestedDate', UserTimezoneAwareDateTimeType::class, [
                 'label' => 'coderhapsodie.dataflow.requestedDate',
-                'years' => range(date('Y'), date('Y') + 5),
             ])
         ;
     }

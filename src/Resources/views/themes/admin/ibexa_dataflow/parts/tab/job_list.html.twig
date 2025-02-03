@@ -9,7 +9,7 @@
     </svg>
 </div>
 
-<div id="{{ id }}" class="history-details-aware">
+<div id="{{ id }}" data-loader="loading_{{ id }}" class="history-details-aware">
 
     {% set body_rows = [] %}
 
@@ -19,6 +19,7 @@
             {content: job.label},
             {content: date(job.requested_date)|ibexa_short_datetime},
             {content: job.count|default('—')},
+            {content: job.exceptions|length},
             {content: job.start_time ? date(job.start_time)|ibexa_short_datetime : '—'},
             {content: job.end_time ? date(job.end_time)|ibexa_short_datetime : '—'},
             {content: macros.translateStatus(job.status)},
@@ -61,6 +62,7 @@
             { content: 'coderhapsodie.ibexa_dataflow.history.list.name'|trans },
             { content: 'coderhapsodie.ibexa_dataflow.history.list.request'|trans },
             { content: 'coderhapsodie.ibexa_dataflow.history.list.count'|trans },
+            { content: 'coderhapsodie.ibexa_dataflow.history.list.errors'|trans },
             { content: 'coderhapsodie.ibexa_dataflow.history.list.start'|trans },
             { content: 'coderhapsodie.ibexa_dataflow.history.list.end'|trans },
             { content: 'coderhapsodie.ibexa_dataflow.history.list.status'|trans },
@@ -78,40 +80,15 @@
         {% endblock %}
     {% endembed %}
 
-    {% if pager.haveToPaginate %}
-        {% include '@ibexadesign/ui/pagination.html.twig' with {
-            'pager': pager,
-            'paginaton_params': {
-                'routeName': paginate_route,
-                'routeParams': paginate_params|default({})
-            }
-        } %}
-    {% endif %}
+    <div class="pag">
+        {% if pager.haveToPaginate %}
+            {% include '@ibexadesign/ui/pagination.html.twig' with {
+                'pager': pager,
+                'paginaton_params': {
+                    'routeName': paginate_route,
+                    'routeParams': paginate_params|default({})
+                }
+            } %}
+        {% endif %}
+    </div>
 </div>
-
-<script>
-    document.addEventListener('DOMContentLoaded', () => {
-        // Manage ajax pagination
-        const display = document.getElementById('{{ id }}');
-        display.addEventListener('click', (e) => {
-            const link = e.target.closest('.ibexa-pagination a');
-            if (!link) {
-                return;
-            }
-
-            const loader = document.getElementById('loading_{{ id }}');
-            e.preventDefault();
-            loader.hidden = false;
-            display.innerHTML = '';
-            fetch(link.href)
-                .then((r) => r.text())
-                .then((content) => {
-                    const node = document.createElement('div');
-                    node.innerHTML = content;
-                    display.innerHTML = node.querySelector('#{{ id }}').innerHTML;
-                    loader.hidden = true;
-                })
-            ;
-        });
-    });
-</script>

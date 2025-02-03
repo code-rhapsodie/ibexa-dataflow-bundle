@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace CodeRhapsodie\IbexaDataflowBundle\Form;
 
+use Ibexa\AdminUi\Form\Type\DateTimePickerType;
 use Ibexa\Contracts\Core\Repository\UserPreferenceService;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\FormBuilderInterface;
 
 class UserTimezoneAwareDateTimeType extends AbstractType
@@ -21,7 +21,7 @@ class UserTimezoneAwareDateTimeType extends AbstractType
 
     public function getParent()
     {
-        return DateTimeType::class;
+        return DateTimePickerType::class;
     }
 
     public function buildForm(FormBuilderInterface $builder, array $options)
