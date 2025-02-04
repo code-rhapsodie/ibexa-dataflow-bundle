@@ -1,6 +1,8 @@
 # Version 5.0.0
 
 * Renamed bundle to IbexaDataflowBundle
+* Replaced every trace of ezdataflow with ibexa_dataflow or ibexa-dataflow
+* Added automatic replacement script
 
 # Version 4.3.0
 
