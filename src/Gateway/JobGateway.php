@@ -13,12 +13,8 @@ final class JobGateway
     public const FILTER_NONE = 0;
     public const FILTER_NON_EMPTY = 1;
 
-    /** @var \CodeRhapsodie\DataflowBundle\Repository\JobRepository */
-    private $jobRepository;
-
-    public function __construct(JobRepository $jobRepository)
+    public function __construct(private readonly JobRepository $jobRepository)
     {
-        $this->jobRepository = $jobRepository;
     }
 
     public function find(int $id): ?Job

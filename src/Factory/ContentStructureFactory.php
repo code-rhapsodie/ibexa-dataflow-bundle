@@ -12,16 +12,10 @@ use Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException;
 final class ContentStructureFactory implements ContentStructureFactoryInterface
 {
     /**
-     * @var \Ibexa\Contracts\Core\Repository\ContentService
-     */
-    private $contentService;
-
-    /**
      * ContentStructureFactory constructor.
      */
-    public function __construct(ContentService $contentService)
+    public function __construct(private readonly ContentService $contentService)
     {
-        $this->contentService = $contentService;
     }
 
     /**
@@ -42,7 +36,7 @@ final class ContentStructureFactory implements ContentStructureFactoryInterface
             }
 
             return ContentUpdateStructure::createForContentId($content->id, $language, $data);
-        } catch (NotFoundException $e) {
+        } catch (NotFoundException) {
             // The content doesn't exist yet, so it will be created.
         }
 

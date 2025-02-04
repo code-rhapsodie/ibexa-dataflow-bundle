@@ -13,20 +13,8 @@ use Ibexa\Contracts\Core\Repository\Values\Content\Content;
 
 class ContentUpdater implements ContentUpdaterInterface
 {
-    /** @var \Ibexa\Contracts\Core\Repository\ContentService */
-    private $contentService;
-
-    /** @var \Ibexa\Contracts\Core\Repository\ContentTypeService */
-    private $contentTypeService;
-
-    /** @var \CodeRhapsodie\IbexaDataflowBundle\Core\Field\ContentStructFieldFillerInterface */
-    private $filler;
-
-    public function __construct(ContentService $contentService, ContentTypeService $contentTypeService, ContentStructFieldFillerInterface $filler)
+    public function __construct(private readonly ContentService $contentService, private readonly ContentTypeService $contentTypeService, private readonly ContentStructFieldFillerInterface $filler)
     {
-        $this->contentService = $contentService;
-        $this->contentTypeService = $contentTypeService;
-        $this->filler = $filler;
     }
 
     /**

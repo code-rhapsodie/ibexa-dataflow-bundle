@@ -12,15 +12,14 @@ use Ibexa\Contracts\Core\Repository\Values\ContentType\ContentType;
 
 class ContentStructFieldFiller implements ContentStructFieldFillerInterface
 {
-    /** @var FieldValueCreatorInterface[] */
-    private $fieldValueCreators;
-
     /**
      * ContentStructFieldFiller constructor.
      */
-    public function __construct(iterable $fieldValueCreators)
+    public function __construct(
+        /** @var FieldValueCreatorInterface[] */
+        private readonly iterable $fieldValueCreators
+    )
     {
-        $this->fieldValueCreators = $fieldValueCreators;
     }
 
     /**

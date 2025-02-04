@@ -17,31 +17,14 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
-/**
- * @Route("/ibexa_dataflow/job")
- */
+#[Route(path: '/ibexa_dataflow/job')]
 class JobController extends Controller
 {
-    /** @var \CodeRhapsodie\IbexaDataflowBundle\Gateway\JobGateway */
-    private $jobGateway;
-    /** @var \Ibexa\Contracts\AdminUi\Notification\NotificationHandlerInterface */
-    private $notificationHandler;
-    /** @var \Symfony\Contracts\Translation\TranslatorInterface */
-    private $translator;
-
-    public function __construct(
-        JobGateway $jobGateway,
-        NotificationHandlerInterface $notificationHandler,
-        TranslatorInterface $translator
-    ) {
-        $this->jobGateway = $jobGateway;
-        $this->notificationHandler = $notificationHandler;
-        $this->translator = $translator;
+    public function __construct(private readonly JobGateway $jobGateway, private readonly NotificationHandlerInterface $notificationHandler, private readonly TranslatorInterface $translator)
+    {
     }
 
-    /**
-     * @Route("/details/{id}", name="coderhapsodie.ibexa_dataflow.job.details")
-     */
+    #[Route(path: '/details/{id}', name: 'coderhapsodie.ibexa_dataflow.job.details')]
     public function displayDetails(int $id): Response
     {
         $this->denyAccessUnlessGranted(new Attribute('ibexa_dataflow', 'view'));
@@ -51,25 +34,19 @@ class JobController extends Controller
         ]);
     }
 
-    /**
-     * @Route("/details/log/{id}", name="coderhapsodie.ibexa_dataflow.job.log")
-     */
+    #[Route(path: '/details/log/{id}', name: 'coderhapsodie.ibexa_dataflow.job.log')]
     public function displayLog(int $id): Response
     {
         $this->denyAccessUnlessGranted(new Attribute('ibexa_dataflow', 'view'));
         $item = $this->jobGateway->find($id);
-        $log = array_map(function ($line) {
-            return preg_replace('~#\d+~', "\n$0", $line);
-        }, $item->getExceptions());
+        $log = array_map(fn($line) => preg_replace('~#\d+~', "\n$0", (string) $line), $item->getExceptions());
 
         return $this->render('@ibexadesign/ibexa_dataflow/Item/log.html.twig', [
             'log' => $log,
         ]);
     }
 
-    /**
-     * @Route("/create", name="coderhapsodie.ibexa_dataflow.job.create", methods={"POST"})
-     */
+    #[Route(path: '/create', name: 'coderhapsodie.ibexa_dataflow.job.create', methods: ['POST'])]
     public function create(Request $request): Response
     {
         $this->denyAccessUnlessGranted(new Attribute('ibexa_dataflow', 'edit'));

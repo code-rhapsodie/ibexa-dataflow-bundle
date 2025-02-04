@@ -10,12 +10,8 @@ use Ibexa\Contracts\Core\Repository\Values\Content\Field;
 
 abstract class AbstractFieldComparator implements FieldComparatorInterface
 {
-    /** @var \Ibexa\Contracts\Core\Repository\FieldTypeService */
-    private $fieldTypeService;
-
-    public function __construct(FieldTypeService $fieldTypeService)
+    public function __construct(private readonly FieldTypeService $fieldTypeService)
     {
-        $this->fieldTypeService = $fieldTypeService;
     }
 
     public function compare(Field $field, $hash): bool

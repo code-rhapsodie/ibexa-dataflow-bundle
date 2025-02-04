@@ -10,12 +10,8 @@ use Doctrine\DBAL\Query\QueryBuilder;
 
 final class ScheduledDataflowGateway
 {
-    /** @var \CodeRhapsodie\DataflowBundle\Repository\ScheduledDataflowRepository */
-    private $scheduledDataflowRepository;
-
-    public function __construct(ScheduledDataflowRepository $scheduledDataflowRepository)
+    public function __construct(private readonly ScheduledDataflowRepository $scheduledDataflowRepository)
     {
-        $this->scheduledDataflowRepository = $scheduledDataflowRepository;
     }
 
     public function find(int $id): ?ScheduledDataflow

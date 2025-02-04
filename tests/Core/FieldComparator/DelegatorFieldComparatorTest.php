@@ -9,19 +9,14 @@ use PHPUnit\Framework\TestCase;
 
 class DelegatorFieldComparatorTest extends TestCase
 {
-    /** @var \CodeRhapsodie\IbexaDataflowBundle\Core\FieldComparator\DelegatorFieldComparator */
-    private $delegatorFieldComparator;
+    private DelegatorFieldComparator $delegatorFieldComparator;
 
     protected function setUp(): void
     {
         $type1FieldComparatorMock = $this->createMock(FieldComparatorInterface::class);
-        $type1FieldComparatorMock->method('compare')->willReturnCallback(function (Field $field, $hash) {
-            return $hash === 'rightValue1';
-        });
+        $type1FieldComparatorMock->method('compare')->willReturnCallback(fn(Field $field, $hash) => $hash === 'rightValue1');
         $type2FieldComparatorMock = $this->createMock(FieldComparatorInterface::class);
-        $type2FieldComparatorMock->method('compare')->willReturnCallback(function (Field $field, $hash) {
-            return $hash === 'rightValue2';
-        });
+        $type2FieldComparatorMock->method('compare')->willReturnCallback(fn(Field $field, $hash) => $hash === 'rightValue2');
         $this->delegatorFieldComparator = new DelegatorFieldComparator();
         $this->delegatorFieldComparator->registerDelegateFieldComparator($type1FieldComparatorMock, 'type1');
         $this->delegatorFieldComparator->registerDelegateFieldComparator($type2FieldComparatorMock, 'type2');

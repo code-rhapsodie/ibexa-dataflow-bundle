@@ -9,12 +9,8 @@ use Ibexa\Contracts\Core\Repository\FieldTypeService;
 
 class DefaultFieldValueCreator implements FieldValueCreatorInterface
 {
-    /** @var \Ibexa\Contracts\Core\Repository\FieldTypeService */
-    private $fieldTypeService;
-
-    public function __construct(FieldTypeService $fieldTypeService)
+    public function __construct(private readonly FieldTypeService $fieldTypeService)
     {
-        $this->fieldTypeService = $fieldTypeService;
     }
 
     public function supports(string $fieldTypeIdentifier): bool

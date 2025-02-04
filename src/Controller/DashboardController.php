@@ -20,25 +20,14 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-/**
- * @Route("/ibexa_dataflow")
- */
+#[Route(path: '/ibexa_dataflow')]
 class DashboardController extends Controller
 {
-    /** @var \CodeRhapsodie\IbexaDataflowBundle\Gateway\JobGateway */
-    private $jobGateway;
-    /** @var \CodeRhapsodie\IbexaDataflowBundle\Gateway\ScheduledDataflowGateway */
-    private $scheduledDataflowGateway;
-
-    public function __construct(JobGateway $jobGateway, ScheduledDataflowGateway $scheduledDataflowGateway)
+    public function __construct(private readonly JobGateway $jobGateway, private readonly ScheduledDataflowGateway $scheduledDataflowGateway)
     {
-        $this->jobGateway = $jobGateway;
-        $this->scheduledDataflowGateway = $scheduledDataflowGateway;
     }
 
-    /**
-     * @Route("/", name="coderhapsodie.ibexa_dataflow.main")
-     */
+    #[Route(path: '/', name: 'coderhapsodie.ibexa_dataflow.main')]
     public function main(): Response
     {
         $this->denyAccessUnlessGranted(new Attribute('ibexa_dataflow', 'view'));
@@ -64,9 +53,7 @@ class DashboardController extends Controller
         ]);
     }
 
-    /**
-     * @Route("/repeating", name="coderhapsodie.ibexa_dataflow.repeating")
-     */
+    #[Route(path: '/repeating', name: 'coderhapsodie.ibexa_dataflow.repeating')]
     public function getRepeatingPage(Request $request): Response
     {
         $this->denyAccessUnlessGranted(new Attribute('ibexa_dataflow', 'view'));
@@ -92,9 +79,7 @@ class DashboardController extends Controller
         ]);
     }
 
-    /**
-     * @Route("/oneshot", name="coderhapsodie.ibexa_dataflow.oneshot")
-     */
+    #[Route(path: '/oneshot', name: 'coderhapsodie.ibexa_dataflow.oneshot')]
     public function getOneshotPage(Request $request): Response
     {
         $this->denyAccessUnlessGranted(new Attribute('ibexa_dataflow', 'view'));
@@ -115,9 +100,7 @@ class DashboardController extends Controller
         ]);
     }
 
-    /**
-     * @Route("/history", name="coderhapsodie.ibexa_dataflow.history")
-     */
+    #[Route(path: '/history', name: 'coderhapsodie.ibexa_dataflow.history')]
     public function getHistoryPage(Request $request): Response
     {
         $this->denyAccessUnlessGranted(new Attribute('ibexa_dataflow', 'view'));
@@ -129,9 +112,7 @@ class DashboardController extends Controller
         ]);
     }
 
-    /**
-     * @Route("/history/schedule/{id}", name="coderhapsodie.ibexa_dataflow.history.workflow")
-     */
+    #[Route(path: '/history/schedule/{id}', name: 'coderhapsodie.ibexa_dataflow.history.workflow')]
     public function getHistoryForScheduled(Request $request, int $id): Response
     {
         $this->denyAccessUnlessGranted(new Attribute('ibexa_dataflow', 'view'));
@@ -146,11 +127,9 @@ class DashboardController extends Controller
     {
         $pager = new Pagerfanta(
             new ExceptionJSONDecoderAdapter(
-                new QueryAdapter($query, function ($queryBuilder) {
-                    return $queryBuilder->select('COUNT(DISTINCT id) AS total_results')
-                        ->resetQueryPart('orderBy')
-                        ->setMaxResults(1);
-                })
+                new QueryAdapter($query, fn($queryBuilder) => $queryBuilder->select('COUNT(DISTINCT id) AS total_results')
+                    ->resetQueryPart('orderBy')
+                    ->setMaxResults(1))
             )
         );
         $pager->setMaxPerPage(20);

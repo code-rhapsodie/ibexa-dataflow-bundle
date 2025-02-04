@@ -16,16 +16,8 @@ class ContentWriter extends RepositoryWriter implements DelegateWriterInterface
 {
     use LoggerAwareTrait;
 
-    /** @var \CodeRhapsodie\IbexaDataflowBundle\Core\Content\ContentCreatorInterface */
-    private $creator;
-
-    /** @var \CodeRhapsodie\IbexaDataflowBundle\Core\Content\ContentUpdaterInterface */
-    private $updater;
-
-    public function __construct(ContentCreatorInterface $creator, ContentUpdaterInterface $updater)
+    public function __construct(private ContentCreatorInterface $creator, private ContentUpdaterInterface $updater)
     {
-        $this->creator = $creator;
-        $this->updater = $updater;
     }
 
     /**

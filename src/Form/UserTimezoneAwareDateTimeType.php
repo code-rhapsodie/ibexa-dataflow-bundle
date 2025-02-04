@@ -11,12 +11,8 @@ use Symfony\Component\Form\FormBuilderInterface;
 
 class UserTimezoneAwareDateTimeType extends AbstractType
 {
-    /** @var \Ibexa\Contracts\Core\Repository\UserPreferenceService */
-    private $userPreferenceService;
-
-    public function __construct(UserPreferenceService $userPreferenceService)
+    public function __construct(private readonly UserPreferenceService $userPreferenceService)
     {
-        $this->userPreferenceService = $userPreferenceService;
     }
 
     public function getParent()

@@ -14,24 +14,8 @@ use Ibexa\Contracts\Core\Repository\Values\Content\LocationCreateStruct;
 
 class ContentCreator implements ContentCreatorInterface
 {
-    /** @var \Ibexa\Contracts\Core\Repository\ContentService */
-    private $contentService;
-
-    /** @var \Ibexa\Contracts\Core\Repository\ContentTypeService */
-    private $contentTypeService;
-
-    /** @var \CodeRhapsodie\IbexaDataflowBundle\Core\Field\ContentStructFieldFillerInterface */
-    private $filler;
-
-    /** @var \CodeRhapsodie\IbexaDataflowBundle\Matcher\LocationMatcherInterface */
-    private $matcher;
-
-    public function __construct(ContentService $contentService, ContentTypeService $contentTypeService, ContentStructFieldFillerInterface $filler, LocationMatcherInterface $matcher)
+    public function __construct(private readonly ContentService $contentService, private readonly ContentTypeService $contentTypeService, private readonly ContentStructFieldFillerInterface $filler, private readonly LocationMatcherInterface $matcher)
     {
-        $this->contentService = $contentService;
-        $this->contentTypeService = $contentTypeService;
-        $this->filler = $filler;
-        $this->matcher = $matcher;
     }
 
     /**

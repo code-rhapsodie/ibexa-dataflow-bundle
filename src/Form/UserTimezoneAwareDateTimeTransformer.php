@@ -10,12 +10,8 @@ use Symfony\Component\Form\DataTransformerInterface;
 
 class UserTimezoneAwareDateTimeTransformer implements DataTransformerInterface
 {
-    /** @var \Ibexa\Contracts\Core\Repository\UserPreferenceService */
-    private $userPreferenceService;
-
-    public function __construct(UserPreferenceService $userPreferenceService)
+    public function __construct(private readonly UserPreferenceService $userPreferenceService)
     {
-        $this->userPreferenceService = $userPreferenceService;
     }
 
     public function transform($value)
@@ -42,7 +38,7 @@ class UserTimezoneAwareDateTimeTransformer implements DataTransformerInterface
     {
         try {
             $tz = $this->userPreferenceService->getUserPreference('timezone')->value ?? 'UTC';
-        } catch (NotFoundException $e) {
+        } catch (NotFoundException) {
             $tz = 'UTC';
         }
 

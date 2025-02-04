@@ -9,23 +9,14 @@ use Ibexa\Contracts\Core\Repository\UserService;
 
 class UserSwitcher implements UserSwitcherInterface
 {
-    /** @var \Ibexa\Contracts\Core\Repository\PermissionResolver */
-    private $permissionResolver;
-
-    /** @var \Ibexa\Contracts\Core\Repository\UserService */
-    private $userService;
-
-    /** @var string|int */
-    private $adminLoginOrId;
-
     /** @var \Ibexa\Contracts\Core\Repository\Values\User\UserReference[] */
     private $userStack;
 
-    public function __construct(PermissionResolver $permissionResolver, UserService $userService, $adminLoginOrId)
+    /**
+     * @param string|int $adminLoginOrId
+     */
+    public function __construct(private readonly PermissionResolver $permissionResolver, private readonly UserService $userService, private $adminLoginOrId)
     {
-        $this->permissionResolver = $permissionResolver;
-        $this->userService = $userService;
-        $this->adminLoginOrId = $adminLoginOrId;
         $this->userStack = [];
     }
 

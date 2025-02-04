@@ -17,16 +17,8 @@ class NotModifiedContentFilter
 {
     use LoggerAwareTrait;
 
-    /** @var \Ibexa\Contracts\Core\Repository\ContentService */
-    private $contentService;
-
-    /** @var \CodeRhapsodie\IbexaDataflowBundle\Core\FieldComparator\FieldComparatorInterface */
-    private $comparator;
-
-    public function __construct(ContentService $contentService, FieldComparatorInterface $comparator)
+    public function __construct(private ContentService $contentService, private FieldComparatorInterface $comparator)
     {
-        $this->contentService = $contentService;
-        $this->comparator = $comparator;
     }
 
     public function __invoke($data)
@@ -40,7 +32,7 @@ class NotModifiedContentFilter
         } else {
             try {
                 $content = $this->contentService->loadContentByRemoteId($data->getRemoteId(), [$data->getLanguageCode()]);
-            } catch (NotFoundException $e) {
+            } catch (NotFoundException) {
                 // New translation
                 return $data;
             }

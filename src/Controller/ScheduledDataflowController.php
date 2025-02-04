@@ -17,31 +17,14 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
-/**
- * @Route("/ibexa_dataflow/scheduled_workflow")
- */
+#[Route(path: '/ibexa_dataflow/scheduled_workflow')]
 class ScheduledDataflowController extends Controller
 {
-    /** @var \Ibexa\Contracts\AdminUi\Notification\NotificationHandlerInterface */
-    private $notificationHandler;
-    /** @var \CodeRhapsodie\IbexaDataflowBundle\Gateway\ScheduledDataflowGateway */
-    private $scheduledDataflowGateway;
-    /** @var \Symfony\Contracts\Translation\TranslatorInterface */
-    private $translator;
-
-    public function __construct(
-        NotificationHandlerInterface $notificationHandler,
-        ScheduledDataflowGateway $scheduledDataflowGateway,
-        TranslatorInterface $translator
-    ) {
-        $this->notificationHandler = $notificationHandler;
-        $this->scheduledDataflowGateway = $scheduledDataflowGateway;
-        $this->translator = $translator;
+    public function __construct(private readonly NotificationHandlerInterface $notificationHandler, private readonly ScheduledDataflowGateway $scheduledDataflowGateway, private readonly TranslatorInterface $translator)
+    {
     }
 
-    /**
-     * @Route("/create", name="coderhapsodie.ibexa_dataflow.workflow.create", methods={"POST"})
-     */
+    #[Route(path: '/create', name: 'coderhapsodie.ibexa_dataflow.workflow.create', methods: ['POST'])]
     public function create(Request $request): Response
     {
         $this->denyAccessUnlessGranted(new Attribute('ibexa_dataflow', 'edit'));
@@ -72,9 +55,7 @@ class ScheduledDataflowController extends Controller
         ]);
     }
 
-    /**
-     * @Route("/{id}/delete", name="coderhapsodie.ibexa_dataflow.workflow.delete", methods={"post"})
-     */
+    #[Route(path: '/{id}/delete', name: 'coderhapsodie.ibexa_dataflow.workflow.delete', methods: ['post'])]
     public function delete(int $id): Response
     {
         $this->denyAccessUnlessGranted(new Attribute('ibexa_dataflow', 'edit'));
@@ -90,9 +71,7 @@ class ScheduledDataflowController extends Controller
         return $this->redirectToRoute('coderhapsodie.ibexa_dataflow.main');
     }
 
-    /**
-     * @Route("/{id}/edit", name="coderhapsodie.ibexa_dataflow.workflow.edit")
-     */
+    #[Route(path: '/{id}/edit', name: 'coderhapsodie.ibexa_dataflow.workflow.edit')]
     public function edit(Request $request, int $id): Response
     {
         $form = $this->createForm(UpdateScheduledType::class, $this->scheduledDataflowGateway->find($id), [
@@ -123,9 +102,7 @@ class ScheduledDataflowController extends Controller
         ]);
     }
 
-    /**
-     * @Route("/{id}/enable", name="coderhapsodie.ibexa_dataflow.workflow.enable")
-     */
+    #[Route(path: '/{id}/enable', name: 'coderhapsodie.ibexa_dataflow.workflow.enable')]
     public function enableDataflow(int $id): Response
     {
         $this->denyAccessUnlessGranted(new Attribute('ibexa_dataflow', 'edit'));
@@ -149,9 +126,7 @@ class ScheduledDataflowController extends Controller
         }
     }
 
-    /**
-     * @Route("/{id}/disable", name="coderhapsodie.ibexa_dataflow.workflow.disable")
-     */
+    #[Route(path: '/{id}/disable', name: 'coderhapsodie.ibexa_dataflow.workflow.disable')]
     public function disableDataflow(int $id): Response
     {
         $this->denyAccessUnlessGranted(new Attribute('ibexa_dataflow', 'edit'));

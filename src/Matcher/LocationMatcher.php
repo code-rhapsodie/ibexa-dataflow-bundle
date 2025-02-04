@@ -11,12 +11,8 @@ use Ibexa\Contracts\Core\Repository\Values\Content\Location;
 
 class LocationMatcher implements LocationMatcherInterface
 {
-    /** @var \Ibexa\Contracts\Core\Repository\LocationService */
-    private $locationService;
-
-    public function __construct(LocationService $locationService)
+    public function __construct(private readonly LocationService $locationService)
     {
-        $this->locationService = $locationService;
     }
 
     /**

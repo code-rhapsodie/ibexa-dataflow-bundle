@@ -26,7 +26,7 @@ class InvalidArgumentTypeException extends \Exception
         return new self(sprintf(
             'Expected argument of type %s, %s received instead',
             $expectedString,
-            is_object($received) ? get_class($received) : gettype($received)
+            get_debug_type($received)
         ));
     }
 }

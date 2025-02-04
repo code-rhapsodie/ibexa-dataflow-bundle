@@ -8,12 +8,8 @@ use Pagerfanta\Adapter\AdapterInterface;
 
 class ExceptionJSONDecoderAdapter implements AdapterInterface
 {
-    /** @var AdapterInterface */
-    private $adapter;
-
-    public function __construct(AdapterInterface $adapter)
+    public function __construct(private readonly AdapterInterface $adapter)
     {
-        $this->adapter = $adapter;
     }
 
     public function getNbResults()
@@ -24,9 +20,9 @@ class ExceptionJSONDecoderAdapter implements AdapterInterface
     public function getSlice($offset, $length)
     {
         $slice = $this->adapter->getSlice($offset, $length);
-        array_walk($slice, static function (&$value) {
+        array_walk($slice, static function (&$value): void {
             if (isset($value['exceptions'])) {
-                $value['exceptions'] = json_decode($value['exceptions'], true, 512, JSON_THROW_ON_ERROR);
+                $value['exceptions'] = json_decode((string) $value['exceptions'], true, 512, JSON_THROW_ON_ERROR);
             }
         });
 
