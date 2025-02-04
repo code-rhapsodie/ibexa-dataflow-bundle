@@ -8,6 +8,7 @@ use CodeRhapsodie\DataflowBundle\Entity\Job;
 use CodeRhapsodie\DataflowBundle\Entity\ScheduledDataflow;
 use CodeRhapsodie\IbexaDataflowBundle\Form\CreateOneshotType;
 use CodeRhapsodie\IbexaDataflowBundle\Form\CreateScheduledType;
+use CodeRhapsodie\IbexaDataflowBundle\Form\UpdateScheduledType;
 use CodeRhapsodie\IbexaDataflowBundle\Gateway\ExceptionJSONDecoderAdapter;
 use CodeRhapsodie\IbexaDataflowBundle\Gateway\JobGateway;
 use CodeRhapsodie\IbexaDataflowBundle\Gateway\ScheduledDataflowGateway;
@@ -86,17 +87,6 @@ class DashboardController extends Controller
 
         return $this->render('@ibexadesign/ibexa_dataflow/Dashboard/oneshot.html.twig', [
             'pager' => $this->getPager($this->jobGateway->getOneshotListQueryForAdmin(), $request),
-        ]);
-    }
-
-    public function history(Request $request): Response
-    {
-        $this->denyAccessUnlessGranted(new Attribute('ibexa_dataflow', 'view'));
-        $filter = (int) $request->query->get('filter', JobGateway::FILTER_NONE);
-
-        return $this->render('@ibexadesign/ibexa_dataflow/Dashboard/history.html.twig', [
-            'pager' => $this->getPager($this->jobGateway->getListQueryForAdmin($filter), $request),
-            'filter' => $filter,
         ]);
     }
 
