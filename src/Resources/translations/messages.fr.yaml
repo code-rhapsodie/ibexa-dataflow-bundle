@@ -16,6 +16,7 @@ coderhapsodie.ezdataflow.workflow.list.history: Historique
 coderhapsodie.ezdataflow.workflow.list.edit: Éditer
 coderhapsodie.ezdataflow.workflow.list.disable: Désactiver
 coderhapsodie.ezdataflow.workflow.list.enable: Activer
+coderhapsodie.ezdataflow.workflow.list.runonce: Lancer maintenant
 coderhapsodie.ezdataflow.history.title: Historique
 coderhapsodie.ezdataflow.history.list.title: 'Liste des exécutions'
 coderhapsodie.ezdataflow.history.list.name: Nom

@@ -1,3 +1,10 @@
+# Version 4.4.0
+* Added possibility to create one shot job from scheduled job
+
+# Version 4.3.0
+
+* Replaced date field with date picker
+
 # Version 4.2.0
 
 * Added error count columns to job tables
