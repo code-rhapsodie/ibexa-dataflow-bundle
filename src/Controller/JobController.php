@@ -100,6 +100,7 @@ class JobController extends Controller
         $newOneshotJob->setLabel("Manual " . $scheduledDataflow->getLabel());
         $newOneshotJob->setScheduledDataflowId($scheduledDataflow->getId());
         $newOneshotJob->setRequestedDate((new \DateTime())->add(new \DateInterval('PT1H')));
+        $newOneshotJob->setDataflowType($scheduledDataflow->getDataflowType());
 
         $form = $this->createForm(CreateOneshotType::class, $newOneshotJob, [
             'action' => $this->generateUrl('coderhapsodie.ibexa_dataflow.job.create'),

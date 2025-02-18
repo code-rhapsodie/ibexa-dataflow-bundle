@@ -147,6 +147,7 @@
                     node.innerHTML = result.form;
                     oneShotModal.querySelector('#create_oneshot_label').value = node.querySelector('#create_oneshot_label').value;
                     oneShotModal.querySelector('#create_oneshot_options').value = node.querySelector('#create_oneshot_options').value;
+                    oneShotModal.querySelector('.ibexa-dropdown').ibexaInstance.selectOption(node.querySelector('#create_oneshot_dataflowType').value)
                     oneShotModal.querySelector('.flatpickr.flatpickr-input').parentNode.parentNode.ibexaInstance.flatpickrInstance.setDate(new Date(), true);
                 })
                 .then(() => {
