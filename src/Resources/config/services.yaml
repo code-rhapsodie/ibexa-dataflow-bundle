@@ -38,6 +38,7 @@ services:
             $jobGateway: '@CodeRhapsodie\IbexaDataflowBundle\Gateway\JobGateway'
             $notificationHandler: '@Ibexa\Contracts\AdminUi\Notification\NotificationHandlerInterface'
             $translator: '@translator'
+            $scheduledDataflowGateway: '@CodeRhapsodie\IbexaDataflowBundle\Gateway\ScheduledDataflowGateway'
         calls:
             - [ 'setContainer', [ '@service_container' ] ]
             - [ 'performAccessCheck', [ ] ]

@@ -1,3 +1,6 @@
+# Version 5.1.0
+* Added possibility to create one shot job from scheduled job
+
 # Version 5.0.0
 
 * Renamed bundle to IbexaDataflowBundle

@@ -16,6 +16,7 @@ coderhapsodie.ibexa_dataflow.workflow.list.history: History
 coderhapsodie.ibexa_dataflow.workflow.list.edit: Edit
 coderhapsodie.ibexa_dataflow.workflow.list.disable: Disable
 coderhapsodie.ibexa_dataflow.workflow.list.enable: Enable
+coderhapsodie.ibexa_dataflow.workflow.list.runonce: Run now
 coderhapsodie.ibexa_dataflow.history.title: History
 coderhapsodie.ibexa_dataflow.history.list.title: 'Executions list'
 coderhapsodie.ibexa_dataflow.history.list.name: Name
