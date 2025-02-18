@@ -16,6 +16,7 @@ coderhapsodie.ibexa_dataflow.workflow.list.history: Historique
 coderhapsodie.ibexa_dataflow.workflow.list.edit: Éditer
 coderhapsodie.ibexa_dataflow.workflow.list.disable: Désactiver
 coderhapsodie.ibexa_dataflow.workflow.list.enable: Activer
+coderhapsodie.ibexa_dataflow.workflow.list.runonce: Lancer maintenant
 coderhapsodie.ibexa_dataflow.history.title: Historique
 coderhapsodie.ibexa_dataflow.history.list.title: 'Liste des exécutions'
 coderhapsodie.ibexa_dataflow.history.list.name: Nom

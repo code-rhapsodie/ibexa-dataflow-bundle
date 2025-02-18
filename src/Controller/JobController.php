@@ -7,12 +7,14 @@ namespace CodeRhapsodie\IbexaDataflowBundle\Controller;
 use CodeRhapsodie\DataflowBundle\Entity\Job;
 use CodeRhapsodie\IbexaDataflowBundle\Form\CreateOneshotType;
 use CodeRhapsodie\IbexaDataflowBundle\Gateway\JobGateway;
+use CodeRhapsodie\IbexaDataflowBundle\Gateway\ScheduledDataflowGateway;
 use Ibexa\Contracts\AdminUi\Controller\Controller;
 use Ibexa\Contracts\AdminUi\Notification\NotificationHandlerInterface;
 use Ibexa\Core\MVC\Symfony\Security\Authorization\Attribute;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
@@ -20,7 +22,7 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 #[Route(path: '/ibexa_dataflow/job')]
 class JobController extends Controller
 {
-    public function __construct(private readonly JobGateway $jobGateway, private readonly NotificationHandlerInterface $notificationHandler, private readonly TranslatorInterface $translator)
+    public function __construct(private readonly JobGateway $jobGateway, private readonly NotificationHandlerInterface $notificationHandler, private readonly TranslatorInterface $translator, private readonly ScheduledDataflowGateway $scheduledDataflowGateway)
     {
     }
 
@@ -77,6 +79,36 @@ class JobController extends Controller
             'form' => $this->renderView('@ibexadesign/ibexa_dataflow/parts/form_modal.html.twig', [
                 'form' => $form->createView(),
                 'type_action' => 'new',
+                'mode' => 'oneshot',
+            ]),
+        ]);
+    }
+
+    #[Route(path: '/run-oneshot/{id}', name: 'coderhapsodie.ibexa_dataflow.job.run-oneshot', methods: ['GET'])]
+    public function runOneShot(int $id): Response
+    {
+        $this->denyAccessUnlessGranted(new Attribute('ibexa_dataflow', 'view'));
+
+        $scheduledDataflow = $this->scheduledDataflowGateway->find($id);
+
+        if ($scheduledDataflow === null) {
+            throw new NotFoundHttpException();
+        }
+
+        $newOneshotJob = new Job();
+        $newOneshotJob->setOptions($scheduledDataflow->getOptions());
+        $newOneshotJob->setLabel("Manual " . $scheduledDataflow->getLabel());
+        $newOneshotJob->setScheduledDataflowId($scheduledDataflow->getId());
+        $newOneshotJob->setRequestedDate((new \DateTime())->add(new \DateInterval('PT1H')));
+
+        $form = $this->createForm(CreateOneshotType::class, $newOneshotJob, [
+            'action' => $this->generateUrl('coderhapsodie.ibexa_dataflow.job.create'),
+        ]);
+
+        return new JsonResponse([
+            'form' => $this->renderView('@ibexadesign/ibexa_dataflow/parts/form_modal.html.twig', [
+                'form' => $form->createView(),
+                'id' => 'modal-new-oneshot',
                 'mode' => 'oneshot',
             ]),
         ]);

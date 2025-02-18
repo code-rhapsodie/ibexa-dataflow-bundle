@@ -1,10 +1,11 @@
 {%- block content -%}
     {% set actions %}
         <button
-            type="button"
-            class="btn ibexa-btn ibexa-btn--tertiary ibexa-btn--small"
-            data-bs-toggle="modal"
-            data-bs-target="#modal-new-oneshot"
+                id="create-oneshot-button"
+                type="button"
+                class="btn ibexa-btn ibexa-btn--tertiary ibexa-btn--small"
+                data-bs-toggle="modal"
+                data-bs-target="#modal-new-oneshot"
         >
             <svg class="ibexa-icon ibexa-icon--small ibexa-icon--create">
                 <use xlink:href="{{ ibexa_icon_path('create') }}"></use>
@@ -53,6 +54,16 @@
                     })
                 ;
             });
+            const createButton = document.getElementById('create-oneshot-button')
+
+            if (createButton) {
+                createButton.addEventListener('click', () => {
+                    const oneShotModal = document.getElementById('modal-new-oneshot');
+                    oneShotModal.querySelector('#create_oneshot_label').value = '';
+                    oneShotModal.querySelector('#create_oneshot_options').value = '';
+                    oneShotModal.querySelector('.flatpickr.flatpickr-input').parentNode.parentNode.ibexaInstance.flatpickrInstance.setDate(new Date(), true);
+                });
+            }
         });
     </script>
 {%- endblock -%}
