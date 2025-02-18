@@ -40,6 +40,15 @@
                     <use xlink:href="{{ ibexa_icon_path('edit') }}"></use>
                 </svg>
             </a>
+            <button
+               class="btn ibexa-btn ibexa-btn--ghost run-oneshot ibexa-btn--no-text"
+               data-url="{{ path('coderhapsodie.ezdataflow.job.run-oneshot', {id: item.id}) }}"
+               title="{{ 'coderhapsodie.ezdataflow.workflow.list.runonce'|trans }}"
+            >
+                <svg class="ibexa-icon ibexa-icon--small ibexa-icon--create">
+                    <use xlink:href="{{ ibexa_icon_path('create') }}"></use>
+                </svg>
+            </button>
             {% if item.enabled %}
                 <a href="{{ path('coderhapsodie.ezdataflow.workflow.disable', {id: item.id}) }}"
                    class="btn ibexa-btn ibexa-btn--ghost ibexa-btn--no-text"
@@ -125,3 +134,27 @@
         {% endif %}
     </div>
 </div>
+
+<script>
+    document.querySelectorAll(".run-oneshot").forEach((el) => {
+        el.addEventListener('click', () => {
+            const oneShotModal = document.getElementById('modal-new-oneshot');
+
+            fetch(el.getAttribute('data-url'))
+                .then(response => response.json())
+                .then(result => {
+                    const node = document.createElement('div');
+                    node.innerHTML = result.form;
+                    oneShotModal.querySelector('#create_oneshot_label').value = node.querySelector('#create_oneshot_label').value;
+                    oneShotModal.querySelector('#create_oneshot_options').value = node.querySelector('#create_oneshot_options').value;
+                    oneShotModal.querySelector('.ibexa-dropdown').ibexaInstance.selectOption(node.querySelector('#create_oneshot_dataflowType').value)
+                    oneShotModal.querySelector('.flatpickr.flatpickr-input').parentNode.parentNode.ibexaInstance.flatpickrInstance.setDate(new Date(), true);
+                })
+                .then(() => {
+                    bootstrap.Tab.getOrCreateInstance(document.querySelector('#ibexa-tab-label-coderhapsodie-ezdataflow-code-rhapsodie-ezdataflow-oneshot')).show()
+                    bootstrap.Modal.getOrCreateInstance(oneShotModal).show()
+                })
+
+        });
+    });
+</script>
