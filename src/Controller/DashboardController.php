@@ -6,6 +6,7 @@ namespace CodeRhapsodie\IbexaDataflowBundle\Controller;
 
 use CodeRhapsodie\DataflowBundle\Entity\Job;
 use CodeRhapsodie\DataflowBundle\Entity\ScheduledDataflow;
+use CodeRhapsodie\IbexaDataflowBundle\CodeRhapsodieIbexaDataflowBundle;
 use CodeRhapsodie\IbexaDataflowBundle\Form\CreateOneshotType;
 use CodeRhapsodie\IbexaDataflowBundle\Form\CreateScheduledType;
 use CodeRhapsodie\IbexaDataflowBundle\Form\UpdateScheduledType;
@@ -14,6 +15,7 @@ use CodeRhapsodie\IbexaDataflowBundle\Gateway\JobGateway;
 use CodeRhapsodie\IbexaDataflowBundle\Gateway\ScheduledDataflowGateway;
 use Doctrine\DBAL\Query\QueryBuilder;
 use Ibexa\Contracts\AdminUi\Controller\Controller;
+use Ibexa\Contracts\Core\Ibexa;
 use Ibexa\Core\MVC\Symfony\Security\Authorization\Attribute;
 use Pagerfanta\Doctrine\DBAL\QueryAdapter;
 use Pagerfanta\Pagerfanta;
@@ -33,7 +35,18 @@ class DashboardController extends Controller
     {
         $this->denyAccessUnlessGranted(new Attribute('ibexa_dataflow', 'view'));
 
-        return $this->render('@ibexadesign/ibexa_dataflow/Dashboard/main.html.twig');
+        $data = [
+            'product' => CodeRhapsodieIbexaDataflowBundle::PRODUCT_NAME,
+            'version' => CodeRhapsodieIbexaDataflowBundle::VERSION,
+            'php' => PHP_VERSION,
+            'ibexa' => Ibexa::VERSION,
+        ];
+
+        return $this->render('@ibexadesign/ibexa_dataflow/Dashboard/main.html.twig', [
+            'link' => 'https://www.code-rhapsodie.fr/product/redirect/'.str_replace('=', '',
+                base64_encode(json_encode($data))
+            ),
+        ]);
     }
 
     public function repeating(Request $request): Response
@@ -117,7 +130,7 @@ class DashboardController extends Controller
     {
         $pager = new Pagerfanta(
             new ExceptionJSONDecoderAdapter(
-                new QueryAdapter($query, fn($queryBuilder) => $queryBuilder->select('COUNT(DISTINCT id) AS total_results')
+                new QueryAdapter($query, fn ($queryBuilder) => $queryBuilder->select('COUNT(DISTINCT id) AS total_results')
                     ->resetQueryPart('orderBy')
                     ->setMaxResults(1))
             )
