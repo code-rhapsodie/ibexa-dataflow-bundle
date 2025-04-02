@@ -1,3 +1,6 @@
+# Version 5.1.1
+* Add branding label
+
 # Version 5.1.0
 * Added possibility to create one shot job from scheduled job
 

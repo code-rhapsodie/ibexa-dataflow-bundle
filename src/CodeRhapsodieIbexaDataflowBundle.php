@@ -13,7 +13,7 @@ use Symfony\Component\HttpKernel\Bundle\Bundle;
 
 class CodeRhapsodieIbexaDataflowBundle extends Bundle
 {
-    public const VERSION = '5.1.0';
+    public const VERSION = '5.1.1';
     public const PRODUCT_NAME = 'ibexadataflow';
 
     protected $name = 'CodeRhapsodieIbexaDataflowBundle';
