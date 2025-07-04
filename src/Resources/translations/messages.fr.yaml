@@ -83,3 +83,5 @@ coderhapsodie.ibexa_dataflow.workflow.edit.error: 'Une erreur est survenue lors 
 coderhapsodie.ibexa_dataflow.notfound: 'Les données demandées sont introuvables'
 coderhapsodie.ibexa_dataflow.powered_by: 'Propulsé par'
 coderhapsodie.ibexa_dataflow.made_by: 'Fabriqué par'
+coderhapsodie.ibexa_dataflow.dashboard: Dashboard
+coderhapsodie.ibexa_dataflow.dashboard.title: Tâches en cours ou en attente

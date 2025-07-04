@@ -129,6 +129,14 @@ services:
         arguments:
             $jobRepository: '@CodeRhapsodie\DataflowBundle\Repository\JobRepository'
 
+    CodeRhapsodie\IbexaDataflowBundle\Tab\DashboardTab:
+        parent: Ibexa\Contracts\AdminUi\Tab\AbstractTab
+        public: false
+        arguments:
+            $httpKernelRuntime: '@twig.runtime.httpkernel'
+        tags:
+            - { name: ibexa.admin_ui.tab, group: coderhapsodie-ibexa_dataflow }
+
     CodeRhapsodie\IbexaDataflowBundle\Tab\RepeatingTab:
         parent: Ibexa\Contracts\AdminUi\Tab\AbstractTab
         public: false

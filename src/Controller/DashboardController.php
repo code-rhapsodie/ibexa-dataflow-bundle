@@ -140,4 +140,13 @@ class DashboardController extends Controller
 
         return $pager;
     }
+
+    public function dashboard(): Response
+    {
+        $this->denyAccessUnlessGranted(new Attribute('ibexa_dataflow', 'view'));
+
+        return $this->render('@ibexadesign/ibexa_dataflow/Dashboard/dashboard.html.twig', [
+            'jobs' => $this->jobGateway->getListPendindOrRunning(),
+        ]);
+    }
 }

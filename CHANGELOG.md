@@ -1,3 +1,6 @@
+# Version 5.2.0
+* Added Dashboard tab
+
 # Version 5.1.1
 * Add branding label
 
