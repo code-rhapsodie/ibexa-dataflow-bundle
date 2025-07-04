@@ -1,3 +1,6 @@
+# Version 5.2.1
+* Fixed datepicker in oneshot modal
+
 # Version 5.2.0
 * Added Dashboard tab
 
