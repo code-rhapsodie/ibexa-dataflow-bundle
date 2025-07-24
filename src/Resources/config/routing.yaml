@@ -1,4 +1,4 @@
 coderhapsodie.ibexa_dataflow.controllers:
-    resource:
-        path: ../../Controller/
+    resource: '../../Controller/'
     type: attribute
+
