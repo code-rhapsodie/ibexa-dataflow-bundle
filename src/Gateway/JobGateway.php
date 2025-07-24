@@ -61,8 +61,6 @@ final class JobGateway
         return $qb->andWhere($qb->expr()->in('w.status', ':status'))
             ->setParameter('status', implode(',',[Job::STATUS_RUNNING, Job::STATUS_PENDING, Job::STATUS_QUEUED]))
             ->orderBy('w.requested_date', 'ASC')
-            ->execute()
             ->fetchAllAssociative();
     }
 }
-class_alias(JobGateway::class, 'CodeRhapsodie\EzDataflowBundle\Gateway\JobGateway');

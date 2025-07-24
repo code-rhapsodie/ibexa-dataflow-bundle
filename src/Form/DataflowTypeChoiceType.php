@@ -15,12 +15,12 @@ class DataflowTypeChoiceType extends AbstractType
     {
     }
 
-    public function getParent()
+    public function getParent(): string
     {
         return ChoiceType::class;
     }
 
-    public function configureOptions(OptionsResolver $resolver)
+    public function configureOptions(OptionsResolver $resolver): void
     {
         $choices = [];
         foreach ($this->registry->listDataflowTypes() as $fqcn => $dataflowType) {
@@ -32,4 +32,3 @@ class DataflowTypeChoiceType extends AbstractType
         ]);
     }
 }
-class_alias(DataflowTypeChoiceType::class, 'CodeRhapsodie\EzDataflowBundle\Form\DataflowTypeChoiceType');

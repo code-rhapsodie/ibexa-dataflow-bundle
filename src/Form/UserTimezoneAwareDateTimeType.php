@@ -15,14 +15,13 @@ class UserTimezoneAwareDateTimeType extends AbstractType
     {
     }
 
-    public function getParent()
+    public function getParent(): string
     {
         return DateTimePickerType::class;
     }
 
-    public function buildForm(FormBuilderInterface $builder, array $options)
+    public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder->addModelTransformer(new UserTimezoneAwareDateTimeTransformer($this->userPreferenceService));
     }
 }
-class_alias(UserTimezoneAwareDateTimeType::class, 'CodeRhapsodie\EzDataflowBundle\Form\UserTimezoneAwareDateTimeType');

@@ -12,14 +12,13 @@ abstract class RepositoryWriter implements WriterInterface, UserSwitcherAwareInt
 {
     use UserSwitcherAwareTrait;
 
-    public function prepare()
+    public function prepare(): void
     {
         $this->userSwitcher->switchToAdmin();
     }
 
-    public function finish()
+    public function finish(): void
     {
         $this->userSwitcher->switchBack();
     }
 }
-class_alias(RepositoryWriter::class, 'CodeRhapsodie\EzDataflowBundle\Writer\RepositoryWriter');

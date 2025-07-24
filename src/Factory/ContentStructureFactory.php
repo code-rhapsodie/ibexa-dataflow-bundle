@@ -11,9 +11,6 @@ use Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException;
 
 final class ContentStructureFactory implements ContentStructureFactoryInterface
 {
-    /**
-     * ContentStructureFactory constructor.
-     */
     public function __construct(private readonly ContentService $contentService)
     {
     }
@@ -53,4 +50,3 @@ final class ContentStructureFactory implements ContentStructureFactoryInterface
         );
     }
 }
-class_alias(ContentStructureFactory::class, 'CodeRhapsodie\EzDataflowBundle\Factory\ContentStructureFactory');

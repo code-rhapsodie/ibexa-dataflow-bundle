@@ -14,7 +14,7 @@ class UserTimezoneAwareDateTimeTransformer implements DataTransformerInterface
     {
     }
 
-    public function transform($value)
+    public function transform($value): mixed
     {
         if (!$value instanceof \DateTimeInterface) {
             return $value;
@@ -23,7 +23,7 @@ class UserTimezoneAwareDateTimeTransformer implements DataTransformerInterface
         return (new \DateTime('now', $this->userTimezone()))->setTimestamp($value->getTimestamp());
     }
 
-    public function reverseTransform($value)
+    public function reverseTransform($value): mixed
     {
         if (!$value instanceof \DateTimeInterface) {
             return $value;
@@ -45,4 +45,3 @@ class UserTimezoneAwareDateTimeTransformer implements DataTransformerInterface
         return new \DateTimeZone($tz);
     }
 }
-class_alias(UserTimezoneAwareDateTimeTransformer::class, 'CodeRhapsodie\EzDataflowBundle\Form\UserTimezoneAwareDateTimeTransformer');

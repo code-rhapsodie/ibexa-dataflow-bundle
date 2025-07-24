@@ -13,4 +13,3 @@ interface FieldComparatorInterface
      */
     public function compare(Field $field, $hash): bool;
 }
-class_alias(FieldComparatorInterface::class, 'CodeRhapsodie\EzDataflowBundle\Core\FieldComparator\FieldComparatorInterface');

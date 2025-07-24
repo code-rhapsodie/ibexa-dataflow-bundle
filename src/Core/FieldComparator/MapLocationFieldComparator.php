@@ -16,4 +16,3 @@ class MapLocationFieldComparator extends AbstractFieldComparator
         ;
     }
 }
-class_alias(MapLocationFieldComparator::class, 'CodeRhapsodie\EzDataflowBundle\Core\FieldComparator\MapLocationFieldComparator');

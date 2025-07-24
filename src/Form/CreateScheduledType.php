@@ -13,7 +13,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class CreateScheduledType extends AbstractType
 {
-    public function buildForm(FormBuilderInterface $builder, array $options)
+    public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
             ->add('label', TextType::class, [
@@ -47,11 +47,10 @@ class CreateScheduledType extends AbstractType
         ;
     }
 
-    public function configureOptions(OptionsResolver $resolver)
+    public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
             'data_class' => ScheduledDataflow::class,
         ]);
     }
 }
-class_alias(CreateScheduledType::class, 'CodeRhapsodie\EzDataflowBundle\Form\CreateScheduledType');

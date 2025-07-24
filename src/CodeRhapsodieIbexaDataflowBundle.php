@@ -9,6 +9,7 @@ use CodeRhapsodie\IbexaDataflowBundle\DependencyInjection\Compiler\FieldComparat
 use CodeRhapsodie\IbexaDataflowBundle\Security\PolicyProvider;
 use Ibexa\Bundle\Core\DependencyInjection\IbexaCoreExtension;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Symfony\Component\DependencyInjection\Extension\ExtensionInterface;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
 class CodeRhapsodieIbexaDataflowBundle extends Bundle
@@ -16,9 +17,9 @@ class CodeRhapsodieIbexaDataflowBundle extends Bundle
     public const VERSION = '5.2.0';
     public const PRODUCT_NAME = 'ibexadataflow';
 
-    protected $name = 'CodeRhapsodieIbexaDataflowBundle';
+    protected string $name = 'CodeRhapsodieIbexaDataflowBundle';
 
-    public function getContainerExtension()
+    public function getContainerExtension(): ?ExtensionInterface
     {
         return new CodeRhapsodieIbexaDataflowExtension();
     }
@@ -34,4 +35,3 @@ class CodeRhapsodieIbexaDataflowBundle extends Bundle
         $ibexaExtension->addPolicyProvider(new PolicyProvider());
     }
 }
-class_alias(CodeRhapsodieIbexaDataflowBundle::class, 'CodeRhapsodie\EzDataflowBundle\CodeRhapsodieIbexaDataflowBundle');

@@ -12,14 +12,13 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
  */
 class FrequencyType extends AbstractType
 {
-    public function getParent()
+    public function getParent(): string
     {
         return TextType::class;
     }
 
-    public function getBlockPrefix()
+    public function getBlockPrefix(): string
     {
         return 'coderhapsodie_port_frequency';
     }
 }
-class_alias(FrequencyType::class, 'CodeRhapsodie\EzDataflowBundle\Form\FrequencyType');

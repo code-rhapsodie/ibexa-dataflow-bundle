@@ -6,14 +6,11 @@ namespace CodeRhapsodie\IbexaDataflowBundle\Model;
 
 abstract class ContentStructure
 {
-    /** @var string|null */
-    protected $remoteId;
+    protected ?string $remoteId;
 
-    /** @var string */
-    protected $languageCode;
+    protected string $languageCode;
 
-    /** @var array */
-    protected $fields;
+    protected array $fields;
 
     public function getRemoteId(): ?string
     {
@@ -30,4 +27,3 @@ abstract class ContentStructure
         return $this->fields;
     }
 }
-class_alias(ContentStructure::class, 'CodeRhapsodie\EzDataflowBundle\Model\ContentStructure');

@@ -34,4 +34,3 @@ class DelegatorFieldComparator implements FieldComparatorInterface
         $this->delegates[$fieldTypeIdentifier] = $typedFieldComparator;
     }
 }
-class_alias(DelegatorFieldComparator::class, 'CodeRhapsodie\EzDataflowBundle\Core\FieldComparator\DelegatorFieldComparator');

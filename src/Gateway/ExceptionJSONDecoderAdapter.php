@@ -12,12 +12,12 @@ class ExceptionJSONDecoderAdapter implements AdapterInterface
     {
     }
 
-    public function getNbResults()
+    public function getNbResults(): int
     {
         return $this->adapter->getNbResults();
     }
 
-    public function getSlice($offset, $length)
+    public function getSlice($offset, $length): iterable
     {
         $slice = $this->adapter->getSlice($offset, $length);
         array_walk($slice, static function (&$value): void {

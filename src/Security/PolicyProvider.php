@@ -12,7 +12,7 @@ class PolicyProvider extends YamlPolicyProvider implements PolicyProviderInterfa
     /**
      * {@inheritdoc}
      */
-    protected function getFiles()
+    protected function getFiles(): array
     {
         return [__DIR__.'/../Resources/config/policies.yaml'];
     }

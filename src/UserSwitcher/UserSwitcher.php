@@ -10,7 +10,7 @@ use Ibexa\Contracts\Core\Repository\UserService;
 class UserSwitcher implements UserSwitcherInterface
 {
     /** @var \Ibexa\Contracts\Core\Repository\Values\User\UserReference[] */
-    private $userStack;
+    private array $userStack;
 
     /**
      * @param string|int $adminLoginOrId
@@ -46,4 +46,3 @@ class UserSwitcher implements UserSwitcherInterface
         $this->permissionResolver->setCurrentUserReference(array_pop($this->userStack));
     }
 }
-class_alias(UserSwitcher::class, 'CodeRhapsodie\EzDataflowBundle\UserSwitcher\UserSwitcher');

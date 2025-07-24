@@ -12,4 +12,3 @@ interface UserSwitcherInterface
 
     public function switchBack(): void;
 }
-class_alias(UserSwitcherInterface::class, 'CodeRhapsodie\EzDataflowBundle\UserSwitcher\UserSwitcherInterface');

@@ -17,12 +17,12 @@ use Symfony\Component\Yaml\Yaml;
  */
 class YamlType extends AbstractType
 {
-    public function getParent()
+    public function getParent(): string
     {
         return TextareaType::class;
     }
 
-    public function buildForm(FormBuilderInterface $builder, array $options)
+    public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder->addModelTransformer(new CallbackTransformer(
             function ($optionsAsArray) {
@@ -51,9 +51,8 @@ class YamlType extends AbstractType
         ));
     }
 
-    public function getBlockPrefix()
+    public function getBlockPrefix(): string
     {
         return 'coderhapsodie_port_yaml';
     }
 }
-class_alias(YamlType::class, 'CodeRhapsodie\EzDataflowBundle\Form\YamlType');

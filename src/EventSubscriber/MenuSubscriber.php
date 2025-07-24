@@ -13,12 +13,12 @@ class MenuSubscriber implements EventSubscriberInterface
     /**
      * {@inheritdoc}
      */
-    public static function getSubscribedEvents()
+    public static function getSubscribedEvents(): array
     {
         return [ConfigureMenuEvent::MAIN_MENU => 'onConfigureMenu'];
     }
 
-    public function onConfigureMenu(ConfigureMenuEvent $event)
+    public function onConfigureMenu(ConfigureMenuEvent $event): void
     {
         /** @var \Knp\Menu\ItemInterface $menu */
         $menu = $event->getMenu();

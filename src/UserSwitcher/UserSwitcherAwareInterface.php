@@ -8,4 +8,3 @@ interface UserSwitcherAwareInterface
 {
     public function setUserSwitcher(UserSwitcherInterface $userSwitcher): void;
 }
-class_alias(UserSwitcherAwareInterface::class, 'CodeRhapsodie\EzDataflowBundle\UserSwitcher\UserSwitcherAwareInterface');

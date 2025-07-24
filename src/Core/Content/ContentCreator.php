@@ -59,4 +59,3 @@ class ContentCreator implements ContentCreatorInterface
         return $locationCreateStructs;
     }
 }
-class_alias(ContentCreator::class, 'CodeRhapsodie\EzDataflowBundle\Core\Content\ContentCreator');

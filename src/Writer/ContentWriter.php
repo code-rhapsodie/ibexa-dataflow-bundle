@@ -55,7 +55,7 @@ class ContentWriter extends RepositoryWriter implements DelegateWriterInterface
         return $item instanceof ContentStructure;
     }
 
-    private function log(string $level, string $message, array $context = [])
+    private function log(string $level, string $message, array $context = []): void
     {
         if (null === $this->logger) {
             return;
@@ -63,4 +63,3 @@ class ContentWriter extends RepositoryWriter implements DelegateWriterInterface
         $this->logger->log($level, $message, $context);
     }
 }
-class_alias(ContentWriter::class, 'CodeRhapsodie\EzDataflowBundle\Writer\ContentWriter');

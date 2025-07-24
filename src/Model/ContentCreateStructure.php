@@ -10,11 +10,9 @@ use Ibexa\Contracts\Core\Repository\Values\Content\LocationCreateStruct;
 
 class ContentCreateStructure extends ContentStructure
 {
-    /** @var string */
-    protected $contentTypeIdentifier;
+    protected string $contentTypeIdentifier;
 
-    /** @var array */
-    protected $locations;
+    protected array $locations;
 
     /**
      * ContentCreateStructure constructor.
@@ -52,7 +50,7 @@ class ContentCreateStructure extends ContentStructure
     /**
      * @throws \CodeRhapsodie\IbexaDataflowBundle\Exception\InvalidArgumentTypeException
      */
-    private function setLocations(array $locations)
+    private function setLocations(array $locations): void
     {
         foreach ($locations as $locationOrIdOrRemoteIdOrStruct) {
             if (!is_int($locationOrIdOrRemoteIdOrStruct)
@@ -67,4 +65,3 @@ class ContentCreateStructure extends ContentStructure
         $this->locations = $locations;
     }
 }
-class_alias(ContentCreateStructure::class, 'CodeRhapsodie\EzDataflowBundle\Model\ContentCreateStructure');

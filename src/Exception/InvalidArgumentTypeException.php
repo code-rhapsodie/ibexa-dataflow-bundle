@@ -30,4 +30,3 @@ class InvalidArgumentTypeException extends \Exception
         ));
     }
 }
-class_alias(InvalidArgumentTypeException::class, 'CodeRhapsodie\EzDataflowBundle\Exception\InvalidArgumentTypeException');

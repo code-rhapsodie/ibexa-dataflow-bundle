@@ -11,4 +11,3 @@ interface ContentStructFieldFillerInterface
 {
     public function fillFields(ContentType $contentType, ContentStruct $contentStruct, array $fieldHashes): void;
 }
-class_alias(ContentStructFieldFillerInterface::class, 'CodeRhapsodie\EzDataflowBundle\Core\Field\ContentStructFieldFillerInterface');

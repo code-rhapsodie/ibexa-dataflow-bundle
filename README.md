@@ -13,7 +13,7 @@ Ibexa Dataflow bundle is intended to manage content imports from external data s
 
 | Ibexa Dataflow Version | Ibexa Content Version | Status                        |
 |------------------------|-----------------------|-------------------------------|
-| 5.x                    | 4.x                   | :white_check_mark: Maintained |
+| 6.x                    | 5.x                   | :white_check_mark: Maintained |
 
 ## User Interface (UI)
 

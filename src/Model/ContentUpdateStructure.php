@@ -6,8 +6,7 @@ namespace CodeRhapsodie\IbexaDataflowBundle\Model;
 
 class ContentUpdateStructure extends ContentStructure
 {
-    /** @var int|null */
-    protected $id;
+    protected ?int $id;
 
     private function __construct(string $languageCode, array $fields)
     {
@@ -36,4 +35,3 @@ class ContentUpdateStructure extends ContentStructure
         return $this->id;
     }
 }
-class_alias(ContentUpdateStructure::class, 'CodeRhapsodie\EzDataflowBundle\Model\ContentUpdateStructure');

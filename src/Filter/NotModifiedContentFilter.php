@@ -52,7 +52,7 @@ class NotModifiedContentFilter
         return false;
     }
 
-    private function log(string $level, string $message, array $context = [])
+    private function log(string $level, string $message, array $context = []): void
     {
         if (null === $this->logger) {
             return;
@@ -60,4 +60,3 @@ class NotModifiedContentFilter
         $this->logger->log($level, $message, $context);
     }
 }
-class_alias(NotModifiedContentFilter::class, 'CodeRhapsodie\EzDataflowBundle\Filter\NotModifiedContentFilter');

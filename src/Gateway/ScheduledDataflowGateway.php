@@ -38,4 +38,3 @@ final class ScheduledDataflowGateway
         $this->scheduledDataflowRepository->delete($id);
     }
 }
-class_alias(ScheduledDataflowGateway::class, 'CodeRhapsodie\EzDataflowBundle\Gateway\ScheduledDataflowGateway');

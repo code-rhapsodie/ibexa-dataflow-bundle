@@ -27,4 +27,3 @@ class MatrixFieldComparator extends AbstractFieldComparator
         return true;
     }
 }
-class_alias(MatrixFieldComparator::class, 'CodeRhapsodie\EzDataflowBundle\Core\FieldComparator\MatrixFieldComparator');
