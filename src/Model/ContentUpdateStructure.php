@@ -6,7 +6,7 @@ namespace CodeRhapsodie\IbexaDataflowBundle\Model;
 
 class ContentUpdateStructure extends ContentStructure
 {
-    protected ?int $id;
+    protected ?int $id = null;
 
     private function __construct(string $languageCode, array $fields)
     {

@@ -80,7 +80,7 @@ services:
     CodeRhapsodie\IbexaDataflowBundle\Core\Field\ContentStructFieldFillerInterface: '@CodeRhapsodie\IbexaDataflowBundle\Core\Field\ContentStructFieldFiller'
     CodeRhapsodie\IbexaDataflowBundle\Core\Field\ContentStructFieldFiller:
         arguments:
-            $fieldValueCreators: !tagged 'coderhapsodie.ibexa_dataflow.field_value_creator'
+            $fieldValueCreators: !tagged_iterator 'coderhapsodie.ibexa_dataflow.field_value_creator'
 
     CodeRhapsodie\IbexaDataflowBundle\Matcher\LocationMatcherInterface: '@CodeRhapsodie\IbexaDataflowBundle\Matcher\LocationMatcher'
     CodeRhapsodie\IbexaDataflowBundle\Matcher\LocationMatcher:
