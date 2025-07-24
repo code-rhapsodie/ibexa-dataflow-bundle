@@ -16,7 +16,7 @@
 {% endblock %}
 
 {% block content %}
-    {{ ibexa_render_component_group('coderhapsodie-ibexa_dataflow', {'filter': app.request.query.get('filter', 0)}) }}
+    {{ ibexa_twig_component_group('coderhapsodie-ibexa_dataflow', {'filter': app.request.query.get('filter', 0)}) }}
 
     {% embed '@ibexadesign/ui/component/modal/modal.html.twig' with {
         id: 'modal-history-details',
