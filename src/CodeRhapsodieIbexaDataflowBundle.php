@@ -24,7 +24,7 @@ class CodeRhapsodieIbexaDataflowBundle extends Bundle
         return new CodeRhapsodieIbexaDataflowExtension();
     }
 
-    public function build(ContainerBuilder $container)
+    public function build(ContainerBuilder $container): void
     {
         parent::build($container);
 
