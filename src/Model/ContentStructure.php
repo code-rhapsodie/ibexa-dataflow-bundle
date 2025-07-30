@@ -6,7 +6,7 @@ namespace CodeRhapsodie\IbexaDataflowBundle\Model;
 
 abstract class ContentStructure
 {
-    protected ?string $remoteId;
+    protected ?string $remoteId = null;
 
     protected string $languageCode;
 

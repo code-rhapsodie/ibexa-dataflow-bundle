@@ -8,9 +8,9 @@ use CodeRhapsodie\DataflowBundle\Entity\ScheduledDataflow;
 use CodeRhapsodie\DataflowBundle\Repository\ScheduledDataflowRepository;
 use Doctrine\DBAL\Query\QueryBuilder;
 
-final class ScheduledDataflowGateway
+final readonly class ScheduledDataflowGateway
 {
-    public function __construct(private readonly ScheduledDataflowRepository $scheduledDataflowRepository)
+    public function __construct(private ScheduledDataflowRepository $scheduledDataflowRepository)
     {
     }
 

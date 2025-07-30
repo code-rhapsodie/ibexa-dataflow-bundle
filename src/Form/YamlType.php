@@ -17,6 +17,7 @@ use Symfony\Component\Yaml\Yaml;
  */
 class YamlType extends AbstractType
 {
+    #[\Override]
     public function getParent(): string
     {
         return TextareaType::class;
@@ -51,6 +52,7 @@ class YamlType extends AbstractType
         ));
     }
 
+    #[\Override]
     public function getBlockPrefix(): string
     {
         return 'coderhapsodie_port_yaml';

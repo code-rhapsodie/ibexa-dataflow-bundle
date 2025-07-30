@@ -8,12 +8,12 @@ use CodeRhapsodie\DataflowBundle\Entity\Job;
 use CodeRhapsodie\DataflowBundle\Repository\JobRepository;
 use Doctrine\DBAL\Query\QueryBuilder;
 
-final class JobGateway
+final readonly class JobGateway
 {
-    public const FILTER_NONE = 0;
-    public const FILTER_NON_EMPTY = 1;
+    public const int FILTER_NONE = 0;
+    public const int FILTER_NON_EMPTY = 1;
 
-    public function __construct(private readonly JobRepository $jobRepository)
+    public function __construct(private JobRepository $jobRepository)
     {
     }
 

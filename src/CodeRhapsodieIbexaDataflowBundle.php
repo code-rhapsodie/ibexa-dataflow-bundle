@@ -19,6 +19,7 @@ class CodeRhapsodieIbexaDataflowBundle extends Bundle
 
     protected string $name = 'CodeRhapsodieIbexaDataflowBundle';
 
+    #[\Override]
     public function getContainerExtension(): ?ExtensionInterface
     {
         return new CodeRhapsodieIbexaDataflowExtension();

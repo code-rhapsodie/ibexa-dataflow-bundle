@@ -10,8 +10,6 @@ use Ibexa\Contracts\Core\Repository\Values\Content\LocationCreateStruct;
 
 class ContentCreateStructure extends ContentStructure
 {
-    protected string $contentTypeIdentifier;
-
     protected array $locations;
 
     /**
@@ -28,9 +26,8 @@ class ContentCreateStructure extends ContentStructure
      *
      * @throws \CodeRhapsodie\IbexaDataflowBundle\Exception\InvalidArgumentTypeException
      */
-    public function __construct(string $contentTypeIdentifier, string $languageCode, array $locations, array $fields, ?string $remoteId = null)
+    public function __construct(protected string $contentTypeIdentifier, string $languageCode, array $locations, array $fields, ?string $remoteId = null)
     {
-        $this->contentTypeIdentifier = $contentTypeIdentifier;
         $this->languageCode = $languageCode;
         $this->setLocations($locations);
         $this->fields = $fields;

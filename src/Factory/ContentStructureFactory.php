@@ -9,9 +9,9 @@ use CodeRhapsodie\IbexaDataflowBundle\Model\ContentUpdateStructure;
 use Ibexa\Contracts\Core\Repository\ContentService;
 use Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException;
 
-final class ContentStructureFactory implements ContentStructureFactoryInterface
+final readonly class ContentStructureFactory implements ContentStructureFactoryInterface
 {
-    public function __construct(private readonly ContentService $contentService)
+    public function __construct(private ContentService $contentService)
     {
     }
 
