@@ -4,44 +4,31 @@ imports:
 services:
     _defaults:
         public: false
+        autowire: true
+        autoconfigure: true
 
     coderhapsodie.dataflow.connection: "@ibexa.persistence.connection"
 
     CodeRhapsodie\IbexaDataflowBundle\Controller\DashboardController:
         public: true
-        tags:
-            - { name: controller.service_arguments }
         arguments:
             $jobGateway: '@CodeRhapsodie\IbexaDataflowBundle\Gateway\JobGateway'
             $scheduledDataflowGateway: '@CodeRhapsodie\IbexaDataflowBundle\Gateway\ScheduledDataflowGateway'
-        calls:
-            - ['setContainer', ['@service_container']]
-            - ['performAccessCheck', []]
 
     CodeRhapsodie\IbexaDataflowBundle\Controller\ScheduledDataflowController:
         public: true
-        tags:
-            - { name: controller.service_arguments }
         arguments:
             $notificationHandler: '@Ibexa\Contracts\AdminUi\Notification\NotificationHandlerInterface'
             $scheduledDataflowGateway: '@CodeRhapsodie\IbexaDataflowBundle\Gateway\ScheduledDataflowGateway'
             $translator: '@translator'
-        calls:
-            - [ 'setContainer', [ '@service_container' ] ]
-            - [ 'performAccessCheck', [ ] ]
 
     CodeRhapsodie\IbexaDataflowBundle\Controller\JobController:
         public: true
-        tags:
-            - { name: controller.service_arguments }
         arguments:
             $jobGateway: '@CodeRhapsodie\IbexaDataflowBundle\Gateway\JobGateway'
             $notificationHandler: '@Ibexa\Contracts\AdminUi\Notification\NotificationHandlerInterface'
             $translator: '@translator'
             $scheduledDataflowGateway: '@CodeRhapsodie\IbexaDataflowBundle\Gateway\ScheduledDataflowGateway'
-        calls:
-            - [ 'setContainer', [ '@service_container' ] ]
-            - [ 'performAccessCheck', [ ] ]
 
     CodeRhapsodie\IbexaDataflowBundle\Writer\RepositoryWriter:
         abstract: true

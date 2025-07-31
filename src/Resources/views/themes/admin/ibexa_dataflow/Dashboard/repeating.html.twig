@@ -17,10 +17,10 @@
     } %}
         {% block body_content %}
             {{ form_start(update_form) }}
-                <div class="form-fields">
-                    {{ form_widget(update_form) }}
-                </div>
-                <button id="modal-edit-submit" type="submit" hidden />
+            <div class="form-fields">
+                {{ form_widget(update_form) }}
+            </div>
+            <button id="modal-edit-submit" type="submit" hidden />
             {{ form_end(update_form) }}
         {% endblock %}
         {% block footer_content %}
@@ -66,6 +66,10 @@
                     })
                         .then((r) => r.json())
                         .then((result) => {
+                            if (result.redirect && window.location.pathname+window.location.hash === result.redirect) {
+                                location.reload();
+                                return;
+                            }
                             if (result.redirect) {
                                 window.location = result.redirect;
                                 return;

@@ -44,7 +44,7 @@ class ScheduledDataflowController extends Controller
                     ['message' => $e->getMessage()]));
             }
 
-            return new JsonResponse(['redirect' => $this->generateUrl('coderhapsodie.ibexa_dataflow.main')]);
+            return new JsonResponse(['redirect' => $this->generateUrl('coderhapsodie.ibexa_dataflow.main', ['_fragment' => 'ibexa-tab-coderhapsodie-ibexa_dataflow-code-rhapsodie-ibexa_dataflow-repeating'])]);
         }
 
         return new JsonResponse([
@@ -68,7 +68,7 @@ class ScheduledDataflowController extends Controller
                 ['message' => $e->getMessage()]));
         }
 
-        return $this->redirectToRoute('coderhapsodie.ibexa_dataflow.main');
+        return $this->redirectToRoute('coderhapsodie.ibexa_dataflow.main', ['_fragment' => 'ibexa-tab-coderhapsodie-ibexa_dataflow-code-rhapsodie-ibexa_dataflow-repeating']);
     }
 
     #[Route(path: '/{id}/edit', name: 'coderhapsodie.ibexa_dataflow.workflow.edit')]
@@ -91,7 +91,7 @@ class ScheduledDataflowController extends Controller
                     ['message' => $e->getMessage()]));
             }
 
-            return new JsonResponse(['redirect' => $this->generateUrl('coderhapsodie.ibexa_dataflow.main')]);
+            return new JsonResponse(['redirect' => $this->generateUrl('coderhapsodie.ibexa_dataflow.main', ['_fragment' => 'ibexa-tab-coderhapsodie-ibexa_dataflow-code-rhapsodie-ibexa_dataflow-repeating'])]);
         }
 
         return new JsonResponse([
@@ -109,7 +109,7 @@ class ScheduledDataflowController extends Controller
 
         $this->changeDataflowStatus($id, true);
 
-        return $this->redirectToRoute('coderhapsodie.ibexa_dataflow.main');
+        return $this->redirectToRoute('coderhapsodie.ibexa_dataflow.main', ['_fragment' => 'ibexa-tab-coderhapsodie-ibexa_dataflow-code-rhapsodie-ibexa_dataflow-repeating']);
     }
 
     private function changeDataflowStatus(int $id, bool $status)
@@ -133,6 +133,6 @@ class ScheduledDataflowController extends Controller
 
         $this->changeDataflowStatus($id, false);
 
-        return $this->redirectToRoute('coderhapsodie.ibexa_dataflow.main');
+        return $this->redirectToRoute('coderhapsodie.ibexa_dataflow.main', ['_fragment' => 'ibexa-tab-coderhapsodie-ibexa_dataflow-code-rhapsodie-ibexa_dataflow-repeating']);
     }
 }
