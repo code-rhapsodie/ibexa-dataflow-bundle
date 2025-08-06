@@ -2,29 +2,29 @@ services:
     CodeRhapsodie\IbexaDataflowBundle\Core\FieldComparator\SimpleFieldComparator:
         parent: 'CodeRhapsodie\IbexaDataflowBundle\Core\FieldComparator\AbstractFieldComparator'
         tags:
-            - { name: 'coderhapsodie.ibexa_dataflow.field_comparator', fieldType: 'ezauthor' }
-            - { name: 'coderhapsodie.ibexa_dataflow.field_comparator', fieldType: 'ezboolean' }
-            - { name: 'coderhapsodie.ibexa_dataflow.field_comparator', fieldType: 'ezcountry' }
+            - { name: 'coderhapsodie.ibexa_dataflow.field_comparator', fieldType: 'ibexa_author' }
+            - { name: 'coderhapsodie.ibexa_dataflow.field_comparator', fieldType: 'ibexa_boolean' }
+            - { name: 'coderhapsodie.ibexa_dataflow.field_comparator', fieldType: 'ibexa_country' }
             - { name: 'coderhapsodie.ibexa_dataflow.field_comparator', fieldType: 'ezdate' }
-            - { name: 'coderhapsodie.ibexa_dataflow.field_comparator', fieldType: 'ezdatetime' }
-            - { name: 'coderhapsodie.ibexa_dataflow.field_comparator', fieldType: 'ezemail' }
-            - { name: 'coderhapsodie.ibexa_dataflow.field_comparator', fieldType: 'ezfloat' }
-            - { name: 'coderhapsodie.ibexa_dataflow.field_comparator', fieldType: 'ezinteger' }
-            - { name: 'coderhapsodie.ibexa_dataflow.field_comparator', fieldType: 'ezisbn' }
-            - { name: 'coderhapsodie.ibexa_dataflow.field_comparator', fieldType: 'ezkeyword' }
-            - { name: 'coderhapsodie.ibexa_dataflow.field_comparator', fieldType: 'ezobjectrelation' }
-            - { name: 'coderhapsodie.ibexa_dataflow.field_comparator', fieldType: 'ezobjectrelationlist' }
-            - { name: 'coderhapsodie.ibexa_dataflow.field_comparator', fieldType: 'ezrichtext' }
-            - { name: 'coderhapsodie.ibexa_dataflow.field_comparator', fieldType: 'ezselection' }
-            - { name: 'coderhapsodie.ibexa_dataflow.field_comparator', fieldType: 'eztext' }
-            - { name: 'coderhapsodie.ibexa_dataflow.field_comparator', fieldType: 'ezstring' }
-            - { name: 'coderhapsodie.ibexa_dataflow.field_comparator', fieldType: 'eztime' }
+            - { name: 'coderhapsodie.ibexa_dataflow.field_comparator', fieldType: 'ibexa_date' }
+            - { name: 'coderhapsodie.ibexa_dataflow.field_comparator', fieldType: 'ibexa_email' }
+            - { name: 'coderhapsodie.ibexa_dataflow.field_comparator', fieldType: 'ibexa_float' }
+            - { name: 'coderhapsodie.ibexa_dataflow.field_comparator', fieldType: 'ibexa_integer' }
+            - { name: 'coderhapsodie.ibexa_dataflow.field_comparator', fieldType: 'ibexa_isbn' }
+            - { name: 'coderhapsodie.ibexa_dataflow.field_comparator', fieldType: 'ibexa_keyword' }
+            - { name: 'coderhapsodie.ibexa_dataflow.field_comparator', fieldType: 'ibexa_object_relation' }
+            - { name: 'coderhapsodie.ibexa_dataflow.field_comparator', fieldType: 'ibexa_object_relation_list' }
+            - { name: 'coderhapsodie.ibexa_dataflow.field_comparator', fieldType: 'ibexa_richtext' }
+            - { name: 'coderhapsodie.ibexa_dataflow.field_comparator', fieldType: 'ibexa_selection' }
+            - { name: 'coderhapsodie.ibexa_dataflow.field_comparator', fieldType: 'ibexa_text' }
+            - { name: 'coderhapsodie.ibexa_dataflow.field_comparator', fieldType: 'ibexa_string' }
+            - { name: 'coderhapsodie.ibexa_dataflow.field_comparator', fieldType: 'ibexa_time' }
             - { name: 'coderhapsodie.ibexa_dataflow.field_comparator', fieldType: 'eztags' }
 
     CodeRhapsodie\IbexaDataflowBundle\Core\FieldComparator\UrlFieldComparator:
         parent: 'CodeRhapsodie\IbexaDataflowBundle\Core\FieldComparator\AbstractFieldComparator'
         tags:
-            - { name: 'coderhapsodie.ibexa_dataflow.field_comparator', fieldType: 'ezurl' }
+            - { name: 'coderhapsodie.ibexa_dataflow.field_comparator', fieldType: 'ibexa_url' }
 
     CodeRhapsodie\IbexaDataflowBundle\Core\FieldComparator\NovaSEOMetasFieldComparator:
         parent: 'CodeRhapsodie\IbexaDataflowBundle\Core\FieldComparator\AbstractFieldComparator'
@@ -34,9 +34,9 @@ services:
     CodeRhapsodie\IbexaDataflowBundle\Core\FieldComparator\MatrixFieldComparator:
         parent: 'CodeRhapsodie\IbexaDataflowBundle\Core\FieldComparator\AbstractFieldComparator'
         tags:
-            - { name: 'coderhapsodie.ibexa_dataflow.field_comparator', fieldType: 'ezmatrix' }
+            - { name: 'coderhapsodie.ibexa_dataflow.field_comparator', fieldType: 'ibexa_matrix' }
 
     CodeRhapsodie\IbexaDataflowBundle\Core\FieldComparator\MapLocationFieldComparator:
         parent: 'CodeRhapsodie\IbexaDataflowBundle\Core\FieldComparator\AbstractFieldComparator'
         tags:
-            - { name: 'coderhapsodie.ibexa_dataflow.field_comparator', fieldType: 'ezgmaplocation' }
+            - { name: 'coderhapsodie.ibexa_dataflow.field_comparator', fieldType: 'ibexa_gmap_location' }
