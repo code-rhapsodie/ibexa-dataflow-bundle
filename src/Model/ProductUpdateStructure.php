@@ -27,4 +27,14 @@ class ProductUpdateStructure extends ProductStructure
     {
         return $this->updateStock;
     }
+
+    public function setUpdateContent(bool $updateContent): void
+    {
+        $this->updateContent = $updateContent;
+    }
+
+    public function setUpdateStock(bool $updateStock): void
+    {
+        $this->updateStock = $updateStock;
+    }
 }

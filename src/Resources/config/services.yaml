@@ -154,6 +154,11 @@ services:
             $contentService: '@Ibexa\Contracts\Core\Repository\ContentService'
             $comparator: '@CodeRhapsodie\IbexaDataflowBundle\Core\FieldComparator\FieldComparatorInterface'
 
+    CodeRhapsodie\IbexaDataflowBundle\Filter\NotModifiedProductFilter:
+      arguments:
+        $notModifiedContentFilter: '@CodeRhapsodie\IbexaDataflowBundle\Filter\NotModifiedContentFilter'
+        $connection: '@ibexa.persistence.connection'
+
     CodeRhapsodie\IbexaDataflowBundle\Core\FieldComparator\FieldComparatorInterface: '@CodeRhapsodie\IbexaDataflowBundle\Core\FieldComparator\DelegatorFieldComparator'
     CodeRhapsodie\IbexaDataflowBundle\Core\FieldComparator\DelegatorFieldComparator:
 

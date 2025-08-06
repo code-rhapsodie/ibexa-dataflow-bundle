@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace CodeRhapsodie\IbexaDataflowBundle\Filter;
 
-use CodeRhapsodie\IbexaDataflowBundle\Filter\NotModifiedContentFilter;
 use CodeRhapsodie\IbexaDataflowBundle\Model\ContentUpdateStructure;
+use CodeRhapsodie\IbexaDataflowBundle\Model\ProductUpdateStructure;
 use Doctrine\DBAL\Connection;
 
 readonly class NotModifiedProductFilter
@@ -31,13 +31,13 @@ readonly class NotModifiedProductFilter
         $result = $this->notModifiedContentFilter->__invoke(ContentUpdateStructure::createForContentId($contentId[0], $data->getLanguageCode(), $data->getFields()));
 
         if ($result === false) {
-            $data->updateContent = false;
+            $data->setUpdateContent(false);
         }
 
         $stockData = $this->connection->executeQuery('SELECT stock FROM ibexa_product_specification_availability WHERE product_code = :code', ['code' => $data->getCode()])->fetchFirstColumn();
 
         if (!empty($stockData) && $data->getStock() === $stockData[0]) {
-            $data->updateStock = false;
+            $data->setUpdateStock(false);
         }
 
         return $data;
