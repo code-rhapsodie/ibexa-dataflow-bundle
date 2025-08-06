@@ -40,3 +40,9 @@ services:
         parent: 'CodeRhapsodie\IbexaDataflowBundle\Core\FieldComparator\AbstractFieldComparator'
         tags:
             - { name: 'coderhapsodie.ibexa_dataflow.field_comparator', fieldType: 'ibexa_gmap_location' }
+
+    CodeRhapsodie\IbexaDataflowBundle\Core\FieldComparator\TaxonomyEntryAssignmentComparator:
+      parent: 'CodeRhapsodie\IbexaDataflowBundle\Core\FieldComparator\AbstractFieldComparator'
+      tags:
+        - { name: 'coderhapsodie.ibexa_dataflow.field_comparator', fieldType: 'ibexa_taxonomy_entry_assignment' }
+

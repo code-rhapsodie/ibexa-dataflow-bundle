@@ -1,0 +1,30 @@
+<?php
+
+declare(strict_types=1);
+
+namespace CodeRhapsodie\IbexaDataflowBundle\Model;
+
+class ProductUpdateStructure extends ProductStructure
+{
+    protected bool $updateContent = true;
+
+    protected bool $updateStock = true;
+
+    public function __construct(string $code, array $fields, string $languageCode, int $stock = 0)
+    {
+        $this->code = $code;
+        $this->fields = $fields;
+        $this->languageCode = $languageCode;
+        $this->stock = $stock;
+    }
+
+    public function isUpdateContent(): bool
+    {
+        return $this->updateContent;
+    }
+
+    public function isUpdateStock(): bool
+    {
+        return $this->updateStock;
+    }
+}
