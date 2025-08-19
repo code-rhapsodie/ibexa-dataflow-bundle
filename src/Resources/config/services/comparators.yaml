@@ -5,7 +5,7 @@ services:
             - { name: 'coderhapsodie.ibexa_dataflow.field_comparator', fieldType: 'ibexa_author' }
             - { name: 'coderhapsodie.ibexa_dataflow.field_comparator', fieldType: 'ibexa_boolean' }
             - { name: 'coderhapsodie.ibexa_dataflow.field_comparator', fieldType: 'ibexa_country' }
-            - { name: 'coderhapsodie.ibexa_dataflow.field_comparator', fieldType: 'ezdate' }
+            - { name: 'coderhapsodie.ibexa_dataflow.field_comparator', fieldType: 'ibexa_datetime' }
             - { name: 'coderhapsodie.ibexa_dataflow.field_comparator', fieldType: 'ibexa_date' }
             - { name: 'coderhapsodie.ibexa_dataflow.field_comparator', fieldType: 'ibexa_email' }
             - { name: 'coderhapsodie.ibexa_dataflow.field_comparator', fieldType: 'ibexa_float' }
