@@ -36,7 +36,7 @@ readonly class NotModifiedProductFilter
 
         $stockData = $this->connection->executeQuery('SELECT stock FROM ibexa_product_specification_availability WHERE product_code = :code', ['code' => $data->getCode()])->fetchFirstColumn();
 
-        if (!empty($stockData) && $data->getStock() === $stockData[0]) {
+        if (!empty($stockData) && ($data->getStock() === $stockData[0] || ($data->getStock() === 0 && $stockData[0] === null))) {
             $data->setUpdateStock(false);
         }
 
