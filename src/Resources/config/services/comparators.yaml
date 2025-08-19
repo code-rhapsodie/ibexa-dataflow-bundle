@@ -56,3 +56,8 @@ services:
       tags:
         - { name: 'coderhapsodie.ibexa_dataflow.field_comparator', fieldType: 'ibexa_customer_group' }
 
+    CodeRhapsodie\IbexaDataflowBundle\Core\FieldComparator\MapLocationComparator:
+      parent: 'CodeRhapsodie\IbexaDataflowBundle\Core\FieldComparator\AbstractFieldComparator'
+      tags:
+        - { name: 'coderhapsodie.ibexa_dataflow.field_comparator', fieldType: 'ibexa_gmap_location' }
+
