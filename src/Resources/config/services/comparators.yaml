@@ -51,3 +51,8 @@ services:
       tags:
         - { name: 'coderhapsodie.ibexa_dataflow.field_comparator', fieldType: 'ibexa_address' }
 
+    CodeRhapsodie\IbexaDataflowBundle\Core\FieldComparator\CustomerGroupComparator:
+      parent: 'CodeRhapsodie\IbexaDataflowBundle\Core\FieldComparator\AbstractFieldComparator'
+      tags:
+        - { name: 'coderhapsodie.ibexa_dataflow.field_comparator', fieldType: 'ibexa_customer_group' }
+
