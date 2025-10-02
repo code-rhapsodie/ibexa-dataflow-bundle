@@ -232,27 +232,31 @@ the `NotModifiedContentFilter` to prevent unnecessary overhead.
 
 ### Supported field types
 
-- ezstring
-- ezauthor
-- ezboolean
-- ezcountry
-- ezdate
-- ezdatetime
-- ezemail
-- ezfloat
-- ezisbn
-- ezobjectrelation
-- ezobjectrelationlist
-- ezkeyword
-- ezselection
-- eztext
-- eztime
+- ibexa_author
+- ibexa_boolean
+- ibexa_country
+- ibexa_datetime
+- ibexa_date
+- ibexa_email
+- ibexa_float
+- ibexa_integer
+- ibexa_isbn
+- ibexa_keyword
+- ibexa_object_relation
+- ibexa_object_relation_list
+- ibexa_richtext
+- ibexa_selection
+- ibexa_text
+- ibexa_string
+- ibexa_time
 - eztags
+- ibexa_url
 - novaseometas
-- ezurl
-- ezmatrix
-- ezgmaplocation
-- ezrichtext
+- ibexa_matrix
+- ibexa_gmap_location
+- ibexa_taxonomy_entry_assignment
+- ibexa_address
+- ibexa_customer_group
 
 ### Add custom field comparator
 

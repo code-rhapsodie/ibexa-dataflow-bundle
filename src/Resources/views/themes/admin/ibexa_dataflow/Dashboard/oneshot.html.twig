@@ -61,7 +61,7 @@
                     const oneShotModal = document.getElementById('modal-new-oneshot');
                     oneShotModal.querySelector('#create_oneshot_label').value = '';
                     oneShotModal.querySelector('#create_oneshot_options').value = '';
-                    oneShotModal.querySelector('.flatpickr.flatpickr-input').parentNode.parentNode.parentNode.ibexaInstance.flatpickrInstance.setDate(new Date(), true);
+                    oneShotModal.querySelector('#create_oneshot_requestedDate').closest('.ibexa-picker').querySelector('.ibexa-date-time-picker').ibexaInstance.flatpickrInstance.setDate(new Date(), true);
                 });
             }
         });

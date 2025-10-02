@@ -58,8 +58,7 @@ final readonly class JobGateway
     public function getListPendindOrRunning(): array
     {
         $qb = $this->jobRepository->createQueryBuilder('w');
-        return $qb->andWhere($qb->expr()->in('w.status', ':status'))
-            ->setParameter('status', implode(',',[Job::STATUS_RUNNING, Job::STATUS_PENDING, Job::STATUS_QUEUED]))
+        return $qb->andWhere($qb->expr()->in('w.status', [Job::STATUS_RUNNING, Job::STATUS_PENDING, Job::STATUS_QUEUED]))
             ->orderBy('w.requested_date', 'ASC')
             ->fetchAllAssociative();
     }

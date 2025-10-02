@@ -100,7 +100,7 @@
                             editModal.querySelector('#update_scheduled_label').value = node.querySelector('#update_scheduled_label').value;
                             editModal.querySelector('#update_scheduled_options').value = node.querySelector('#update_scheduled_options').value;
                             editModal.querySelector('#update_scheduled_frequency').value = node.querySelector('#update_scheduled_frequency').value;
-                            editModal.querySelector('#update_scheduled_next').parentNode.parentNode.ibexaInstance.flatpickrInstance.setDate(
+                            editModal.querySelector('#update_scheduled_next').closest('.ibexa-picker').querySelector('.ibexa-date-time-picker').ibexaInstance.flatpickrInstance.setDate(
                                 new Date(node.querySelector('#update_scheduled_next').value * 1000),
                                 true
                             );
