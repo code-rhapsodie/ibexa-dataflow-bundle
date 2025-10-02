@@ -1,6 +1,7 @@
 {% extends '@ibexadesign/ui/form_fields.html.twig' %}
 
 {%- block checkbox_widget -%}
+    {{ block('form_label') }}
     {{ block('toggle_widget') }}
 {%- endblock -%}
 
