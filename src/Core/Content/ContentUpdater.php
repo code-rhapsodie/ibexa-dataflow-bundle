@@ -9,11 +9,12 @@ use CodeRhapsodie\IbexaDataflowBundle\Exception\NoMatchFoundException;
 use CodeRhapsodie\IbexaDataflowBundle\Model\ContentUpdateStructure;
 use Ibexa\Contracts\Core\Repository\ContentService;
 use Ibexa\Contracts\Core\Repository\ContentTypeService;
+use Ibexa\Contracts\Core\Repository\Repository;
 use Ibexa\Contracts\Core\Repository\Values\Content\Content;
 
-class ContentUpdater implements ContentUpdaterInterface
+readonly class ContentUpdater implements ContentUpdaterInterface
 {
-    public function __construct(private readonly ContentService $contentService, private readonly ContentTypeService $contentTypeService, private readonly ContentStructFieldFillerInterface $filler)
+    public function __construct(private ContentService $contentService, private ContentTypeService $contentTypeService, private ContentStructFieldFillerInterface $filler, private Repository $repository)
     {
     }
 
@@ -44,9 +45,18 @@ class ContentUpdater implements ContentUpdaterInterface
             $structure->getFields()
         );
 
-        $draft = $this->contentService->createContentDraft($content->contentInfo);
-        $this->contentService->updateContent($draft->versionInfo, $contentUpdateStruct);
+        $this->repository->beginTransaction();
+        try {
+            $draft = $this->contentService->createContentDraft($content->contentInfo);
+            $this->contentService->updateContent($draft->versionInfo, $contentUpdateStruct);
+            $content = $this->contentService->publishVersion($draft->versionInfo);
 
-        return $this->contentService->publishVersion($draft->versionInfo);
+            $this->repository->commit();
+
+            return $content;
+        } catch (\Exception $e) {
+            $this->repository->rollback();
+            throw $e;
+        }
     }
 }

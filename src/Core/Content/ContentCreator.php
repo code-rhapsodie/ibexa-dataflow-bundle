@@ -9,12 +9,13 @@ use CodeRhapsodie\IbexaDataflowBundle\Matcher\LocationMatcherInterface;
 use CodeRhapsodie\IbexaDataflowBundle\Model\ContentCreateStructure;
 use Ibexa\Contracts\Core\Repository\ContentService;
 use Ibexa\Contracts\Core\Repository\ContentTypeService;
+use Ibexa\Contracts\Core\Repository\Repository;
 use Ibexa\Contracts\Core\Repository\Values\Content\Content;
 use Ibexa\Contracts\Core\Repository\Values\Content\LocationCreateStruct;
 
-class ContentCreator implements ContentCreatorInterface
+readonly class ContentCreator implements ContentCreatorInterface
 {
-    public function __construct(private readonly ContentService $contentService, private readonly ContentTypeService $contentTypeService, private readonly ContentStructFieldFillerInterface $filler, private readonly LocationMatcherInterface $matcher)
+    public function __construct(private ContentService $contentService, private ContentTypeService $contentTypeService, private ContentStructFieldFillerInterface $filler, private LocationMatcherInterface $matcher, private Repository $repository)
     {
     }
 
@@ -32,9 +33,20 @@ class ContentCreator implements ContentCreatorInterface
         $contentCreateStruct = $this->contentService->newContentCreateStruct($contentType, $structure->getLanguageCode());
         $contentCreateStruct->remoteId = $structure->getRemoteId();
         $this->filler->fillFields($contentType, $contentCreateStruct, $structure->getFields());
-        $content = $this->contentService->createContent($contentCreateStruct, $this->getLocationCreateStructs($structure->getLocations()));
 
-        return $this->contentService->publishVersion($content->versionInfo);
+        $this->repository->beginTransaction();
+        try {
+            $content = $this->contentService->createContent($contentCreateStruct, $this->getLocationCreateStructs($structure->getLocations()));
+
+            $content = $this->contentService->publishVersion($content->versionInfo);
+            $this->repository->commit();
+
+            return $content;
+        } catch (\Exception $exception) {
+            $this->repository->rollback();
+            throw $exception;
+        }
+
     }
 
     /**

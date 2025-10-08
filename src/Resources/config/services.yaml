@@ -64,6 +64,7 @@ services:
             $contentService: '@Ibexa\Contracts\Core\Repository\ContentService'
             $contentTypeService: '@Ibexa\Contracts\Core\Repository\ContentTypeService'
             $filler: '@CodeRhapsodie\IbexaDataflowBundle\Core\Field\ContentStructFieldFillerInterface'
+            $repository: '@Ibexa\Core\Event\Repository'
 
     CodeRhapsodie\IbexaDataflowBundle\Core\Field\ContentStructFieldFillerInterface: '@CodeRhapsodie\IbexaDataflowBundle\Core\Field\ContentStructFieldFiller'
     CodeRhapsodie\IbexaDataflowBundle\Core\Field\ContentStructFieldFiller:
