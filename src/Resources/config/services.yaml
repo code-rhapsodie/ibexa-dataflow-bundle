@@ -14,6 +14,7 @@ services:
         arguments:
             $jobGateway: '@CodeRhapsodie\IbexaDataflowBundle\Gateway\JobGateway'
             $scheduledDataflowGateway: '@CodeRhapsodie\IbexaDataflowBundle\Gateway\ScheduledDataflowGateway'
+            $exceptionHandler: '@CodeRhapsodie\DataflowBundle\ExceptionsHandler\ExceptionHandlerInterface'
 
     CodeRhapsodie\IbexaDataflowBundle\Controller\ScheduledDataflowController:
         public: true
@@ -115,6 +116,7 @@ services:
     CodeRhapsodie\IbexaDataflowBundle\Gateway\JobGateway:
         arguments:
             $jobRepository: '@CodeRhapsodie\DataflowBundle\Repository\JobRepository'
+            $jobGateway: '@CodeRhapsodie\DataflowBundle\Gateway\JobGateway'
 
     CodeRhapsodie\IbexaDataflowBundle\Tab\DashboardTab:
         parent: Ibexa\Contracts\AdminUi\Tab\AbstractTab

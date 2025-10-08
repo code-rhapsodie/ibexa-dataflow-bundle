@@ -6,6 +6,8 @@ namespace CodeRhapsodie\IbexaDataflowBundle\Controller;
 
 use CodeRhapsodie\DataflowBundle\Entity\Job;
 use CodeRhapsodie\DataflowBundle\Entity\ScheduledDataflow;
+use CodeRhapsodie\DataflowBundle\ExceptionsHandler\ExceptionHandlerInterface;
+use CodeRhapsodie\DataflowBundle\ExceptionsHandler\NullExceptionHandler;
 use CodeRhapsodie\IbexaDataflowBundle\CodeRhapsodieIbexaDataflowBundle;
 use CodeRhapsodie\IbexaDataflowBundle\Form\CreateOneshotType;
 use CodeRhapsodie\IbexaDataflowBundle\Form\CreateScheduledType;
@@ -17,6 +19,7 @@ use Doctrine\DBAL\Query\QueryBuilder;
 use Ibexa\Contracts\AdminUi\Controller\Controller;
 use Ibexa\Contracts\Core\Ibexa;
 use Ibexa\Core\MVC\Symfony\Security\Authorization\Attribute;
+use Pagerfanta\Adapter\TransformingAdapter;
 use Pagerfanta\Doctrine\DBAL\QueryAdapter;
 use Pagerfanta\Pagerfanta;
 use Symfony\Component\HttpFoundation\Request;
@@ -26,7 +29,11 @@ use Symfony\Component\Routing\Attribute\Route;
 #[Route(path: '/ibexa_dataflow')]
 class DashboardController extends Controller
 {
-    public function __construct(private readonly JobGateway $jobGateway, private readonly ScheduledDataflowGateway $scheduledDataflowGateway)
+    public function __construct(
+        private readonly JobGateway $jobGateway,
+        private readonly ScheduledDataflowGateway $scheduledDataflowGateway,
+        private readonly ExceptionHandlerInterface $exceptionHandler
+    )
     {
     }
 
@@ -88,7 +95,7 @@ class DashboardController extends Controller
         ]);
 
         return $this->render('@ibexadesign/ibexa_dataflow/Dashboard/oneshot.html.twig', [
-            'pager' => $this->getPager($this->jobGateway->getOneshotListQueryForAdmin(), $request),
+            'pager' => $this->getPager($this->jobGateway->getOneshotListQueryForAdmin(), $request, Job::class),
             'form' => $form->createView(),
         ]);
     }
@@ -99,7 +106,7 @@ class DashboardController extends Controller
         $this->denyAccessUnlessGranted(new Attribute('ibexa_dataflow', 'view'));
 
         return $this->render('@ibexadesign/ibexa_dataflow/Dashboard/oneshot.html.twig', [
-            'pager' => $this->getPager($this->jobGateway->getOneshotListQueryForAdmin(), $request),
+            'pager' => $this->getPager($this->jobGateway->getOneshotListQueryForAdmin(), $request, Job::class),
         ]);
     }
 
@@ -110,7 +117,7 @@ class DashboardController extends Controller
         $filter = (int) $request->query->get('filter', JobGateway::FILTER_NONE);
 
         return $this->render('@ibexadesign/ibexa_dataflow/Dashboard/history.html.twig', [
-            'pager' => $this->getPager($this->jobGateway->getListQueryForAdmin($filter), $request),
+            'pager' => $this->getPager($this->jobGateway->getListQueryForAdmin($filter), $request, Job::class),
             'filter' => $filter,
         ]);
     }
@@ -122,19 +129,29 @@ class DashboardController extends Controller
 
         return $this->render('@ibexadesign/ibexa_dataflow/Dashboard/schedule_history.html.twig', [
             'id' => $id,
-            'pager' => $this->getPager($this->jobGateway->getListQueryForScheduleAdmin($id), $request),
+            'pager' => $this->getPager($this->jobGateway->getListQueryForScheduleAdmin($id), $request, Job::class),
         ]);
     }
 
-    private function getPager(QueryBuilder $query, Request $request): Pagerfanta
+    private function getPager(QueryBuilder $query, Request $request, string $class = null): Pagerfanta
     {
-        $pager = new Pagerfanta(
-            new ExceptionJSONDecoderAdapter(
-                new QueryAdapter($query, fn ($queryBuilder) => $queryBuilder->select('COUNT(DISTINCT id) AS total_results')
-                    ->resetQueryPart('orderBy')
-                    ->setMaxResults(1))
-            )
+        $adatapter = new ExceptionJSONDecoderAdapter(
+            new QueryAdapter($query, fn($queryBuilder) => $queryBuilder->select('COUNT(DISTINCT id) AS total_results')
+                ->resetQueryPart('orderBy')
+                ->setMaxResults(1))
         );
+
+        if ($class === Job::class && !$this->exceptionHandler instanceof NullExceptionHandler) {
+            $adatapter = new TransformingAdapter($adatapter, function (array $value) {
+                $exceptions = $this->exceptionHandler->find((int)$value['id']);
+                $value['exceptions'] = $exceptions;
+                $value['total_results'] = \count($exceptions);
+
+                return $value;
+            });
+        }
+
+        $pager = new Pagerfanta($adatapter);
         $pager->setMaxPerPage(20);
         $pager->setCurrentPage($request->query->get('page', 1));
 

@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace CodeRhapsodie\IbexaDataflowBundle\Gateway;
 
 use CodeRhapsodie\DataflowBundle\Entity\Job;
+use CodeRhapsodie\DataflowBundle\Gateway\JobGateway as JobGatewayDataflow;
 use CodeRhapsodie\DataflowBundle\Repository\JobRepository;
 use Doctrine\DBAL\Query\QueryBuilder;
 
@@ -13,13 +14,13 @@ final readonly class JobGateway
     public const int FILTER_NONE = 0;
     public const int FILTER_NON_EMPTY = 1;
 
-    public function __construct(private JobRepository $jobRepository)
+    public function __construct(private JobRepository $jobRepository, private JobGatewayDataflow $jobGateway)
     {
     }
 
     public function find(int $id): ?Job
     {
-        return $this->jobRepository->find($id);
+        return $this->jobGateway->find($id);
     }
 
     public function getOneshotListQueryForAdmin(): QueryBuilder
@@ -52,7 +53,7 @@ final readonly class JobGateway
 
     public function save(Job $job)
     {
-        $this->jobRepository->save($job);
+        $this->jobGateway->save($job);
     }
 
     public function getListPendindOrRunning(): array
