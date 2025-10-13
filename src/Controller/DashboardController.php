@@ -153,7 +153,7 @@ class DashboardController extends Controller
 
         $pager = new Pagerfanta($adatapter);
         $pager->setMaxPerPage(20);
-        $pager->setCurrentPage($request->query->get('page', 1));
+        $pager->setCurrentPage($request->query->getInt('page', 1));
 
         return $pager;
     }
