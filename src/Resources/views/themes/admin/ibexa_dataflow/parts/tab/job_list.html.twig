@@ -18,8 +18,8 @@
         {% set body_row_cols = body_row_cols|merge([
             {content: job.label},
             {content: date(job.requested_date)|ibexa_short_datetime},
-            {content: job.count|default('—')},
-            {content: job.exceptions|length},
+            {content: job.count is not null ? job.count|format_number(locale: app.request.locale) : '—'},
+            {content: job.exceptions|length|format_number(locale: app.request.locale)},
             {content: job.start_time ? date(job.start_time)|ibexa_short_datetime : '—'},
             {content: job.end_time ? date(job.end_time)|ibexa_short_datetime : '—'},
             {content: macros.translateStatus(job.status)},

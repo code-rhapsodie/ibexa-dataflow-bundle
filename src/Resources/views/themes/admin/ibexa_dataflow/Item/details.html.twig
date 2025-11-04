@@ -36,11 +36,11 @@
             </tr>
             <tr>
                 <td>{{ 'coderhapsodie.ibexa_dataflow.history.details.count'|trans }}</td>
-                <td>{{ item.count }}</td>
+                <td>{{ item.count ? item.count|format_number(locale: app.request.locale) : '—' }}</td>
             </tr>
             <tr>
                 <td>{{ 'coderhapsodie.ibexa_dataflow.history.details.errors'|trans }}</td>
-                <td>{{ item.exceptions|length }}</td>
+                <td>{{ item.exceptions|length|format_number(locale: app.request.locale) }}</td>
             </tr>
             <tr>
                 <td>{{ 'coderhapsodie.ibexa_dataflow.history.details.type'|trans }}</td>
