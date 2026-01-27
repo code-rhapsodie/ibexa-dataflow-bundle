@@ -32,6 +32,13 @@ class TaxonomyEntryAssignmentComparator extends AbstractFieldComparator
             return $newEntry->id;
         }, $newEntries);
 
-        return empty(array_diff($currentEntriesId, $newEntriesId));
+        if (\count($currentEntriesId) !== \count($newEntriesId)) {
+            return false;
+        }
+
+        sort($currentEntriesId);
+        sort($newEntriesId);
+
+        return $currentEntriesId === $newEntriesId;
     }
 }
