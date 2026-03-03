@@ -12,6 +12,8 @@ abstract class ProductStructure
 
     protected int $stock;
 
+    protected array $attributes;
+
 
     public function getCode(): string
     {
@@ -31,5 +33,10 @@ abstract class ProductStructure
     public function getStock(): int
     {
         return $this->stock;
+    }
+
+    public function getAttributes(): array
+    {
+        return $this->attributes;
     }
 }

@@ -10,12 +10,13 @@ class ProductUpdateStructure extends ProductStructure
 
     protected bool $updateStock = true;
 
-    public function __construct(string $code, array $fields, string $languageCode, int $stock = 0)
+    public function __construct(string $code, array $fields, string $languageCode, int $stock = 0, array $attributes = [])
     {
         $this->code = $code;
         $this->fields = $fields;
         $this->languageCode = $languageCode;
         $this->stock = $stock;
+        $this->attributes = $attributes;
     }
 
     public function isUpdateContent(): bool
