@@ -1,3 +1,14 @@
+# Version 6.1.0
+* Add `ibexa_product_specification` comparator
+* Add `attributes` in `ProductCreateStructure` and `ProductUpdateStructure`
+
+# Version 6.0.1
+* Fix taxonomy comparator
+
+# Version 6.0.0
+* Ibexa 5.0+ support
+* Comparators for Ibexa Commerce / Experience field types
+
 # Version 5.2.1
 * Fixed datepicker in oneshot modal
 
