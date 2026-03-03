@@ -257,6 +257,7 @@ the `NotModifiedContentFilter` to prevent unnecessary overhead.
 - ibexa_taxonomy_entry_assignment
 - ibexa_address
 - ibexa_customer_group
+- ibexa_product_specification
 
 ### Add custom field comparator
 
