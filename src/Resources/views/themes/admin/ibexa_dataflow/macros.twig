@@ -5,6 +5,10 @@
         {{ 'coderhapsodie.ibexa_dataflow.job.status.running'|trans }}
     {% elseif status == 2 %}
         {{ 'coderhapsodie.ibexa_dataflow.job.status.complete'|trans }}
+    {% elseif status == 3 %}
+        {{ 'coderhapsodie.ibexa_dataflow.job.status.queued'|trans }}
+    {% elseif status == 4 %}
+        {{ 'coderhapsodie.ibexa_dataflow.job.status.crashed'|trans }}
     {% else %}
         {{ 'coderhapsodie.ibexa_dataflow.job.status.unknown'|trans }}
     {% endif %}

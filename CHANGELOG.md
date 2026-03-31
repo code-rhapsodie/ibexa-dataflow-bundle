@@ -1,3 +1,6 @@
+# Version 6.1.1
+* Add missing status labels
+
 # Version 6.1.0
 * Add `ibexa_product_specification` comparator
 * Add `attributes` in `ProductCreateStructure` and `ProductUpdateStructure`

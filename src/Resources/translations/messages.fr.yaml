@@ -34,6 +34,8 @@ coderhapsodie.ibexa_dataflow.history.filter.with_error_only: Seulement avec erre
 coderhapsodie.ibexa_dataflow.job.status.pending: 'En attente'
 coderhapsodie.ibexa_dataflow.job.status.running: 'En cours'
 coderhapsodie.ibexa_dataflow.job.status.complete: Terminé
+coderhapsodie.ibexa_dataflow.job.status.queued: File d'attente
+coderhapsodie.ibexa_dataflow.job.status.crashed: Planté
 coderhapsodie.ibexa_dataflow.job.status.unknown: Inconnu
 coderhapsodie.ibexa_dataflow.history.job.title: 'Exécution'
 coderhapsodie.ibexa_dataflow.history.details.title: 'Détails de l''exécution'
