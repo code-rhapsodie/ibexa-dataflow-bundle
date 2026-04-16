@@ -14,7 +14,7 @@ class BillingAddressComparator extends AbstractFieldComparator
     protected function compareValues(Value $currentValue, Value $newValue): bool
     {
         return \count($currentValue->fields) === \count($newValue->fields)
-            &&  empty(array_diff_assoc($currentValue->fields, $newValue->fields))
+            && empty(array_diff_assoc($currentValue->fields, $newValue->fields))
             && $currentValue->name === $newValue->name
             && $currentValue->country === $newValue->country;
     }
