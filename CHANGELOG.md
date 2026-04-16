@@ -1,3 +1,6 @@
+# Version 6.1.2
+* Fix BillingAddressComparator
+
 # Version 6.1.1
 * Add missing status labels
 
