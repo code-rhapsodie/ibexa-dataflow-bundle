@@ -46,6 +46,17 @@
                     <use xlink:href="{{ ibexa_icon_path('article') }}"></use>
                 </svg>
             </a>
+            {% if job.scheduled_dataflow_id is null and job.status == 0 %}
+                <form action="{{ path('coderhapsodie.ibexa_dataflow.job.delete', {id: job.id}) }}" method="POST">
+                    <button type="submit" class="btn ibexa-btn ibexa-btn--ghost ibexa-btn--no-text"
+                            title="{{ 'coderhapsodie.ibexa_dataflow.job.delete'|trans }}"
+                    >
+                        <svg class="ibexa-icon ibexa-icon--small ibexa-icon--trash" style="fill: red">
+                            <use xlink:href="{{ ibexa_icon_path('trash') }}"></use>
+                        </svg>
+                    </button>
+                </form>
+            {% endif %}
         {% endset %}
         {% set body_row_cols = body_row_cols|merge([{
             has_action_btns: true,

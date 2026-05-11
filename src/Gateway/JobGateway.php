@@ -63,4 +63,9 @@ final readonly class JobGateway
             ->orderBy('w.requested_date', 'ASC')
             ->fetchAllAssociative();
     }
+
+    public function delete(Job $job): void
+    {
+        $this->jobRepository->delete($job->getId());
+    }
 }
