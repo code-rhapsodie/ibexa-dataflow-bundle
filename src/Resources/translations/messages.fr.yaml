@@ -65,6 +65,8 @@ coderhapsodie.ibexa_dataflow.workflow.delete.error: 'Une erreur est survenue lor
 coderhapsodie.ibexa_dataflow.workflow.oneshot.new.title: 'Nouvelle exécution ponctuelle'
 coderhapsodie.ibexa_dataflow.job.create.success: 'Votre exécution a bien été ajoutée.'
 coderhapsodie.ibexa_dataflow.job.create.error: 'Une erreur est survenue lors de l''ajout de l''exécution : "%message%".'
+coderhapsodie.ibexa_dataflow.job.delete: 'Supprimer l''exécution'
+coderhapsodie.ibexa_dataflow.job.delete.success: 'Votre exécution a bien été supprimée.'
 coderhapsodie.dataflow.label: 'Nom de la programmation du dataflow'
 coderhapsodie.dataflow.oneshot.label: 'Nom de l''exécution ponctuelle du dataflow'
 coderhapsodie.dataflow.dataflowType: 'Dataflow à exécuter'

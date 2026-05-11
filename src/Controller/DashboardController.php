@@ -135,23 +135,21 @@ class DashboardController extends Controller
 
     private function getPager(QueryBuilder $query, Request $request, string $class = null): Pagerfanta
     {
-        $adatapter = new ExceptionJSONDecoderAdapter(
+        $adapter = new ExceptionJSONDecoderAdapter(
             new QueryAdapter($query, fn($queryBuilder) => $queryBuilder->select('COUNT(DISTINCT id) AS total_results')
                 ->resetQueryPart('orderBy')
                 ->setMaxResults(1))
         );
 
         if ($class === Job::class && !$this->exceptionHandler instanceof NullExceptionHandler) {
-            $adatapter = new TransformingAdapter($adatapter, function (array $value) {
-                $exceptions = $this->exceptionHandler->find((int)$value['id']);
-                $value['exceptions'] = $exceptions;
-                $value['total_results'] = \count($exceptions);
+            $adapter = new TransformingAdapter($adapter, function (array $value) {
+                $value['exceptions'] = $this->exceptionHandler->find((int) $value['id']) ?? [];
 
                 return $value;
             });
         }
 
-        $pager = new Pagerfanta($adatapter);
+        $pager = new Pagerfanta($adapter);
         $pager->setMaxPerPage(20);
         $pager->setCurrentPage($request->query->getInt('page', 1));
 

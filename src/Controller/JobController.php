@@ -41,7 +41,7 @@ class JobController extends Controller
     {
         $this->denyAccessUnlessGranted(new Attribute('ibexa_dataflow', 'view'));
         $item = $this->jobGateway->find($id);
-        $log = array_map(fn($line) => preg_replace('~#\d+~', "\n$0", (string) $line), $item->getExceptions());
+        $log = array_map(fn($line) => preg_replace('~#\d+~', "\n$0", (string) $line), $item->getExceptions() ?? []);
 
         return $this->render('@ibexadesign/ibexa_dataflow/Item/log.html.twig', [
             'log' => $log,
@@ -113,5 +113,22 @@ class JobController extends Controller
                 'mode' => 'oneshot',
             ]),
         ]);
+    }
+
+    #[Route(path: '/delete/{id}', name: 'coderhapsodie.ibexa_dataflow.job.delete', methods: ['POST'])]
+    public function delete(int $id): Response
+    {
+        $this->denyAccessUnlessGranted(new Attribute('ibexa_dataflow', 'edit'));
+
+        $job = $this->jobGateway->find($id);
+
+        if ($job === null || $job->getScheduledDataflowId() !== null || $job->getStatus() !== Job::STATUS_PENDING) {
+            throw new NotFoundHttpException();
+        }
+
+        $this->jobGateway->delete($job);
+        $this->notificationHandler->success($this->translator->trans('coderhapsodie.ibexa_dataflow.job.delete.success'));
+
+        return $this->redirectToRoute('coderhapsodie.ibexa_dataflow.main');
     }
 }

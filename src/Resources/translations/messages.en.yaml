@@ -65,6 +65,8 @@ coderhapsodie.ibexa_dataflow.workflow.delete.error: 'An error occurred during th
 coderhapsodie.ibexa_dataflow.workflow.oneshot.new.title: 'New oneshot job'
 coderhapsodie.ibexa_dataflow.job.create.success: 'Job successfully added.'
 coderhapsodie.ibexa_dataflow.job.create.error: 'An error occured during the job creation: "%message%".'
+coderhapsodie.ibexa_dataflow.job.delete: 'Delete job'
+coderhapsodie.ibexa_dataflow.job.delete.success: 'Job successfully deleted.'
 coderhapsodie.dataflow.label: 'Scheduled dataflow name'
 coderhapsodie.dataflow.oneshot.label: 'One-shot job name'
 coderhapsodie.dataflow.dataflowType: 'Select the dataflow to run'
