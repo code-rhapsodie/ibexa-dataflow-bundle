@@ -44,7 +44,7 @@ class JobController extends Controller
         $item = $this->jobGateway->find($id);
         $log = array_map(fn($line) => preg_replace('~#\d+~', "\n$0", (string) $line), $item->getExceptions() ?? []);
 
-        if (!empty($log) && $item->getStreamExceptions()) {
+        if (empty($log) && $item->getStreamExceptions()) {
             return new StreamedResponse(function () use ($item) {
                 while (($line = fgets($item->getStreamExceptions())) !== false) {
                     echo "<p>",preg_replace('~#\d+~', "<br>$0", (string) $line),"</p>";
