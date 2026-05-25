@@ -19,7 +19,7 @@
             {content: job.label},
             {content: date(job.requested_date)|ibexa_short_datetime},
             {content: job.count is not null ? job.count|format_number(locale: app.request.locale) : '—'},
-            {content: job.exceptions|length|format_number(locale: app.request.locale)},
+            {content: job.exception_count|format_number(locale: app.request.locale)},
             {content: job.start_time ? date(job.start_time)|ibexa_short_datetime : '—'},
             {content: job.end_time ? date(job.end_time)|ibexa_short_datetime : '—'},
             {content: macros.translateStatus(job.status)},

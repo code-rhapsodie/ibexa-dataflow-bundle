@@ -143,9 +143,7 @@ class DashboardController extends Controller
 
         if ($class === Job::class && !$this->exceptionHandler instanceof NullExceptionHandler) {
             $adapter = new TransformingAdapter($adapter, function (array $value) {
-                $exceptions = $this->exceptionHandler->find((int)$value['id']);
-                $value['exceptions'] = $exceptions;
-                $value['total_results'] = $exceptions ? \count($exceptions) : 0;
+                $value['exceptions'] = $this->exceptionHandler->find((int) $value['id']);
 
                 return $value;
             });
