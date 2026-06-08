@@ -14,6 +14,7 @@ use Ibexa\Core\MVC\Symfony\Security\Authorization\Attribute;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\StreamedResponse;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
@@ -42,6 +43,15 @@ class JobController extends Controller
         $this->denyAccessUnlessGranted(new Attribute('ibexa_dataflow', 'view'));
         $item = $this->jobGateway->find($id);
         $log = array_map(fn($line) => preg_replace('~#\d+~', "\n$0", (string) $line), $item->getExceptions() ?? []);
+
+        if (empty($log) && $item->getStreamExceptions()) {
+            return new StreamedResponse(function () use ($item) {
+                while (($line = fgets($item->getStreamExceptions())) !== false) {
+                    echo "<p>",preg_replace('~#\d+~', "<br>$0", (string) $line),"</p>";
+                    flush();
+                }
+            });
+        }
 
         return $this->render('@ibexadesign/ibexa_dataflow/Item/log.html.twig', [
             'log' => $log,
