@@ -46,7 +46,7 @@
     "require": {
         "php": "^8.4",
         "ext-json": "*",
-        "code-rhapsodie/dataflow-bundle": "dev-stream-exceptions",
+        "code-rhapsodie/dataflow-bundle": "^6.0",
         "guzzlehttp/promises": "^2.2",
         "http-interop/http-factory-guzzle": "^1.2",
         "ibexa/admin-ui": "^5.0",
