@@ -1,5 +1,8 @@
-# Version 6.2.0
+# Version 6.3.0
 * add stream exceptions management
+
+# Version 6.2.0
+* Added delete pending job button by
 
 # Version 6.1.2
 * Fix BillingAddressComparator
