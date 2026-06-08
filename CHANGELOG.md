@@ -1,3 +1,6 @@
+# Version 6.2.0
+* add stream exceptions management
+
 # Version 6.1.2
 * Fix BillingAddressComparator
 
