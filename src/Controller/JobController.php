@@ -45,9 +45,23 @@ class JobController extends Controller
         $log = array_map(fn($line) => preg_replace('~#\d+~', "\n$0", (string) $line), $item->getExceptions() ?? []);
 
         if (empty($log) && $item->getStreamExceptions()) {
-            return new StreamedResponse(function () use ($item) {
+            return new StreamedResponse(function () use ($item, $id) {
+                $maxBytes = 1048576;
+                $bytesRead = 0;
+
                 while (($line = fgets($item->getStreamExceptions())) !== false) {
-                    echo "<p>",preg_replace('~#\d+~', "<br>$0", (string) $line),"</p>";
+                    $bytesRead += strlen($line);
+
+                    if ($bytesRead > $maxBytes) {
+                        echo sprintf('<p><strong>[%s]</strong></p><p><a href="%s">%s</a></p>',
+                            $this->translator->trans('coderhapsodie.ibexa_dataflow.logs.trucated'),
+                            $this->generateUrl('coderhapsodie.ibexa_dataflow.job.log.download', ['id' => $id]),
+                            $this->translator->trans('coderhapsodie.ibexa_dataflow.logs.download')
+                        );
+                        break;
+                    }
+
+                    echo "<p>", preg_replace('~#\d+~', "<br>$0", (string)$line), "</p>";
                     flush();
                 }
             });
@@ -57,6 +71,32 @@ class JobController extends Controller
             'log' => $log,
         ]);
     }
+
+    #[Route(path: '/details/log/{id}/download', name: 'coderhapsodie.ibexa_dataflow.job.log.download', methods: 'GET')]
+    public function downloadLog(int $id): Response
+    {
+        $this->denyAccessUnlessGranted(new Attribute('ibexa_dataflow', 'view'));
+        $item = $this->jobGateway->find($id);
+        $log = array_map(fn($line) => preg_replace('~#\d+~', "\n$0", (string) $line), $item->getExceptions() ?? []);
+
+        if (empty($log) && $item->getStreamExceptions()) {
+            $headers = [
+                'Content-Type' => 'plain/text; charset=utf-8',
+                'Content-Disposition' => sprintf('attachment; filename="%s.log"', $item->getLabel().'-'.$item->getStartTime()->format('Y-m-d-H-i-s')),
+            ];
+
+            return new StreamedResponse(function () use ($item) {
+                while (($line = fgets($item->getStreamExceptions())) !== false) {
+                    echo $line;
+                    flush();
+                }
+            }, headers: $headers);
+        }
+
+        throw $this->createNotFoundException();
+    }
+
+
 
     #[Route(path: '/create', name: 'coderhapsodie.ibexa_dataflow.job.create', methods: ['POST'])]
     public function create(Request $request): Response

@@ -89,3 +89,5 @@ coderhapsodie.ibexa_dataflow.powered_by: 'Propulsé par'
 coderhapsodie.ibexa_dataflow.made_by: 'Fabriqué par'
 coderhapsodie.ibexa_dataflow.dashboard: Dashboard
 coderhapsodie.ibexa_dataflow.dashboard.title: Tâches en cours ou en attente
+coderhapsodie.ibexa_dataflow.logs.trucated: 'Les logs sont tronqués (supérieur à 1Mo).'
+coderhapsodie.ibexa_dataflow.logs.download: 'Télécharger tous les logs'
