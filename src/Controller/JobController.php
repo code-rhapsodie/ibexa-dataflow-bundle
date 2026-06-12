@@ -45,15 +45,15 @@ class JobController extends Controller
         $log = array_map(fn($line) => preg_replace('~#\d+~', "\n$0", (string) $line), $item->getExceptions() ?? []);
 
         if (empty($log) && $item->getStreamExceptions()) {
-            return new StreamedResponse(function () use ($item) {
-                $maxBytes = 3145728;
+            return new StreamedResponse(function () use ($item, $id) {
+                $maxBytes = 1048576;
                 $bytesRead = 0;
 
                 while (($line = fgets($item->getStreamExceptions())) !== false) {
                     $bytesRead += strlen($line);
 
                     if ($bytesRead > $maxBytes) {
-                        echo sprintf('<p><strong>[Stream stopped: Maximum size of 3Mo reached]</strong></p><p><a href=""%s">Download all logs</a></p>', $this->generateUrl('coderhapsodie.ibexa_dataflow.job.log.download', ['id' => $id]));
+                        echo sprintf('<p><strong>[Stream stopped: Maximum size of 1Mo reached]</strong></p><p><a href="%s">Download all logs</a></p>', $this->generateUrl('coderhapsodie.ibexa_dataflow.job.log.download', ['id' => $id]));
                         break;
                     }
 
