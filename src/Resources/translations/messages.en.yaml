@@ -91,3 +91,5 @@ coderhapsodie.ibexa_dataflow.powered_by: 'Powered by'
 coderhapsodie.ibexa_dataflow.made_by: 'Made by'
 coderhapsodie.ibexa_dataflow.dashboard: Dashboard
 coderhapsodie.ibexa_dataflow.dashboard.title: Running or waiting tasks
+coderhapsodie.ibexa_dataflow.logs.trucated: 'Logs are truncated (over 1Mo).'
+coderhapsodie.ibexa_dataflow.logs.download: 'Download full logs'

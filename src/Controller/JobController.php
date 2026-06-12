@@ -53,7 +53,11 @@ class JobController extends Controller
                     $bytesRead += strlen($line);
 
                     if ($bytesRead > $maxBytes) {
-                        echo sprintf('<p><strong>[Stream stopped: Maximum size of 1Mo reached]</strong></p><p><a href="%s">Download all logs</a></p>', $this->generateUrl('coderhapsodie.ibexa_dataflow.job.log.download', ['id' => $id]));
+                        echo sprintf('<p><strong>[%s]</strong></p><p><a href="%s">%s</a></p>',
+                            $this->translator->trans('coderhapsodie.ibexa_dataflow.logs.trucated'),
+                            $this->generateUrl('coderhapsodie.ibexa_dataflow.job.log.download', ['id' => $id]),
+                            $this->translator->trans('coderhapsodie.ibexa_dataflow.logs.download')
+                        );
                         break;
                     }
 
@@ -77,9 +81,8 @@ class JobController extends Controller
 
         if (empty($log) && $item->getStreamExceptions()) {
             $headers = [
-                'Content-Type'        => 'text/html; charset=utf-8',
+                'Content-Type' => 'plain/text; charset=utf-8',
                 'Content-Disposition' => sprintf('attachment; filename="%s.log"', $item->getLabel().'-'.$item->getStartTime()->format('Y-m-d-H-i-s')),
-                'Cache-Control'       => 'no-cache, private',
             ];
 
             return new StreamedResponse(function () use ($item) {
