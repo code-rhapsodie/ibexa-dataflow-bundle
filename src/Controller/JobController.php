@@ -46,8 +46,18 @@ class JobController extends Controller
 
         if (empty($log) && $item->getStreamExceptions()) {
             return new StreamedResponse(function () use ($item) {
+                $maxBytes = 3145728;
+                $bytesRead = 0;
+
                 while (($line = fgets($item->getStreamExceptions())) !== false) {
-                    echo "<p>",preg_replace('~#\d+~', "<br>$0", (string) $line),"</p>";
+                    $bytesRead += strlen($line);
+
+                    if ($bytesRead > $maxBytes) {
+                        echo sprintf('<p><strong>[Stream stopped: Maximum size of 3Mo reached]</strong></p><p><a href=""%s">Download all logs</a></p>', $this->generateUrl('coderhapsodie.ibexa_dataflow.job.log.download', ['id' => $id]));
+                        break;
+                    }
+
+                    echo "<p>", preg_replace('~#\d+~', "<br>$0", (string)$line), "</p>";
                     flush();
                 }
             });
@@ -57,6 +67,33 @@ class JobController extends Controller
             'log' => $log,
         ]);
     }
+
+    #[Route(path: '/details/log/{id}/download', name: 'coderhapsodie.ibexa_dataflow.job.log.download', methods: 'GET')]
+    public function downloadLog(int $id): Response
+    {
+        $this->denyAccessUnlessGranted(new Attribute('ibexa_dataflow', 'view'));
+        $item = $this->jobGateway->find($id);
+        $log = array_map(fn($line) => preg_replace('~#\d+~', "\n$0", (string) $line), $item->getExceptions() ?? []);
+
+        if (empty($log) && $item->getStreamExceptions()) {
+            $headers = [
+                'Content-Type'        => 'text/html; charset=utf-8',
+                'Content-Disposition' => sprintf('attachment; filename="%s.log"', $item->getLabel().'-'.$item->getStartTime()->format('Y-m-d-H-i-s')),
+                'Cache-Control'       => 'no-cache, private',
+            ];
+
+            return new StreamedResponse(function () use ($item) {
+                while (($line = fgets($item->getStreamExceptions())) !== false) {
+                    echo $line;
+                    flush();
+                }
+            }, headers: $headers);
+        }
+
+        throw $this->createNotFoundException();
+    }
+
+
 
     #[Route(path: '/create', name: 'coderhapsodie.ibexa_dataflow.job.create', methods: ['POST'])]
     public function create(Request $request): Response
