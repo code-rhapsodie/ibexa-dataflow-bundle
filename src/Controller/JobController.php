@@ -18,6 +18,7 @@ use Symfony\Component\HttpFoundation\StreamedResponse;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
+use Symfony\Component\Yaml\Yaml;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
 #[Route(path: '/ibexa_dataflow/job')]
@@ -31,9 +32,11 @@ class JobController extends Controller
     public function displayDetails(int $id): Response
     {
         $this->denyAccessUnlessGranted(new Attribute('ibexa_dataflow', 'view'));
+        $job = $this->jobGateway->find($id);
 
         return $this->render('@ibexadesign/ibexa_dataflow/Item/details.html.twig', [
-            'item' => $this->jobGateway->find($id),
+            'item' => $job,
+            'options' => Yaml::dump($job->getOptions()),
         ]);
     }
 
