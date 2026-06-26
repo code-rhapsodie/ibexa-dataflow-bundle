@@ -8,6 +8,7 @@ use CodeRhapsodie\DataflowBundle\Entity\Job;
 use CodeRhapsodie\DataflowBundle\Entity\ScheduledDataflow;
 use CodeRhapsodie\DataflowBundle\ExceptionsHandler\ExceptionHandlerInterface;
 use CodeRhapsodie\DataflowBundle\ExceptionsHandler\NullExceptionHandler;
+use CodeRhapsodie\DataflowBundle\Registry\DataflowTypeRegistryInterface;
 use CodeRhapsodie\IbexaDataflowBundle\CodeRhapsodieIbexaDataflowBundle;
 use CodeRhapsodie\IbexaDataflowBundle\Form\CreateOneshotType;
 use CodeRhapsodie\IbexaDataflowBundle\Form\CreateScheduledType;
@@ -32,9 +33,9 @@ class DashboardController extends Controller
     public function __construct(
         private readonly JobGateway $jobGateway,
         private readonly ScheduledDataflowGateway $scheduledDataflowGateway,
-        private readonly ExceptionHandlerInterface $exceptionHandler
-    )
-    {
+        private readonly ExceptionHandlerInterface $exceptionHandler,
+        private readonly DataflowTypeRegistryInterface $registry
+    ) {
     }
 
     #[Route(path: '/', name: 'coderhapsodie.ibexa_dataflow.main')]
@@ -51,8 +52,8 @@ class DashboardController extends Controller
 
         return $this->render('@ibexadesign/ibexa_dataflow/Dashboard/main.html.twig', [
             'link' => 'https://www.code-rhapsodie.fr/product/redirect/'.str_replace('=', '',
-                base64_encode(json_encode($data))
-            ),
+                    base64_encode(json_encode($data))
+                ),
         ]);
     }
 
@@ -114,11 +115,22 @@ class DashboardController extends Controller
     public function getHistoryPage(Request $request): Response
     {
         $this->denyAccessUnlessGranted(new Attribute('ibexa_dataflow', 'view'));
-        $filter = (int) $request->query->get('filter', JobGateway::FILTER_NONE);
+        $statusFilter = (int) $request->query->get('status', JobGateway::FILTER_NONE);
+        $typeFilter = $request->query->get('type');
+
+        $typeChoices = [['value' => '', 'label' => 'all']];
+        foreach ($this->registry->listDataflowTypes() as $type) {
+            $typeChoices[] = [
+                'value' => $type::class,
+                'label' => $type->getLabel(),
+            ];
+        }
 
         return $this->render('@ibexadesign/ibexa_dataflow/Dashboard/history.html.twig', [
-            'pager' => $this->getPager($this->jobGateway->getListQueryForAdmin($filter), $request, Job::class),
-            'filter' => $filter,
+            'pager' => $this->getPager($this->jobGateway->getListQueryForAdmin($statusFilter), $request, Job::class),
+            'status' => $statusFilter,
+            'type' => $typeFilter,
+            'typeChoices' => $typeChoices,
         ]);
     }
 

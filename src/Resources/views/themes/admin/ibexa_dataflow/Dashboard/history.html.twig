@@ -1,5 +1,5 @@
 {%- block content -%}
-    {% set choices = [
+    {% set statusChoices = [
         {
             'value': 0,
             'label': 'coderhapsodie.ibexa_dataflow.history.filter.none'|trans,
@@ -10,9 +10,18 @@
         },
     ] %}
 
-    {% set source %}
-        <select id="ibexa_dataflow_history_filter" class="form-control ibexa-input">
-            {% for choice in choices %}
+    {% set statusSource %}
+        <select id="ibexa_dataflow_history_filter_status" class="form-control ibexa-input">
+            {% for choice in statusChoices %}
+                <option value="{{ choice.value }}">
+                    {{ choice.label }}
+                </option>
+            {% endfor %}
+        </select>
+    {% endset %}
+    {% set typeSource %}
+        <select id="ibexa_dataflow_history_filter_type" class="form-control ibexa-input">
+            {% for choice in typeChoices %}
                 <option value="{{ choice.value }}">
                     {{ choice.label }}
                 </option>
@@ -22,32 +31,40 @@
 
     {% set actions %}
         {{ include('@ibexadesign/ui/component/dropdown/dropdown.html.twig', {
-            source: source,
-            choices: choices,
-            value: filter,
+            source: typeSource,
+            choices: typeChoices,
+            value: type,
+        }) }}
+        {{ include('@ibexadesign/ui/component/dropdown/dropdown.html.twig', {
+            source: statusSource,
+            choices: statusChoices,
+            value: status,
         }) }}
     {% endset %}
 
     {{ include('@ibexadesign/ibexa_dataflow/parts/tab/job_list.html.twig', {
         identifier: 'ibexa_dataflow_history_results',
         paginate_route: 'coderhapsodie.ibexa_dataflow.history',
-        paginate_params: {'filter': filter},
+        paginate_params: {'status': status, 'type': type},
         headline: 'coderhapsodie.ibexa_dataflow.history.title'|trans,
         actions: actions
     }) }}
 
     <script>
         document.addEventListener('DOMContentLoaded', function () {
-            // Manage ajax pagination
-            document.getElementById('ibexa_dataflow_history_filter').addEventListener('change', function (e) {
+            const loading = document.getElementById('loading_ibexa_dataflow_history_results');
+            const results = document.getElementById('ibexa_dataflow_history_results').querySelector('.ibexa-table');
+            const pagination = document.getElementById('ibexa_dataflow_history_results').querySelector('.pag');
+
+            const statusSelect = document.getElementById('ibexa_dataflow_history_filter_status');
+            const typeSelect = document.getElementById('ibexa_dataflow_history_filter_type');
+
+            const refresh = (e) => {
                 e.preventDefault();
-                const loading = document.getElementById('loading_ibexa_dataflow_history_results');
-                const results = document.getElementById('ibexa_dataflow_history_results').querySelector('.ibexa-table');
-                const pagination = document.getElementById('ibexa_dataflow_history_results').querySelector('.pag');
                 loading.hidden = false;
                 results.innerHTML = '';
                 pagination.innerHTML = '';
-                fetch('{{ path('coderhapsodie.ibexa_dataflow.history') }}?filter=' + this.value)
+                fetch('{{ path('coderhapsodie.ibexa_dataflow.history') }}?status=' + encodeURIComponent(statusSelect.value) + '&type=' + encodeURIComponent(typeSelect.value))
                     .then((r) => r.text())
                     .then((content) => {
                         const node = document.createElement('div');
@@ -57,7 +74,11 @@
                         loading.hidden = true;
                     })
                 ;
-            });
+            }
+
+            // Manage ajax pagination
+            statusSelect.addEventListener('change', refresh);
+            typeSelect.addEventListener('change', refresh);
         })
     </script>
 {%- endblock -%}
