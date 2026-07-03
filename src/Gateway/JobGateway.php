@@ -7,6 +7,7 @@ namespace CodeRhapsodie\IbexaDataflowBundle\Gateway;
 use CodeRhapsodie\DataflowBundle\Entity\Job;
 use CodeRhapsodie\DataflowBundle\Gateway\JobGateway as JobGatewayDataflow;
 use CodeRhapsodie\DataflowBundle\Repository\JobRepository;
+use Doctrine\DBAL\ArrayParameterType;
 use Doctrine\DBAL\Query\QueryBuilder;
 
 final readonly class JobGateway
@@ -72,5 +73,59 @@ final readonly class JobGateway
     public function delete(Job $job): void
     {
         $this->jobRepository->delete($job->getId());
+    }
+
+    /**
+     * @param array<int> $scheduleIds
+     *
+     * @return array<int, float>
+     */
+    public function getAverageExecutionTimes(array $scheduleIds): array
+    {
+        if (empty($scheduleIds)) {
+            return [];
+        }
+
+        $rows = $this->jobRepository->createQueryBuilder('j')
+            ->select('j.scheduled_dataflow_id', 'j.start_time', 'j.end_time')
+            ->andWhere('j.scheduled_dataflow_id IN (:ids)')
+            ->andWhere('j.start_time IS NOT NULL')
+            ->andWhere('j.end_time IS NOT NULL')
+            ->andWhere('j.status = :status')
+            ->setParameter('ids', $scheduleIds, ArrayParameterType::INTEGER)
+            ->setParameter('status', Job::STATUS_COMPLETED)
+            ->fetchAllAssociative();
+
+        $totals = [];
+        $counts = [];
+        foreach ($rows as $row) {
+            $id = (int) $row['scheduled_dataflow_id'];
+            $start = new \DateTimeImmutable($row['start_time']);
+            $end = new \DateTimeImmutable($row['end_time']);
+            $totals[$id] = ($totals[$id] ?? 0) + ($end->getTimestamp() - $start->getTimestamp());
+            $counts[$id] = ($counts[$id] ?? 0) + 1;
+        }
+
+        $averages = [];
+        foreach ($totals as $id => $total) {
+            $averages[$id] = $total / $counts[$id];
+        }
+
+        return $averages;
+    }
+
+    /**
+     * @param array<int> $status
+     */
+    public function counts(array $status): array
+    {
+        $qb = $this->jobRepository->createQueryBuilder('w')->groupBy('w.status');
+
+        if (!empty($status)) {
+           $qb->andWhere('w.status IN (:status)')
+               ->setParameter('status', $status, ArrayParameterType::INTEGER);
+        }
+
+        return $qb->select('w.status, COUNT(w.id) as count')->fetchAllAssociative();
     }
 }

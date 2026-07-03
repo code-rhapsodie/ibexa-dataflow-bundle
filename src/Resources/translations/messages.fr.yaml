@@ -11,6 +11,7 @@ coderhapsodie.ibexa_dataflow.history: Historique
 coderhapsodie.ibexa_dataflow.workflow.list.name: Nom
 coderhapsodie.ibexa_dataflow.workflow.list.frequency: Fréquence
 coderhapsodie.ibexa_dataflow.workflow.list.next_execution: 'Prochaine exécution'
+coderhapsodie.ibexa_dataflow.workflow.list.estimated_time: 'Temps estimé'
 coderhapsodie.ibexa_dataflow.workflow.list.enabled: 'Activé ?'
 coderhapsodie.ibexa_dataflow.workflow.list.history: Historique
 coderhapsodie.ibexa_dataflow.workflow.list.edit: Éditer
@@ -92,3 +93,13 @@ coderhapsodie.ibexa_dataflow.dashboard.title: Tâches en cours ou en attente
 coderhapsodie.ibexa_dataflow.logs.trucated: 'Les logs sont tronqués (supérieur à 1Mo).'
 coderhapsodie.ibexa_dataflow.logs.download: 'Télécharger tous les logs'
 coderhapsodie.ibexa_dataflow.history.filter.type.all: Tous
+coderhapsodie.ibexa_dataflow.dashboard.0.label: En attente
+coderhapsodie.ibexa_dataflow.dashboard.1.label: En cours
+coderhapsodie.ibexa_dataflow.dashboard.2.label: Complété
+coderhapsodie.ibexa_dataflow.dashboard.3.label: File d'attente
+coderhapsodie.ibexa_dataflow.dashboard.4.label: Planté
+coderhapsodie.ibexa_dataflow.dashboard.0.sub-label: En attente
+coderhapsodie.ibexa_dataflow.dashboard.1.sub-label: En cours d'exécution
+coderhapsodie.ibexa_dataflow.dashboard.2.sub-label: Complété
+coderhapsodie.ibexa_dataflow.dashboard.3.sub-label: File d'attente
+coderhapsodie.ibexa_dataflow.dashboard.4.sub-label: Planté

@@ -11,6 +11,7 @@ coderhapsodie.ibexa_dataflow.history: History
 coderhapsodie.ibexa_dataflow.workflow.list.name: Name
 coderhapsodie.ibexa_dataflow.workflow.list.frequency: Frequency
 coderhapsodie.ibexa_dataflow.workflow.list.next_execution: 'Next execution'
+coderhapsodie.ibexa_dataflow.workflow.list.estimated_time: 'Estimated time'
 coderhapsodie.ibexa_dataflow.workflow.list.enabled: 'Enabled?'
 coderhapsodie.ibexa_dataflow.workflow.list.history: History
 coderhapsodie.ibexa_dataflow.workflow.list.edit: Edit
@@ -94,3 +95,13 @@ coderhapsodie.ibexa_dataflow.dashboard.title: Running or waiting tasks
 coderhapsodie.ibexa_dataflow.logs.trucated: 'Logs are truncated (over 1Mo).'
 coderhapsodie.ibexa_dataflow.logs.download: 'Download full logs'
 coderhapsodie.ibexa_dataflow.history.filter.type.all: All
+coderhapsodie.ibexa_dataflow.dashboard.0.label: Pending
+coderhapsodie.ibexa_dataflow.dashboard.1.label: In progress
+coderhapsodie.ibexa_dataflow.dashboard.2.label: Completed
+coderhapsodie.ibexa_dataflow.dashboard.3.label: Queued
+coderhapsodie.ibexa_dataflow.dashboard.4.label: Crashed
+coderhapsodie.ibexa_dataflow.dashboard.0.sub-label: Pending
+coderhapsodie.ibexa_dataflow.dashboard.1.sub-label: Running
+coderhapsodie.ibexa_dataflow.dashboard.2.sub-label: Completed
+coderhapsodie.ibexa_dataflow.dashboard.3.sub-label: Queued
+coderhapsodie.ibexa_dataflow.dashboard.4.sub-label: Crashed

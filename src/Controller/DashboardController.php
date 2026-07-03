@@ -70,8 +70,11 @@ class DashboardController extends Controller
         ]);
         $updateForm = $this->createForm(UpdateScheduledType::class);
 
+        $pager = $this->getPager($this->scheduledDataflowGateway->getListQueryForAdmin(), $request);
+
         return $this->render('@ibexadesign/ibexa_dataflow/Dashboard/repeating.html.twig', [
-            'pager' => $this->getPager($this->scheduledDataflowGateway->getListQueryForAdmin(), $request),
+            'pager' => $pager,
+            'avg_times' => $this->jobGateway->getAverageExecutionTimes($this->extractIds($pager)),
             'form' => $form->createView(),
             'update_form' => $updateForm->createView(),
         ]);
@@ -82,8 +85,11 @@ class DashboardController extends Controller
     {
         $this->denyAccessUnlessGranted(new Attribute('ibexa_dataflow', 'view'));
 
+        $pager = $this->getPager($this->scheduledDataflowGateway->getListQueryForAdmin(), $request);
+
         return $this->render('@ibexadesign/ibexa_dataflow/Dashboard/repeating.html.twig', [
-            'pager' => $this->getPager($this->scheduledDataflowGateway->getListQueryForAdmin(), $request),
+            'pager' => $pager,
+            'avg_times' => $this->jobGateway->getAverageExecutionTimes($this->extractIds($pager)),
         ]);
     }
 
@@ -147,6 +153,14 @@ class DashboardController extends Controller
         ]);
     }
 
+    /**
+     * @return array<int>
+     */
+    private function extractIds(Pagerfanta $pager): array
+    {
+        return array_map(fn(array $item) => (int)$item['id'], $pager->getCurrentPageResults());
+    }
+
     private function getPager(QueryBuilder $query, Request $request, string $class = null): Pagerfanta
     {
         $adapter = new ExceptionJSONDecoderAdapter(
@@ -176,6 +190,7 @@ class DashboardController extends Controller
 
         return $this->render('@ibexadesign/ibexa_dataflow/Dashboard/dashboard.html.twig', [
             'jobs' => $this->jobGateway->getListPendindOrRunning(),
+            'counts' => $this->jobGateway->counts([Job::STATUS_PENDING, Job::STATUS_RUNNING, Job::STATUS_QUEUED]),
         ]);
     }
 }
