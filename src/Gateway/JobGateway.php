@@ -30,7 +30,7 @@ final readonly class JobGateway
             ->addOrderBy('i.requested_date', 'DESC');
     }
 
-    public function getListQueryForAdmin(int $filter): QueryBuilder
+    public function getListQueryForAdmin(int $filter, string $type): QueryBuilder
     {
         $qb = $this->jobRepository->createQueryBuilder('w')
             ->addOrderBy('w.requested_date', 'DESC')
@@ -38,6 +38,11 @@ final readonly class JobGateway
 
         if (self::FILTER_NON_EMPTY === $filter) {
             $qb->andWhere('w.count > 0');
+        }
+
+        if (!empty($type)) {
+           $qb->andWhere('w.dataflow_type = :type')
+               ->setParameter('type', $type);
         }
 
         return $qb;

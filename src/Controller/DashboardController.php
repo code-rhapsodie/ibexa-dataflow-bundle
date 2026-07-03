@@ -26,6 +26,7 @@ use Pagerfanta\Pagerfanta;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 #[Route(path: '/ibexa_dataflow')]
 class DashboardController extends Controller
@@ -34,7 +35,8 @@ class DashboardController extends Controller
         private readonly JobGateway $jobGateway,
         private readonly ScheduledDataflowGateway $scheduledDataflowGateway,
         private readonly ExceptionHandlerInterface $exceptionHandler,
-        private readonly DataflowTypeRegistryInterface $registry
+        private readonly DataflowTypeRegistryInterface $registry,
+        private readonly TranslatorInterface $translator,
     ) {
     }
 
@@ -115,10 +117,10 @@ class DashboardController extends Controller
     public function getHistoryPage(Request $request): Response
     {
         $this->denyAccessUnlessGranted(new Attribute('ibexa_dataflow', 'view'));
-        $statusFilter = (int) $request->query->get('status', JobGateway::FILTER_NONE);
-        $typeFilter = $request->query->get('type');
+        $statusFilter = $request->query->getInt('status', JobGateway::FILTER_NONE);
+        $typeFilter = $request->query->getString('type');
 
-        $typeChoices = [['value' => '', 'label' => 'all']];
+        $typeChoices = [['value' => '', 'label' => $this->translator->trans('coderhapsodie.ibexa_dataflow.history.filter.type.all')]];
         foreach ($this->registry->listDataflowTypes() as $type) {
             $typeChoices[] = [
                 'value' => $type::class,
@@ -127,7 +129,7 @@ class DashboardController extends Controller
         }
 
         return $this->render('@ibexadesign/ibexa_dataflow/Dashboard/history.html.twig', [
-            'pager' => $this->getPager($this->jobGateway->getListQueryForAdmin($statusFilter), $request, Job::class),
+            'pager' => $this->getPager($this->jobGateway->getListQueryForAdmin($statusFilter, $typeFilter), $request, Job::class),
             'status' => $statusFilter,
             'type' => $typeFilter,
             'typeChoices' => $typeChoices,
