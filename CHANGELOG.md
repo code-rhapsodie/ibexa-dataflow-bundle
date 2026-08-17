@@ -1,5 +1,5 @@
 # Version 6.5.0
-* Add the possibility to download the log file
+* Add `ibexa_seo` field comparator
 
 # Version 6.4.0
 * Add the possibility to download the log file
