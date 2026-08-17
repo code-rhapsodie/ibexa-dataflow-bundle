@@ -60,3 +60,8 @@ services:
       parent: 'CodeRhapsodie\IbexaDataflowBundle\Core\FieldComparator\AbstractFieldComparator'
       tags:
         - { name: 'coderhapsodie.ibexa_dataflow.field_comparator', fieldType: 'ibexa_product_specification' }
+
+    CodeRhapsodie\IbexaDataflowBundle\Core\FieldComparator\SeoComparator:
+      parent: 'CodeRhapsodie\IbexaDataflowBundle\Core\FieldComparator\AbstractFieldComparator'
+      tags:
+        - { name: 'coderhapsodie.ibexa_dataflow.field_comparator', fieldType: 'ibexa_seo' }

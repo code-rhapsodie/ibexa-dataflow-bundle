@@ -1,3 +1,6 @@
+# Version 6.5.0
+* Add the possibility to download the log file
+
 # Version 6.4.0
 * Add the possibility to download the log file
 
