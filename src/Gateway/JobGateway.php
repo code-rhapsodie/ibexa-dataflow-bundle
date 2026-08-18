@@ -86,32 +86,22 @@ final readonly class JobGateway
             return [];
         }
 
-        $rows = $this->jobRepository->createQueryBuilder('j')
-            ->select('j.scheduled_dataflow_id', 'j.start_time', 'j.end_time')
+        $results = $this->jobRepository->createQueryBuilder('j')
+            ->select(
+                'j.scheduled_dataflow_id',
+                'AVG(TIMESTAMPDIFF(SECOND, j.start_time, j.end_time)) AS avg_time'
+            )
             ->andWhere('j.scheduled_dataflow_id IN (:ids)')
             ->andWhere('j.start_time IS NOT NULL')
             ->andWhere('j.end_time IS NOT NULL')
             ->andWhere('j.status = :status')
             ->setParameter('ids', $scheduleIds, ArrayParameterType::INTEGER)
             ->setParameter('status', Job::STATUS_COMPLETED)
-            ->fetchAllAssociative();
+            ->groupBy('j.scheduled_dataflow_id')
+            ->executeQuery()
+            ->fetchAllKeyValue();
 
-        $totals = [];
-        $counts = [];
-        foreach ($rows as $row) {
-            $id = (int) $row['scheduled_dataflow_id'];
-            $start = new \DateTimeImmutable($row['start_time']);
-            $end = new \DateTimeImmutable($row['end_time']);
-            $totals[$id] = ($totals[$id] ?? 0) + ($end->getTimestamp() - $start->getTimestamp());
-            $counts[$id] = ($counts[$id] ?? 0) + 1;
-        }
-
-        $averages = [];
-        foreach ($totals as $id => $total) {
-            $averages[$id] = $total / $counts[$id];
-        }
-
-        return $averages;
+        return array_map('floatval', $results);
     }
 
     /**
