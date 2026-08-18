@@ -3,6 +3,7 @@
 * Add type filter
 * Add count on dashbaord
 * Add average time on scheduled tab
+* Better options display
 
 # Version 6.4.0
 * Add the possibility to download the log file
