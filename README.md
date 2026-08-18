@@ -258,6 +258,7 @@ the `NotModifiedContentFilter` to prevent unnecessary overhead.
 - ibexa_address
 - ibexa_customer_group
 - ibexa_product_specification
+- ibexa_seo
 
 ### Add custom field comparator
 
