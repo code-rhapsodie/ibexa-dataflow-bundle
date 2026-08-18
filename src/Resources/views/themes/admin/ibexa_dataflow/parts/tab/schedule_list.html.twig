@@ -10,24 +10,25 @@
 <div id="{{ id }}" data-loader="loading_{{ id }}" class="history-details-aware">
     {% set body_rows = [] %}
 
-    {% set body_row_cols = [] %}
-    {% set avg_seconds = avg_times[item.id] ?? null %}
+    {% for item in pager.currentPageResults %}
+        {% set body_row_cols = [] %}
+        {% set avg_seconds = avg_times[item.id] ?? null %}
 
-    {% if avg_seconds is null %}
-        {% set avg_time_display = '-' %}
-    {% else %}
-        {% set total_seconds = avg_seconds|round %}
-        {% if total_seconds < 60 %}
-            {% set avg_time_display = total_seconds ~ 's' %}
-        {% elseif total_seconds < 3600 %}
-            {% set minutes = total_seconds // 60 %}
-            {% set avg_time_display = minutes ~ 'm' %}
+        {% if avg_seconds is null %}
+            {% set avg_time_display = '-' %}
         {% else %}
-            {% set hours = total_seconds // 3600 %}
-            {% set minutes = (total_seconds % 3600) // 60 %}
-            {% set avg_time_display = hours ~ 'h ' ~ minutes ~ 'm' %}
+            {% set total_seconds = avg_seconds|round %}
+            {% if total_seconds < 60 %}
+                {% set avg_time_display = total_seconds ~ 's' %}
+            {% elseif total_seconds < 3600 %}
+                {% set minutes = total_seconds // 60 %}
+                {% set avg_time_display = minutes ~ 'm' %}
+            {% else %}
+                {% set hours = total_seconds // 3600 %}
+                {% set minutes = (total_seconds % 3600) // 60 %}
+                {% set avg_time_display = hours ~ 'h ' ~ minutes ~ 'm' %}
+            {% endif %}
         {% endif %}
-    {% endif %}
 
         {% set body_row_cols = body_row_cols|merge([
             {content: item.label},
