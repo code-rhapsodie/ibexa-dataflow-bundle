@@ -8,6 +8,7 @@ use CodeRhapsodie\DataflowBundle\Entity\Job;
 use CodeRhapsodie\DataflowBundle\Entity\ScheduledDataflow;
 use CodeRhapsodie\DataflowBundle\ExceptionsHandler\ExceptionHandlerInterface;
 use CodeRhapsodie\DataflowBundle\ExceptionsHandler\NullExceptionHandler;
+use CodeRhapsodie\DataflowBundle\Registry\DataflowTypeRegistryInterface;
 use CodeRhapsodie\IbexaDataflowBundle\CodeRhapsodieIbexaDataflowBundle;
 use CodeRhapsodie\IbexaDataflowBundle\Form\CreateOneshotType;
 use CodeRhapsodie\IbexaDataflowBundle\Form\CreateScheduledType;
@@ -25,6 +26,7 @@ use Pagerfanta\Pagerfanta;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 #[Route(path: '/ibexa_dataflow')]
 class DashboardController extends Controller
@@ -32,9 +34,10 @@ class DashboardController extends Controller
     public function __construct(
         private readonly JobGateway $jobGateway,
         private readonly ScheduledDataflowGateway $scheduledDataflowGateway,
-        private readonly ExceptionHandlerInterface $exceptionHandler
-    )
-    {
+        private readonly ExceptionHandlerInterface $exceptionHandler,
+        private readonly DataflowTypeRegistryInterface $registry,
+        private readonly TranslatorInterface $translator,
+    ) {
     }
 
     #[Route(path: '/', name: 'coderhapsodie.ibexa_dataflow.main')]
@@ -51,8 +54,8 @@ class DashboardController extends Controller
 
         return $this->render('@ibexadesign/ibexa_dataflow/Dashboard/main.html.twig', [
             'link' => 'https://www.code-rhapsodie.fr/product/redirect/'.str_replace('=', '',
-                base64_encode(json_encode($data))
-            ),
+                    base64_encode(json_encode($data))
+                ),
         ]);
     }
 
@@ -67,8 +70,11 @@ class DashboardController extends Controller
         ]);
         $updateForm = $this->createForm(UpdateScheduledType::class);
 
+        $pager = $this->getPager($this->scheduledDataflowGateway->getListQueryForAdmin(), $request);
+
         return $this->render('@ibexadesign/ibexa_dataflow/Dashboard/repeating.html.twig', [
-            'pager' => $this->getPager($this->scheduledDataflowGateway->getListQueryForAdmin(), $request),
+            'pager' => $pager,
+            'avg_times' => $this->jobGateway->getAverageExecutionTimes($this->extractIds($pager)),
             'form' => $form->createView(),
             'update_form' => $updateForm->createView(),
         ]);
@@ -79,8 +85,11 @@ class DashboardController extends Controller
     {
         $this->denyAccessUnlessGranted(new Attribute('ibexa_dataflow', 'view'));
 
+        $pager = $this->getPager($this->scheduledDataflowGateway->getListQueryForAdmin(), $request);
+
         return $this->render('@ibexadesign/ibexa_dataflow/Dashboard/repeating.html.twig', [
-            'pager' => $this->getPager($this->scheduledDataflowGateway->getListQueryForAdmin(), $request),
+            'pager' => $pager,
+            'avg_times' => $this->jobGateway->getAverageExecutionTimes($this->extractIds($pager)),
         ]);
     }
 
@@ -114,11 +123,22 @@ class DashboardController extends Controller
     public function getHistoryPage(Request $request): Response
     {
         $this->denyAccessUnlessGranted(new Attribute('ibexa_dataflow', 'view'));
-        $filter = (int) $request->query->get('filter', JobGateway::FILTER_NONE);
+        $statusFilter = $request->query->getInt('status', JobGateway::FILTER_NONE);
+        $typeFilter = $request->query->getString('type');
+
+        $typeChoices = [['value' => '', 'label' => $this->translator->trans('coderhapsodie.ibexa_dataflow.history.filter.type.all')]];
+        foreach ($this->registry->listDataflowTypes() as $type) {
+            $typeChoices[] = [
+                'value' => $type::class,
+                'label' => $type->getLabel(),
+            ];
+        }
 
         return $this->render('@ibexadesign/ibexa_dataflow/Dashboard/history.html.twig', [
-            'pager' => $this->getPager($this->jobGateway->getListQueryForAdmin($filter), $request, Job::class),
-            'filter' => $filter,
+            'pager' => $this->getPager($this->jobGateway->getListQueryForAdmin($statusFilter, $typeFilter), $request, Job::class),
+            'status' => $statusFilter,
+            'type' => $typeFilter,
+            'typeChoices' => $typeChoices,
         ]);
     }
 
@@ -131,6 +151,14 @@ class DashboardController extends Controller
             'id' => $id,
             'pager' => $this->getPager($this->jobGateway->getListQueryForScheduleAdmin($id), $request, Job::class),
         ]);
+    }
+
+    /**
+     * @return array<int>
+     */
+    private function extractIds(Pagerfanta $pager): array
+    {
+        return array_map(fn(array $item) => (int)$item['id'], $pager->getCurrentPageResults());
     }
 
     private function getPager(QueryBuilder $query, Request $request, string $class = null): Pagerfanta
@@ -162,6 +190,7 @@ class DashboardController extends Controller
 
         return $this->render('@ibexadesign/ibexa_dataflow/Dashboard/dashboard.html.twig', [
             'jobs' => $this->jobGateway->getListPendindOrRunning(),
+            'counts' => $this->jobGateway->counts([Job::STATUS_PENDING, Job::STATUS_RUNNING, Job::STATUS_QUEUED]),
         ]);
     }
 }

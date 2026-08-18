@@ -7,6 +7,7 @@ namespace CodeRhapsodie\IbexaDataflowBundle\Gateway;
 use CodeRhapsodie\DataflowBundle\Entity\Job;
 use CodeRhapsodie\DataflowBundle\Gateway\JobGateway as JobGatewayDataflow;
 use CodeRhapsodie\DataflowBundle\Repository\JobRepository;
+use Doctrine\DBAL\ArrayParameterType;
 use Doctrine\DBAL\Query\QueryBuilder;
 
 final readonly class JobGateway
@@ -30,7 +31,7 @@ final readonly class JobGateway
             ->addOrderBy('i.requested_date', 'DESC');
     }
 
-    public function getListQueryForAdmin(int $filter): QueryBuilder
+    public function getListQueryForAdmin(int $filter, string $type): QueryBuilder
     {
         $qb = $this->jobRepository->createQueryBuilder('w')
             ->addOrderBy('w.requested_date', 'DESC')
@@ -38,6 +39,11 @@ final readonly class JobGateway
 
         if (self::FILTER_NON_EMPTY === $filter) {
             $qb->andWhere('w.count > 0');
+        }
+
+        if (!empty($type)) {
+           $qb->andWhere('w.dataflow_type = :type')
+               ->setParameter('type', $type);
         }
 
         return $qb;
@@ -67,5 +73,49 @@ final readonly class JobGateway
     public function delete(Job $job): void
     {
         $this->jobRepository->delete($job->getId());
+    }
+
+    /**
+     * @param array<int> $scheduleIds
+     *
+     * @return array<int, float>
+     */
+    public function getAverageExecutionTimes(array $scheduleIds): array
+    {
+        if (empty($scheduleIds)) {
+            return [];
+        }
+
+        $results = $this->jobRepository->createQueryBuilder('j')
+            ->select(
+                'j.scheduled_dataflow_id',
+                'AVG(TIMESTAMPDIFF(SECOND, j.start_time, j.end_time)) AS avg_time'
+            )
+            ->andWhere('j.scheduled_dataflow_id IN (:ids)')
+            ->andWhere('j.start_time IS NOT NULL')
+            ->andWhere('j.end_time IS NOT NULL')
+            ->andWhere('j.status = :status')
+            ->setParameter('ids', $scheduleIds, ArrayParameterType::INTEGER)
+            ->setParameter('status', Job::STATUS_COMPLETED)
+            ->groupBy('j.scheduled_dataflow_id')
+            ->executeQuery()
+            ->fetchAllKeyValue();
+
+        return array_map('floatval', $results);
+    }
+
+    /**
+     * @param array<int> $status
+     */
+    public function counts(array $status): array
+    {
+        $qb = $this->jobRepository->createQueryBuilder('w')->groupBy('w.status');
+
+        if (!empty($status)) {
+           $qb->andWhere('w.status IN (:status)')
+               ->setParameter('status', $status, ArrayParameterType::INTEGER);
+        }
+
+        return $qb->select('w.status, COUNT(w.id) as count')->fetchAllAssociative();
     }
 }

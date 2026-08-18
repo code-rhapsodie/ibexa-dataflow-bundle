@@ -12,10 +12,29 @@
 
     {% for item in pager.currentPageResults %}
         {% set body_row_cols = [] %}
+        {% set avg_seconds = avg_times[item.id] ?? null %}
+
+        {% if avg_seconds is null %}
+            {% set avg_time_display = '-' %}
+        {% else %}
+            {% set total_seconds = avg_seconds|round %}
+            {% if total_seconds < 60 %}
+                {% set avg_time_display = total_seconds ~ 's' %}
+            {% elseif total_seconds < 3600 %}
+                {% set minutes = total_seconds // 60 %}
+                {% set avg_time_display = minutes ~ 'm' %}
+            {% else %}
+                {% set hours = total_seconds // 3600 %}
+                {% set minutes = (total_seconds % 3600) // 60 %}
+                {% set avg_time_display = hours ~ 'h ' ~ minutes ~ 'm' %}
+            {% endif %}
+        {% endif %}
+
         {% set body_row_cols = body_row_cols|merge([
             {content: item.label},
             {content: item.frequency},
             {content: date(item.next)|ibexa_short_datetime},
+            {content: avg_time_display},
             {content: ('coderhapsodie.ibexa_dataflow.' ~ (item.enabled ? 'yes' : 'no'))|trans},
         ]) %}
 
@@ -95,6 +114,7 @@
             { content: 'coderhapsodie.ibexa_dataflow.workflow.list.name'|trans },
             { content: 'coderhapsodie.ibexa_dataflow.workflow.list.frequency'|trans },
             { content: 'coderhapsodie.ibexa_dataflow.workflow.list.next_execution'|trans },
+            { content: 'coderhapsodie.ibexa_dataflow.workflow.list.estimated_time'|trans },
             { content: 'coderhapsodie.ibexa_dataflow.workflow.list.enabled'|trans },
             { },
         ],

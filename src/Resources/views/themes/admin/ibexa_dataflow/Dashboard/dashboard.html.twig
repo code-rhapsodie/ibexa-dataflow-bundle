@@ -1,4 +1,16 @@
 {%- block content -%}
+    <div class="d-flex gap-3">
+        {% for count in counts %}
+            <div class="card">
+                <div class="card-body ps-3 pe-3">
+                    <span class="card-title text-secondary fs-5">{{ ('coderhapsodie.ibexa_dataflow.dashboard.'~count.status~'.label')|trans }}</span>
+                    <div class="card-text">
+                        <span class="fs-1">{{ count.count }}</span>&nbsp;&nbsp;&nbsp;{{ ('coderhapsodie.ibexa_dataflow.dashboard.'~count.status~'.sub-label')|trans }}
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
     {% include '@ibexadesign/ibexa_dataflow/parts/tab/dashboard_list.html.twig' with {
         identifier: 'ibexa_dataflow_schedule_dashboard_results',
     } %}

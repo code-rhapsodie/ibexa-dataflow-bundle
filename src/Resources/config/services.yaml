@@ -15,6 +15,7 @@ services:
             $jobGateway: '@CodeRhapsodie\IbexaDataflowBundle\Gateway\JobGateway'
             $scheduledDataflowGateway: '@CodeRhapsodie\IbexaDataflowBundle\Gateway\ScheduledDataflowGateway'
             $exceptionHandler: '@CodeRhapsodie\DataflowBundle\ExceptionsHandler\ExceptionHandlerInterface'
+            $registry: '@CodeRhapsodie\DataflowBundle\Registry\DataflowTypeRegistryInterface'
 
     CodeRhapsodie\IbexaDataflowBundle\Controller\ScheduledDataflowController:
         public: true
