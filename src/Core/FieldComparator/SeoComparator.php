@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace CodeRhapsodie\IbexaDataflowBundle\Core\FieldComparator;
 
 use Ibexa\Contracts\Core\FieldType\Value;
+use Ibexa\Seo\Value\SeoTypeValue;
 
 class SeoComparator extends AbstractFieldComparator
 {
@@ -16,10 +17,26 @@ class SeoComparator extends AbstractFieldComparator
      */
     protected function compareValues(Value $currentValue, Value $newValue): bool
     {
-        $current = $currentValue->getSeoTypesValue()?->getSeoTypesValues();
-        $new = $newValue->getSeoTypesValue()?->getSeoTypesValues();
+        $currentSeoTypeValues = $currentValue->getSeoTypesValue()?->getSeoTypesValues() ?: [];
+        $newSeoTypeValues = $newValue->getSeoTypesValue()?->getSeoTypesValues() ?: [];
 
-        return \count($current) === \count($new)
-            && empty(array_diff_assoc($current, $new));
+
+        if (\count($currentSeoTypeValues) !== \count($newSeoTypeValues)){
+            return false;
+        }
+
+        return array_all(
+            $currentSeoTypeValues,
+            function (SeoTypeValue $oldItem, string $key) use ($newSeoTypeValues): bool {
+                if (!array_key_exists($key, $newSeoTypeValues)) {
+                    return false;
+                }
+
+                $newItem = $newSeoTypeValues[$key];
+
+                return $oldItem->getType() === $newItem->getType()
+                    && $oldItem->getFields() === $newItem->getFields();
+            }
+        );
     }
 }
