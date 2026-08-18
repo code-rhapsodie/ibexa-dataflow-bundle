@@ -1,5 +1,8 @@
 # Version 6.5.0
 * Add `ibexa_seo` field comparator
+* Add type filter
+* Add count on dashbaord
+* Add average time on scheduled tab
 
 # Version 6.4.0
 * Add the possibility to download the log file
