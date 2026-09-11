@@ -33,6 +33,9 @@ class JobController extends Controller
     {
         $this->denyAccessUnlessGranted(new Attribute('ibexa_dataflow', 'view'));
         $job = $this->jobGateway->find($id);
+        if ($job === null) {
+            throw $this->createNotFoundException();
+        }
 
         return $this->render('@ibexadesign/ibexa_dataflow/Item/details.html.twig', [
             'item' => $job,
@@ -45,6 +48,9 @@ class JobController extends Controller
     {
         $this->denyAccessUnlessGranted(new Attribute('ibexa_dataflow', 'view'));
         $item = $this->jobGateway->find($id);
+        if ($item === null) {
+            throw $this->createNotFoundException();
+        }
         $log = array_map(fn($line) => preg_replace('~#\d+~', "\n$0", (string) $line), $item->getExceptions() ?? []);
 
         if (empty($log) && $item->getStreamExceptions()) {
@@ -64,7 +70,7 @@ class JobController extends Controller
                         break;
                     }
 
-                    echo "<p>", preg_replace('~#\d+~', "<br>$0", (string)$line), "</p>";
+                    echo "<p>", preg_replace('~#\d+~', "<br>$0", htmlspecialchars((string) $line, ENT_QUOTES)), "</p>";
                     flush();
                 }
             });
@@ -80,6 +86,9 @@ class JobController extends Controller
     {
         $this->denyAccessUnlessGranted(new Attribute('ibexa_dataflow', 'view'));
         $item = $this->jobGateway->find($id);
+        if ($item === null) {
+            throw $this->createNotFoundException();
+        }
         $log = array_map(fn($line) => preg_replace('~#\d+~', "\n$0", (string) $line), $item->getExceptions() ?? []);
 
         if (empty($log) && $item->getStreamExceptions()) {
