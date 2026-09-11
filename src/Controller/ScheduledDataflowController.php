@@ -74,7 +74,14 @@ class ScheduledDataflowController extends Controller
     #[Route(path: '/{id}/edit', name: 'coderhapsodie.ibexa_dataflow.workflow.edit')]
     public function edit(Request $request, int $id): Response
     {
-        $form = $this->createForm(UpdateScheduledType::class, $this->scheduledDataflowGateway->find($id), [
+        $this->denyAccessUnlessGranted(new Attribute('ibexa_dataflow', 'edit'));
+
+        $workflow = $this->scheduledDataflowGateway->find($id);
+        if ($workflow === null) {
+            throw $this->createNotFoundException();
+        }
+
+        $form = $this->createForm(UpdateScheduledType::class, $workflow, [
             'action' => $this->generateUrl('coderhapsodie.ibexa_dataflow.workflow.edit', ['id' => $id]),
         ]);
         $form->handleRequest($request);
@@ -102,7 +109,7 @@ class ScheduledDataflowController extends Controller
         ]);
     }
 
-    #[Route(path: '/{id}/enable', name: 'coderhapsodie.ibexa_dataflow.workflow.enable')]
+    #[Route(path: '/{id}/enable', name: 'coderhapsodie.ibexa_dataflow.workflow.enable', methods: ['POST'])]
     public function enableDataflow(int $id): Response
     {
         $this->denyAccessUnlessGranted(new Attribute('ibexa_dataflow', 'edit'));
@@ -115,8 +122,11 @@ class ScheduledDataflowController extends Controller
     private function changeDataflowStatus(int $id, bool $status)
     {
         try {
-            /** @var \CodeRhapsodie\DataflowBundle\Entity\ScheduledDataflow $workflow */
+            /** @var \CodeRhapsodie\DataflowBundle\Entity\ScheduledDataflow|null $workflow */
             $workflow = $this->scheduledDataflowGateway->find($id);
+            if ($workflow === null) {
+                throw $this->createNotFoundException();
+            }
             $workflow->setEnabled($status);
             $this->scheduledDataflowGateway->save($workflow);
 
@@ -126,7 +136,7 @@ class ScheduledDataflowController extends Controller
         }
     }
 
-    #[Route(path: '/{id}/disable', name: 'coderhapsodie.ibexa_dataflow.workflow.disable')]
+    #[Route(path: '/{id}/disable', name: 'coderhapsodie.ibexa_dataflow.workflow.disable', methods: ['POST'])]
     public function disableDataflow(int $id): Response
     {
         $this->denyAccessUnlessGranted(new Attribute('ibexa_dataflow', 'edit'));

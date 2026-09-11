@@ -69,23 +69,25 @@
                 </svg>
             </button>
             {% if item.enabled %}
-                <a href="{{ path('coderhapsodie.ibexa_dataflow.workflow.disable', {id: item.id}) }}"
-                   class="btn ibexa-btn ibexa-btn--ghost ibexa-btn--no-text"
-                   title="{{ 'coderhapsodie.ibexa_dataflow.workflow.list.disable'|trans }}"
-                >
-                    <svg class="ibexa-icon ibexa-icon--small ibexa-icon--logout" style="fill: #f7d000;">
-                        <use xlink:href="{{ ibexa_icon_path('logout') }}"></use>
-                    </svg>
-                </a>
+                <form action="{{ path('coderhapsodie.ibexa_dataflow.workflow.disable', {id: item.id}) }}" method="POST" style="display: inline-block">
+                    <button type="submit" class="btn ibexa-btn ibexa-btn--ghost ibexa-btn--no-text"
+                            title="{{ 'coderhapsodie.ibexa_dataflow.workflow.list.disable'|trans }}"
+                    >
+                        <svg class="ibexa-icon ibexa-icon--small ibexa-icon--logout" style="fill: #f7d000;">
+                            <use xlink:href="{{ ibexa_icon_path('logout') }}"></use>
+                        </svg>
+                    </button>
+                </form>
             {% else %}
-                <a href="{{ path('coderhapsodie.ibexa_dataflow.workflow.enable', {id: item.id}) }}"
-                   class="btn ibexa-btn ibexa-btn--ghost ibexa-btn--no-text"
-                   title="{{ 'coderhapsodie.ibexa_dataflow.workflow.list.enable'|trans }}"
-                >
-                    <svg class="ibexa-icon ibexa-icon--small ibexa-icon--logout" style="fill: #00825c;">
-                        <use xlink:href="{{ ibexa_icon_path('approved') }}"></use>
-                    </svg>
-                </a>
+                <form action="{{ path('coderhapsodie.ibexa_dataflow.workflow.enable', {id: item.id}) }}" method="POST" style="display: inline-block">
+                    <button type="submit" class="btn ibexa-btn ibexa-btn--ghost ibexa-btn--no-text"
+                            title="{{ 'coderhapsodie.ibexa_dataflow.workflow.list.enable'|trans }}"
+                    >
+                        <svg class="ibexa-icon ibexa-icon--small ibexa-icon--logout" style="fill: #00825c;">
+                            <use xlink:href="{{ ibexa_icon_path('approved') }}"></use>
+                        </svg>
+                    </button>
+                </form>
             {% endif %}
             <a href="{{ path('coderhapsodie.ibexa_dataflow.workflow.delete', {id: item.id}) }}"
                class="btn ibexa-btn ibexa-btn--ghost ibexa-btn--no-text modal-delete"

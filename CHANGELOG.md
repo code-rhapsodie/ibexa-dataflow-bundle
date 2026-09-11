@@ -1,3 +1,9 @@
+# Version 6.5.1
+* Fix missing permission check on scheduled dataflow edit (broken access control)
+* Fix XSS in streamed job log output
+* Require POST for enable/disable scheduled dataflow actions
+* Fix 500 error (instead of 404) when a job or scheduled dataflow id does not exist
+
 # Version 6.5.0
 * Add `ibexa_seo` field comparator
 * Add type filter
