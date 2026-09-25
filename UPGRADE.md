@@ -1,3 +1,20 @@
+# Upgrade to v6
+
+Version 6 requires `code-rhapsodie/dataflow-bundle` ^6.0, which adds new columns to the job table
+(`exceptions`, `exception_count`). Update your database schema:
+
+```shell
+php bin/console code-rhapsodie:dataflow:database-schema --update
+```
+
+You can also generate the SQL queries to review or apply them manually:
+
+```shell
+php bin/console code-rhapsodie:dataflow:dump-schema --update
+```
+
+# Upgrade to v5
+
 In version 5, all references to ezdataflow were replaced by ibexa-dataflow, in namespaces, class names, tags and config keys.
 This requires some changes in your application files.
 
