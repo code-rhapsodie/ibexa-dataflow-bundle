@@ -54,8 +54,8 @@ class DashboardController extends Controller
 
         return $this->render('@ibexadesign/ibexa_dataflow/Dashboard/main.html.twig', [
             'link' => 'https://www.code-rhapsodie.fr/product/redirect/'.str_replace('=', '',
-                    base64_encode(json_encode($data))
-                ),
+                base64_encode(json_encode($data))
+            ),
         ]);
     }
 
@@ -64,7 +64,7 @@ class DashboardController extends Controller
         $this->denyAccessUnlessGranted(new Attribute('ibexa_dataflow', 'view'));
 
         $newWorkflow = new ScheduledDataflow();
-        $newWorkflow->setNext((new \DateTimeImmutable())->add(new \DateInterval('PT1H')));
+        $newWorkflow->setNext(new \DateTimeImmutable()->add(new \DateInterval('PT1H')));
         $form = $this->createForm(CreateScheduledType::class, $newWorkflow, [
             'action' => $this->generateUrl('coderhapsodie.ibexa_dataflow.workflow.create'),
         ]);
@@ -98,7 +98,7 @@ class DashboardController extends Controller
         $this->denyAccessUnlessGranted(new Attribute('ibexa_dataflow', 'view'));
 
         $newOneshotJob = new Job();
-        $newOneshotJob->setRequestedDate((new \DateTime())->add(new \DateInterval('PT1H')));
+        $newOneshotJob->setRequestedDate(new \DateTime()->add(new \DateInterval('PT1H')));
         $form = $this->createForm(CreateOneshotType::class, $newOneshotJob, [
             'action' => $this->generateUrl('coderhapsodie.ibexa_dataflow.job.create'),
         ]);
@@ -158,13 +158,13 @@ class DashboardController extends Controller
      */
     private function extractIds(Pagerfanta $pager): array
     {
-        return array_map(fn(array $item) => (int)$item['id'], $pager->getCurrentPageResults());
+        return array_map(fn (array $item) => (int) $item['id'], $pager->getCurrentPageResults());
     }
 
-    private function getPager(QueryBuilder $query, Request $request, string $class = null): Pagerfanta
+    private function getPager(QueryBuilder $query, Request $request, ?string $class = null): Pagerfanta
     {
         $adapter = new ExceptionJSONDecoderAdapter(
-            new QueryAdapter($query, fn($queryBuilder) => $queryBuilder->select('COUNT(DISTINCT id) AS total_results')
+            new QueryAdapter($query, fn ($queryBuilder) => $queryBuilder->select('COUNT(DISTINCT id) AS total_results')
                 ->resetQueryPart('orderBy')
                 ->setMaxResults(1))
         );

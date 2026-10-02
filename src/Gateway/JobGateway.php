@@ -37,13 +37,13 @@ final readonly class JobGateway
             ->addOrderBy('w.requested_date', 'DESC')
         ;
 
-        if (self::FILTER_NON_EMPTY === $filter) {
+        if ($filter === self::FILTER_NON_EMPTY) {
             $qb->andWhere('w.count > 0');
         }
 
         if (!empty($type)) {
-           $qb->andWhere('w.dataflow_type = :type')
-               ->setParameter('type', $type);
+            $qb->andWhere('w.dataflow_type = :type')
+                ->setParameter('type', $type);
         }
 
         return $qb;
@@ -65,6 +65,7 @@ final readonly class JobGateway
     public function getListPendindOrRunning(): array
     {
         $qb = $this->jobRepository->createQueryBuilder('w');
+
         return $qb->andWhere($qb->expr()->in('w.status', [Job::STATUS_RUNNING, Job::STATUS_PENDING, Job::STATUS_QUEUED]))
             ->orderBy('w.requested_date', 'ASC')
             ->fetchAllAssociative();
@@ -101,7 +102,7 @@ final readonly class JobGateway
             ->executeQuery()
             ->fetchAllKeyValue();
 
-        return array_map('floatval', $results);
+        return array_map(floatval(...), $results);
     }
 
     /**
@@ -112,8 +113,8 @@ final readonly class JobGateway
         $qb = $this->jobRepository->createQueryBuilder('w')->groupBy('w.status');
 
         if (!empty($status)) {
-           $qb->andWhere('w.status IN (:status)')
-               ->setParameter('status', $status, ArrayParameterType::INTEGER);
+            $qb->andWhere('w.status IN (:status)')
+                ->setParameter('status', $status, ArrayParameterType::INTEGER);
         }
 
         return $qb->select('w.status, COUNT(w.id) as count')->fetchAllAssociative();

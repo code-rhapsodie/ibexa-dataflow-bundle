@@ -1,12 +1,13 @@
 <?php
 
+declare(strict_types=1);
+
 namespace CodeRhapsodie\IbexaDataflowBundle\Core\FieldComparator;
 
 use Ibexa\Contracts\Core\FieldType\Value;
 
 class BillingAddressComparator extends AbstractFieldComparator
 {
-
     /**
      * @param \Ibexa\FieldTypeAddress\FieldType\Value $currentValue
      * @param \Ibexa\FieldTypeAddress\FieldType\Value $newValue

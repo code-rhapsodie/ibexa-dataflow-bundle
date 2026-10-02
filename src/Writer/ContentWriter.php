@@ -20,9 +20,6 @@ class ContentWriter extends RepositoryWriter implements DelegateWriterInterface
     {
     }
 
-    /**
-     * @param \CodeRhapsodie\IbexaDataflowBundle\Model\ContentStructure $item
-     */
     public function write($item)
     {
         if (!$item instanceof ContentStructure) {
@@ -47,9 +44,6 @@ class ContentWriter extends RepositoryWriter implements DelegateWriterInterface
         }
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function supports($item): bool
     {
         return $item instanceof ContentStructure;
@@ -57,7 +51,7 @@ class ContentWriter extends RepositoryWriter implements DelegateWriterInterface
 
     private function log(string $level, string $message, array $context = []): void
     {
-        if (null === $this->logger) {
+        if ($this->logger === null) {
             return;
         }
         $this->logger->log($level, $message, $context);

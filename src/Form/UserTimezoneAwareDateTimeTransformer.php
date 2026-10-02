@@ -20,7 +20,7 @@ class UserTimezoneAwareDateTimeTransformer implements DataTransformerInterface
             return $value;
         }
 
-        return (new \DateTime('now', $this->userTimezone()))->setTimestamp($value->getTimestamp());
+        return new \DateTime('now', $this->userTimezone())->setTimestamp($value->getTimestamp());
     }
 
     public function reverseTransform($value): mixed
@@ -31,7 +31,7 @@ class UserTimezoneAwareDateTimeTransformer implements DataTransformerInterface
 
         $dateTimeWithUserTimeZone = new \DateTime($value->format('Y-m-d H:i:s'), $this->userTimezone());
 
-        return (new \DateTime())->setTimestamp($dateTimeWithUserTimeZone->getTimestamp());
+        return new \DateTime()->setTimestamp($dateTimeWithUserTimeZone->getTimestamp());
     }
 
     private function userTimezone(): \DateTimeZone

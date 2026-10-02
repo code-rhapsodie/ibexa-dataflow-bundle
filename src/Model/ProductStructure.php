@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace CodeRhapsodie\IbexaDataflowBundle\Model;
 
 abstract class ProductStructure
@@ -13,7 +15,6 @@ abstract class ProductStructure
     protected int $stock;
 
     protected array $attributes;
-
 
     public function getCode(): string
     {

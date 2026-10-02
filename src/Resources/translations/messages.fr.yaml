@@ -103,3 +103,6 @@ coderhapsodie.ibexa_dataflow.dashboard.1.sub-label: En cours d'exécution
 coderhapsodie.ibexa_dataflow.dashboard.2.sub-label: Complété
 coderhapsodie.ibexa_dataflow.dashboard.3.sub-label: File d'attente
 coderhapsodie.ibexa_dataflow.dashboard.4.sub-label: Planté
+coderhapsodie.ibexa_dataflow.history.back_to_list: 'Retour à l''historique des exécutions'
+coderhapsodie.ibexa_dataflow.history.tab.info: 'Informations'
+coderhapsodie.ibexa_dataflow.logs.empty: 'Aucun log pour cette exécution.'

@@ -16,9 +16,7 @@ class LocationMatcher implements LocationMatcherInterface
     }
 
     /**
-     * @param mixed $valueToMatch
-     *
-     * @throws \CodeRhapsodie\IbexaDataflowBundle\Exception\NoMatchFoundException
+     * @throws NoMatchFoundException
      * @throws \Ibexa\Contracts\Core\Repository\Exceptions\UnauthorizedException
      */
     public function matchLocation($valueToMatch): Location

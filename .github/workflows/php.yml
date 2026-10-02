@@ -2,54 +2,70 @@ name: PHP Composer
 
 on:
   push:
-    branches: [ master ]
+    branches: [ 'v*.x' ]
   pull_request:
-    branches: [ master ]
+    branches: [ 'v*.x' ]
 
 jobs:
   build:
+    name: PHP ${{ matrix.php-version }} (${{ matrix.dependencies }})
 
     strategy:
       fail-fast: false
       matrix:
-        php-version: [7.4, 8.0, 8.1, 8.2]
+        php-version: ['8.4', '8.5']
+        dependencies: [lowest, highest]
 
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v4
 
     - name: Setup PHP ${{ matrix.php-version }}
       uses: shivammathur/setup-php@v2
       with:
         php-version: ${{ matrix.php-version }}
         extensions: xdebug
-    - name: PHP Version
-      run: php -v
 
     - name: PHP Lint
-      run: find . -type f -name '*.php' -exec php -l {} \; | (! grep -v "No syntax errors detected" )
+      run: find src tests -type f -name '*.php' -exec php -l {} \; | (! grep -v "No syntax errors detected" )
 
-    - name: Validate composer.json and composer.lock
+    - name: Validate composer.json
       run: composer validate --strict
 
-    - name: Cache Composer packages
-      id: composer-cache
-      uses: actions/cache@v2
-      with:
-        path: vendor
-        key: ${{ runner.os }}-php${{ matrix.php-version }}-${{ hashFiles('**/composer.lock') }}
-        restore-keys: |
-          ${{ runner.os }}-php${{ matrix.php-version }}-
-
-    - name: Install dependencies
-      run: composer update --prefer-dist --no-progress --no-scripts
+    - name: Install dependencies (${{ matrix.dependencies }})
+      run: composer update --prefer-dist --no-progress --no-scripts --no-interaction ${{ matrix.dependencies == 'lowest' && '--prefer-lowest' || '' }}
 
     - name: PHPUnit
       run: php -d xdebug.mode=coverage vendor/bin/phpunit --log-junit junit.xml
 
     - name: Publish Unit Test Results
-      uses: EnricoMi/publish-unit-test-result-action@v1
-      if: always()
+      uses: EnricoMi/publish-unit-test-result-action@v2
+      if: always() && github.event_name == 'push'
       with:
         files: junit.xml
+
+  quality:
+    name: Static analysis & code style
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Setup PHP
+      uses: shivammathur/setup-php@v2
+      with:
+        php-version: '8.4'
+        tools: composer
+
+    - name: Install dependencies
+      run: composer update --prefer-dist --no-progress --no-scripts --no-interaction
+
+    - name: PHP CS Fixer
+      run: vendor/bin/php-cs-fixer fix --dry-run --diff --show-progress=none
+
+    - name: PHPStan
+      run: vendor/bin/phpstan analyse --no-progress
+
+    - name: Rector
+      run: vendor/bin/rector process --dry-run --no-progress-bar

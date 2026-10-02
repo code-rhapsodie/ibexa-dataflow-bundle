@@ -46,11 +46,10 @@ readonly class ContentCreator implements ContentCreatorInterface
             $this->repository->rollback();
             throw $exception;
         }
-
     }
 
     /**
-     * @return \Ibexa\Contracts\Core\Repository\Values\Content\LocationCreateStruct[]
+     * @return LocationCreateStruct[]
      */
     private function getLocationCreateStructs(array $locations): array
     {

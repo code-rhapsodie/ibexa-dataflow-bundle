@@ -34,7 +34,7 @@ class ScheduledDataflowController extends Controller
 
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
-            /** @var \CodeRhapsodie\DataflowBundle\Entity\ScheduledDataflow $newWorkflow */
+            /** @var ScheduledDataflow $newWorkflow */
             $newWorkflow = $form->getData();
             try {
                 $this->scheduledDataflowGateway->save($newWorkflow);
@@ -87,7 +87,7 @@ class ScheduledDataflowController extends Controller
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            /** @var \CodeRhapsodie\DataflowBundle\Entity\ScheduledDataflow $editDataflow */
+            /** @var ScheduledDataflow $editDataflow */
             $editDataflow = $form->getData();
 
             try {
@@ -122,7 +122,7 @@ class ScheduledDataflowController extends Controller
     private function changeDataflowStatus(int $id, bool $status)
     {
         try {
-            /** @var \CodeRhapsodie\DataflowBundle\Entity\ScheduledDataflow|null $workflow */
+            /** @var ScheduledDataflow|null $workflow */
             $workflow = $this->scheduledDataflowGateway->find($id);
             if ($workflow === null) {
                 throw $this->createNotFoundException();

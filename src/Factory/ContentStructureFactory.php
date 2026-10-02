@@ -16,8 +16,8 @@ final readonly class ContentStructureFactory implements ContentStructureFactoryI
     }
 
     /**
-     * @param mixed $parentLocations
-     * @param int   $mode            One of the constant ContentStructureFactoryInterface::MODE_*
+     * @param int|string|array<int|string> $parentLocations Int for location id or string for remote location id (or a list of them)
+     * @param int                          $mode            One of the constant ContentStructureFactoryInterface::MODE_*
      *
      * @return false|\CodeRhapsodie\IbexaDataflowBundle\Model\ContentStructure
      *
@@ -37,7 +37,7 @@ final readonly class ContentStructureFactory implements ContentStructureFactoryI
             // The content doesn't exist yet, so it will be created.
         }
 
-        if (self::MODE_UPDATE_ONLY === $mode) {
+        if ($mode === self::MODE_UPDATE_ONLY) {
             return false;
         }
 

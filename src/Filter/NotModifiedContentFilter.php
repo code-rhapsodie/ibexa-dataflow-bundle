@@ -40,7 +40,7 @@ class NotModifiedContentFilter
 
         foreach ($data->getFields() as $identifier => $hash) {
             $field = $content->getField($identifier, $data->getLanguageCode());
-            if (null === $field || !$this->comparator->compare($field, $hash)) {
+            if ($field === null || !$this->comparator->compare($field, $hash)) {
                 // At least one field is different, continue the dataflow.
                 return $data;
             }
@@ -54,7 +54,7 @@ class NotModifiedContentFilter
 
     private function log(string $level, string $message, array $context = []): void
     {
-        if (null === $this->logger) {
+        if ($this->logger === null) {
             return;
         }
         $this->logger->log($level, $message, $context);

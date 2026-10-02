@@ -24,7 +24,7 @@ class ContentCreateStructure extends ContentStructure
      *                         <li>a LocationCreateStruct object</li>
      *                         </ul>
      *
-     * @throws \CodeRhapsodie\IbexaDataflowBundle\Exception\InvalidArgumentTypeException
+     * @throws InvalidArgumentTypeException
      */
     public function __construct(protected string $contentTypeIdentifier, string $languageCode, array $locations, array $fields, ?string $remoteId = null)
     {
@@ -45,7 +45,7 @@ class ContentCreateStructure extends ContentStructure
     }
 
     /**
-     * @throws \CodeRhapsodie\IbexaDataflowBundle\Exception\InvalidArgumentTypeException
+     * @throws InvalidArgumentTypeException
      */
     private function setLocations(array $locations): void
     {

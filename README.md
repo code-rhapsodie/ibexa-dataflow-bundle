@@ -355,6 +355,44 @@ Details of one scheduled job:
 
 ![Job execution details](src/Resources/doc/job_successful.png)
 
+### Job details popin
+
+The job popin has two tabs: "Information" (dates, counters, options) and "Log". Switching between them does not close
+the popin, and a loaded tab is kept in memory until the page is reloaded. If the log is empty, a message says so.
+
+When the popin is opened from the execution history of a scheduled dataflow (the popin of the "Recurring" tab), a
+"Back to the executions history" button brings you back to that history.
+
+### Link directly to a job
+
+Add the `job` query parameter to the Ibexa Dataflow admin URL to open the details popin of a job on page load:
+
+```
+https://your-domain/admin/ibexa_dataflow/?job=<job id>
+```
+
+The parameter is removed from the URL once the popin is open, so reloading the page does not open it again. It only
+accepts a numeric job id.
+
+This is useful to link to a job from an Ibexa back office notification. With the `system` notification type, pass the
+parameter in `route_params`:
+
+```php
+$createStruct = new \Ibexa\Contracts\Core\Repository\Values\Notification\CreateStruct();
+$createStruct->ownerId = $userId;
+$createStruct->type = 'system';
+$createStruct->data = [
+    'icon' => 'alert-error',
+    'subject' => 'Dataflow failed',
+    'content' => sprintf('Job "%s" (#%d) ended with errors.', $job->getLabel(), $job->getId()),
+    'route_name' => 'coderhapsodie.ibexa_dataflow.main',
+    'route_params' => ['job' => $job->getId()],
+];
+$notificationService->createNotification($createStruct);
+```
+
+Clicking the notification then opens the job details directly.
+
 ## One-shot job
 
 If you don't want to run a Dataflow periodically, you can add a single execution at the time and date that you want.

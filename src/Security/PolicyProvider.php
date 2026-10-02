@@ -9,9 +9,6 @@ use Ibexa\Bundle\Core\DependencyInjection\Security\PolicyProvider\YamlPolicyProv
 
 class PolicyProvider extends YamlPolicyProvider implements PolicyProviderInterface
 {
-    /**
-     * {@inheritdoc}
-     */
     protected function getFiles(): array
     {
         return [__DIR__.'/../Resources/config/policies.yaml'];

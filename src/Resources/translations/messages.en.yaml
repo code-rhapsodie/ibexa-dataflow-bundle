@@ -105,3 +105,6 @@ coderhapsodie.ibexa_dataflow.dashboard.1.sub-label: Running
 coderhapsodie.ibexa_dataflow.dashboard.2.sub-label: Completed
 coderhapsodie.ibexa_dataflow.dashboard.3.sub-label: Queued
 coderhapsodie.ibexa_dataflow.dashboard.4.sub-label: Crashed
+coderhapsodie.ibexa_dataflow.history.back_to_list: 'Back to the executions history'
+coderhapsodie.ibexa_dataflow.history.tab.info: 'Information'
+coderhapsodie.ibexa_dataflow.logs.empty: 'No logs for this execution.'
