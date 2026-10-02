@@ -157,6 +157,18 @@
             bindModalLinks('modal-history-log', '.modal-history-log');
             bindModalLinks('modal-history', '.modal-history');
 
+            // Open the job details directly (e.g. from a notification): ?job=<id>
+            const params = new URLSearchParams(window.location.search);
+            const jobId = params.get('job');
+            if (jobId && /^\d+$/.test(jobId)) {
+                previousModalId = null;
+                loadModal('modal-history-details', {{ path('coderhapsodie.ibexa_dataflow.job.details', {id: 0})|json_encode|raw }}.replace(/0$/, jobId));
+                bootstrap.Modal.getOrCreateInstance(document.getElementById('modal-history-details')).show();
+                params.delete('job');
+                const query = params.toString();
+                window.history.replaceState(null, '', window.location.pathname + (query ? '?' + query : '') + window.location.hash);
+            }
+
             const labels = document.getElementById('ibexa-tab-label-coderhapsodie-ibexa_dataflow-code-rhapsodie-ibexa_dataflow-repeating')
                 .closest('ul').querySelectorAll('li.ibexa-tabs__tab');
             const tabs = document.getElementById('ibexa-tab-coderhapsodie-ibexa_dataflow-code-rhapsodie-ibexa_dataflow-repeating')
