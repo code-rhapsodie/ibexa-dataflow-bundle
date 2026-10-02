@@ -58,6 +58,8 @@
             const bindFormSubmit = (modalId) => {
                 document.querySelector('#'+modalId+' form').addEventListener('submit', function (e) {
                     e.preventDefault();
+                    const submitBtn = document.querySelector('#'+modalId+' .modal-footer .ibexa-btn--primary');
+                    submitBtn.disabled = true;
                     url = this.getAttribute('action');
                     data = new FormData(this);
                     fetch(url, {
@@ -66,23 +68,36 @@
                     })
                         .then((r) => r.json())
                         .then((result) => {
-                            if (result.redirect && window.location.pathname+window.location.hash === result.redirect) {
-                                location.reload();
-                                return;
-                            }
                             if (result.redirect) {
                                 window.location = result.redirect;
+                                location.reload();
                                 return;
                             }
                             const node = document.createElement('div');
                             node.innerHTML = result.form;
-                            document.querySelector('#'+modalId+' .form-fields').innerHTML = node.querySelector('.form-fields').innerHTML;
+                            const fields = document.querySelector('#'+modalId+' .form-fields');
+                            const currentPicker = fields.querySelector('.ibexa-picker');
+                            fields.innerHTML = node.querySelector('.form-fields').innerHTML;
+                            fields.querySelector('.ibexa-picker').replaceWith(currentPicker);
                         })
+                        .finally(() => { submitBtn.disabled = false; })
                     ;
                 });
             };
             bindFormSubmit('modal-new-scheduled');
             bindFormSubmit('modal-edit-scheduled');
+
+            const setupFormModal = (modalId) => {
+                const modal = document.getElementById(modalId);
+                modal.addEventListener('shown.bs.modal', () => modal.querySelector('input[type=text]').focus());
+                modal.addEventListener('hidden.bs.modal', () => {
+                    modal.querySelectorAll('.is-invalid').forEach((el) => el.classList.remove('is-invalid'));
+                    modal.querySelectorAll('.ibexa-form-error').forEach((el) => { el.innerHTML = ''; });
+                    modal.querySelectorAll('input[type=text], textarea').forEach((el) => { el.value = ''; });
+                });
+            };
+            setupFormModal('modal-new-scheduled');
+            setupFormModal('modal-edit-scheduled');
 
             const editModal = document.getElementById('modal-edit-scheduled')
             document.addEventListener('click', (e) => {
