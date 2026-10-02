@@ -1,3 +1,8 @@
+# Unreleased
+* CI: test PHP 8.4 and 8.5 with lowest and highest dependencies, and add PHP CS Fixer, PHPStan (level 4, with banned code) and Rector checks
+* Migrate tests to PHPUnit 12
+* Apply PHP CS Fixer and Rector rules (PHP 8.4 syntax, non-Yoda comparisons)
+
 # Version 6.6.0
 * Add "Information" and "Log" tabs in the job popin, with content kept in memory, an empty log message and a back button to the executions history
 * Add `?job=<id>` query parameter to open the job details popin directly (e.g. from an Ibexa notification)
