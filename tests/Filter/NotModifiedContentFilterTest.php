@@ -11,8 +11,10 @@ use Ibexa\Contracts\Core\Repository\ContentService;
 use Ibexa\Contracts\Core\Repository\Values\Content\Field;
 use Ibexa\Core\Repository\Values\Content\Content;
 use PHPUnit\Framework\MockObject\MockObject;
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\TestCase;
 
+#[AllowMockObjectsWithoutExpectations]
 class NotModifiedContentFilterTest extends TestCase
 {
     /** @var \Ibexa\Contracts\Core\Repository\ContentService|\PHPUnit\Framework\MockObject\MockObject */
@@ -57,8 +59,7 @@ class NotModifiedContentFilterTest extends TestCase
         $content
             ->expects($this->exactly(2))
             ->method('getField')
-            ->withConsecutive([$field1], [$field2])
-            ->willReturnOnConsecutiveCalls($contentField1, $contentField2)
+            ->willReturnCallback(fn (string $name) => [$field1 => $contentField1, $field2 => $contentField2][$name])
         ;
         $this->contentServiceMock
             ->expects($this->once())
@@ -69,8 +70,7 @@ class NotModifiedContentFilterTest extends TestCase
         $this->comparatorMock
             ->expects($this->exactly(2))
             ->method('compare')
-            ->withConsecutive([$contentField1, $value1], [$contentField2, $value2])
-            ->willReturn(true)
+            ->willReturnCallback(fn ($field, $value) => true)
         ;
 
         $return = ($this->notModifiedContentFilter)($data);
@@ -99,8 +99,7 @@ class NotModifiedContentFilterTest extends TestCase
         $content
             ->expects($this->exactly(2))
             ->method('getField')
-            ->withConsecutive([$field1], [$field2])
-            ->willReturnOnConsecutiveCalls($contentField1, $contentField2)
+            ->willReturnCallback(fn (string $name) => [$field1 => $contentField1, $field2 => $contentField2][$name])
         ;
         $this->contentServiceMock
             ->expects($this->once())
@@ -111,8 +110,7 @@ class NotModifiedContentFilterTest extends TestCase
         $this->comparatorMock
             ->expects($this->exactly(2))
             ->method('compare')
-            ->withConsecutive([$contentField1, $value1], [$contentField2, $value2])
-            ->willReturnOnConsecutiveCalls(true, false)
+            ->willReturnCallback(fn ($field, $value) => $value === $value1)
         ;
 
         $return = ($this->notModifiedContentFilter)($data);

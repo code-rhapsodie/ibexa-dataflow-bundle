@@ -9,19 +9,16 @@ use Ibexa\Seo\Value\SeoTypeValue;
 
 class SeoComparator extends AbstractFieldComparator
 {
-
     /**
      * @param \Ibexa\Seo\FieldType\SeoValue $currentValue
      * @param \Ibexa\Seo\FieldType\SeoValue $newValue
-     * @return bool
      */
     protected function compareValues(Value $currentValue, Value $newValue): bool
     {
         $currentSeoTypeValues = $currentValue->getSeoTypesValue()?->getSeoTypesValues() ?: [];
         $newSeoTypeValues = $newValue->getSeoTypesValue()?->getSeoTypesValues() ?: [];
 
-
-        if (\count($currentSeoTypeValues) !== \count($newSeoTypeValues)){
+        if (\count($currentSeoTypeValues) !== \count($newSeoTypeValues)) {
             return false;
         }
 

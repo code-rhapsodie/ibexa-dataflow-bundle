@@ -17,22 +17,19 @@ class ContentStructFieldFiller implements ContentStructFieldFillerInterface
      */
     public function __construct(
         /** @var FieldValueCreatorInterface[] */
-        private readonly iterable $fieldValueCreators
-    )
-    {
+        private readonly iterable $fieldValueCreators,
+    ) {
     }
 
     /**
-     * {@inheritdoc}
-     *
-     * @throws \CodeRhapsodie\IbexaDataflowBundle\Exception\UnknownFieldException
-     * @throws \CodeRhapsodie\IbexaDataflowBundle\Exception\UnsupportedFieldTypeException
+     * @throws UnknownFieldException
+     * @throws UnsupportedFieldTypeException
      */
     public function fillFields(ContentType $contentType, ContentStruct $contentStruct, array $fieldHashes): void
     {
         foreach ($fieldHashes as $identifier => $hash) {
             $fieldDef = $contentType->getFieldDefinition($identifier);
-            if (null === $fieldDef) {
+            if ($fieldDef === null) {
                 throw UnknownFieldException::create($identifier, $contentType->identifier);
             }
 
@@ -44,9 +41,7 @@ class ContentStructFieldFiller implements ContentStructFieldFillerInterface
     }
 
     /**
-     * @param mixed $hash
-     *
-     * @throws \CodeRhapsodie\IbexaDataflowBundle\Exception\UnsupportedFieldTypeException
+     * @throws UnsupportedFieldTypeException
      */
     private function createFieldValue(string $fieldTypeIdentifier, $hash): Value
     {

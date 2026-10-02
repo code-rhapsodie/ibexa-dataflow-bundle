@@ -51,10 +51,10 @@ class JobController extends Controller
         if ($item === null) {
             throw $this->createNotFoundException();
         }
-        $log = array_map(fn($line) => preg_replace('~#\d+~', "\n$0", (string) $line), $item->getExceptions() ?? []);
+        $log = array_map(fn ($line) => preg_replace('~#\d+~', "\n$0", (string) $line), $item->getExceptions() ?? []);
 
         if (empty($log) && $item->getStreamExceptions()) {
-            return new StreamedResponse(function () use ($item, $id) {
+            return new StreamedResponse(function () use ($item, $id): void {
                 $maxBytes = 1048576;
                 $bytesRead = 0;
 
@@ -70,7 +70,7 @@ class JobController extends Controller
                         break;
                     }
 
-                    echo "<p>", preg_replace('~#\d+~', "<br>$0", htmlspecialchars((string) $line, ENT_QUOTES)), "</p>";
+                    echo '<p>', preg_replace('~#\d+~', '<br>$0', htmlspecialchars((string) $line, ENT_QUOTES)), '</p>';
                     flush();
                 }
             });
@@ -89,7 +89,7 @@ class JobController extends Controller
         if ($item === null) {
             throw $this->createNotFoundException();
         }
-        $log = array_map(fn($line) => preg_replace('~#\d+~', "\n$0", (string) $line), $item->getExceptions() ?? []);
+        $log = array_map(fn ($line) => preg_replace('~#\d+~', "\n$0", (string) $line), $item->getExceptions() ?? []);
 
         if (empty($log) && $item->getStreamExceptions()) {
             $headers = [
@@ -97,7 +97,7 @@ class JobController extends Controller
                 'Content-Disposition' => sprintf('attachment; filename="%s.log"', $item->getLabel().'-'.$item->getStartTime()->format('Y-m-d-H-i-s')),
             ];
 
-            return new StreamedResponse(function () use ($item) {
+            return new StreamedResponse(function () use ($item): void {
                 while (($line = fgets($item->getStreamExceptions())) !== false) {
                     echo $line;
                     flush();
@@ -108,8 +108,6 @@ class JobController extends Controller
         throw $this->createNotFoundException();
     }
 
-
-
     #[Route(path: '/create', name: 'coderhapsodie.ibexa_dataflow.job.create', methods: ['POST'])]
     public function create(Request $request): Response
     {
@@ -119,7 +117,7 @@ class JobController extends Controller
         $form = $this->createForm(CreateOneshotType::class, $newOneshot);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
-            /** @var \CodeRhapsodie\DataflowBundle\Entity\Job $newOneshot */
+            /** @var Job $newOneshot */
             $newOneshot = $form->getData();
             $newOneshot->setStatus(Job::STATUS_PENDING);
 
@@ -159,9 +157,9 @@ class JobController extends Controller
 
         $newOneshotJob = new Job();
         $newOneshotJob->setOptions($scheduledDataflow->getOptions());
-        $newOneshotJob->setLabel("Manual " . $scheduledDataflow->getLabel());
+        $newOneshotJob->setLabel('Manual '.$scheduledDataflow->getLabel());
         $newOneshotJob->setScheduledDataflowId($scheduledDataflow->getId());
-        $newOneshotJob->setRequestedDate((new \DateTime())->add(new \DateInterval('PT1H')));
+        $newOneshotJob->setRequestedDate(new \DateTime()->add(new \DateInterval('PT1H')));
         $newOneshotJob->setDataflowType($scheduledDataflow->getDataflowType());
 
         $form = $this->createForm(CreateOneshotType::class, $newOneshotJob, [

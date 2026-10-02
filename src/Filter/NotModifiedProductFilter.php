@@ -10,7 +10,6 @@ use Doctrine\DBAL\Connection;
 
 readonly class NotModifiedProductFilter
 {
-
     public function __construct(private NotModifiedContentFilter $notModifiedContentFilter, private Connection $connection)
     {
     }
@@ -42,5 +41,4 @@ readonly class NotModifiedProductFilter
 
         return $data;
     }
-
 }

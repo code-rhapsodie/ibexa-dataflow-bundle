@@ -19,7 +19,7 @@ readonly class ContentUpdater implements ContentUpdaterInterface
     }
 
     /**
-     * @throws \CodeRhapsodie\IbexaDataflowBundle\Exception\NoMatchFoundException
+     * @throws NoMatchFoundException
      * @throws \Ibexa\Contracts\Core\Repository\Exceptions\BadStateException
      * @throws \Ibexa\Contracts\Core\Repository\Exceptions\ContentFieldValidationException
      * @throws \Ibexa\Contracts\Core\Repository\Exceptions\ContentValidationException
@@ -29,9 +29,9 @@ readonly class ContentUpdater implements ContentUpdaterInterface
      */
     public function updateFromStructure(ContentUpdateStructure $structure): Content
     {
-        if (null !== $structure->getId()) {
+        if ($structure->getId() !== null) {
             $content = $this->contentService->loadContent($structure->getId());
-        } elseif (null !== $structure->getRemoteId()) {
+        } elseif ($structure->getRemoteId() !== null) {
             $content = $this->contentService->loadContentByRemoteId($structure->getRemoteId());
         } else {
             throw new NoMatchFoundException('ContentUpdateStructure should either have their id or their remoteId set in order to match the content to update');

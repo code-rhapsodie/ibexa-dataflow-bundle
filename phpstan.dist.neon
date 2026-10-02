@@ -1,0 +1,28 @@
+includes:
+    - vendor/ekino/phpstan-banned-code/extension.neon
+parameters:
+    level: 4
+    banned_code:
+        non_ignorable: false
+    paths:
+        - src
+    ignoreErrors:
+        # Field comparators receive a generic Value and access the properties of the concrete field type value
+        -
+            identifiers:
+                - property.notFound
+                - method.notFound
+                - parameter.phpDocType
+            path: src/Core/FieldComparator/*
+        # Classes from optional Ibexa packages that are not required by this bundle
+        -
+            identifier: class.notFound
+            path: src/Core/FieldComparator/*
+        # Defensive default if the user has no timezone preference
+        -
+            identifier: nullCoalesce.property
+            path: src/Form/UserTimezoneAwareDateTimeTransformer.php
+        # Output is streamed to the client from StreamedResponse callbacks
+        -
+            identifier: ekinoBannedCode.expression
+            path: src/Controller/JobController.php

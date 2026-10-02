@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace CodeRhapsodie\IbexaDataflowBundle\Gateway;
 
@@ -15,11 +17,6 @@ use Pagerfanta\Adapter\AdapterInterface;
 class TransformingAdapter implements AdapterInterface
 {
     /**
-     * @var AdapterInterface<T>
-     */
-    private AdapterInterface $adapter;
-
-    /**
      * @var callable
      *
      * @phpstan-var callable(T, array-key): Transformed
@@ -31,9 +28,8 @@ class TransformingAdapter implements AdapterInterface
      *
      * @phpstan-param callable(T, array-key): Transformed $transformer
      */
-    public function __construct(AdapterInterface $adapter, callable $transformer)
+    public function __construct(private readonly AdapterInterface $adapter, callable $transformer)
     {
-        $this->adapter = $adapter;
         $this->transformer = $transformer;
     }
 

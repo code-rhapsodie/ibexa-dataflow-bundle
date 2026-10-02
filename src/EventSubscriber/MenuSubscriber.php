@@ -10,9 +10,6 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 class MenuSubscriber implements EventSubscriberInterface
 {
-    /**
-     * {@inheritdoc}
-     */
     public static function getSubscribedEvents(): array
     {
         return [ConfigureMenuEvent::MAIN_MENU => 'onConfigureMenu'];
