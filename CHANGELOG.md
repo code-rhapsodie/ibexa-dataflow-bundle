@@ -1,3 +1,9 @@
+# Version 6.6.0
+* Add "Information" and "Log" tabs in the job popin, with content kept in memory, an empty log message and a back button to the executions history
+* Add `?job=<id>` query parameter to open the job details popin directly (e.g. from an Ibexa notification)
+* Improve form popins: focus the first field on open, reset fields and errors on close, disable submit while pending
+* Fix scheduled dataflow form validation (constraints as PHP attributes)
+
 # Version 6.5.1
 * Fix missing permission check on scheduled dataflow edit (broken access control)
 * Fix XSS in streamed job log output
