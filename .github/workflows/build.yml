@@ -11,6 +11,8 @@ jobs:
     name: Build and analyze
     runs-on: ubuntu-latest
 
+    environment: CI
+
     steps:
       - uses: actions/checkout@v6
         with:
