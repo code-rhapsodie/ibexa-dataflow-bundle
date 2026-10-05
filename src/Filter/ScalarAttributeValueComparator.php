@@ -14,7 +14,10 @@ class ScalarAttributeValueComparator implements ProductAttributeValueComparatorI
         return true;
     }
 
-
+    /**
+     * Loose on the PHP type (a float attribute is stored as float but may be imported as int or string),
+     * strict on the value.
+     */
     public function isSame(mixed $stored, mixed $expected): bool
     {
         if (!\is_scalar($stored) || !\is_scalar($expected)) {
