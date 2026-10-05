@@ -1,4 +1,4 @@
-# Unreleased
+# Version 6.7.0
 * `NotModifiedProductFilter` now compares product attributes (per attribute type) and no longer skips the update of a product whose attributes changed or are unset, e.g. a null `checkbox` value
 * Add `ProductAttributesComparatorInterface` (default `ApiProductAttributesComparator`, using the public product catalog API) and `ProductAttributeValueComparatorInterface` (tag `coderhapsodie.ibexa_dataflow.product_attribute_value_comparator`) to customize the comparison
 
