@@ -33,7 +33,7 @@ class DateTimeAttributeValueComparator implements ProductAttributeValueComparato
         }
 
         try {
-            return (new \DateTimeImmutable($value))->getTimestamp();
+            return new \DateTimeImmutable($value)->getTimestamp();
         } catch (\Exception) {
             return null;
         }

@@ -13,16 +13,16 @@ class AttributeValueComparatorsTest extends TestCase
 {
     public function testSupportedTypes(): void
     {
-        $this->assertTrue((new DateTimeAttributeValueComparator())->supports('datetime'));
-        $this->assertFalse((new DateTimeAttributeValueComparator())->supports('measurement'));
-        $this->assertTrue((new MeasurementAttributeValueComparator())->supports('measurement'));
-        $this->assertFalse((new MeasurementAttributeValueComparator())->supports('datetime'));
+        $this->assertTrue(new DateTimeAttributeValueComparator()->supports('datetime'));
+        $this->assertFalse(new DateTimeAttributeValueComparator()->supports('measurement'));
+        $this->assertTrue(new MeasurementAttributeValueComparator()->supports('measurement'));
+        $this->assertFalse(new MeasurementAttributeValueComparator()->supports('datetime'));
     }
 
     #[DataProvider('provideDates')]
     public function testDateTime(mixed $stored, mixed $expected, bool $same): void
     {
-        $this->assertSame($same, (new DateTimeAttributeValueComparator())->isSame($stored, $expected));
+        $this->assertSame($same, new DateTimeAttributeValueComparator()->isSame($stored, $expected));
     }
 
     public static function provideDates(): iterable
@@ -42,7 +42,7 @@ class AttributeValueComparatorsTest extends TestCase
     #[DataProvider('provideMeasurements')]
     public function testMeasurement(mixed $stored, mixed $expected, bool $same): void
     {
-        $this->assertSame($same, (new MeasurementAttributeValueComparator())->isSame($stored, $expected));
+        $this->assertSame($same, new MeasurementAttributeValueComparator()->isSame($stored, $expected));
     }
 
     public static function provideMeasurements(): iterable
@@ -60,7 +60,7 @@ class AttributeValueComparatorsTest extends TestCase
 
     private static function simple(int|float $value, string $unit): object
     {
-        return new class($value, $unit) {
+        return new readonly class($value, $unit) {
             public function __construct(private int|float $value, private string $unit)
             {
             }
@@ -79,7 +79,7 @@ class AttributeValueComparatorsTest extends TestCase
 
     private static function range(int|float $min, int|float $max, string $unit): object
     {
-        return new class($min, $max, $unit) {
+        return new readonly class($min, $max, $unit) {
             public function __construct(private int|float $min, private int|float $max, private string $unit)
             {
             }

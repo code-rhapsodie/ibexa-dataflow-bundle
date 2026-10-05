@@ -20,7 +20,7 @@ class ProductAttributesComparatorCompilerPassTest extends TestCase
         $container = $this->container();
         $container->setDefinition(ProductServiceInterface::class, new Definition(\stdClass::class));
 
-        (new ProductAttributesComparatorCompilerPass())->process($container);
+        new ProductAttributesComparatorCompilerPass()->process($container);
 
         $this->assertTrue($container->hasDefinition(ApiProductAttributesComparator::class));
         $this->assertSame(ApiProductAttributesComparator::class, (string) $container->getAlias(ProductAttributesComparatorInterface::class));
@@ -30,7 +30,7 @@ class ProductAttributesComparatorCompilerPassTest extends TestCase
     {
         $container = $this->container();
 
-        (new ProductAttributesComparatorCompilerPass())->process($container);
+        new ProductAttributesComparatorCompilerPass()->process($container);
 
         $this->assertFalse($container->hasDefinition(ApiProductAttributesComparator::class));
         $this->assertSame(NullProductAttributesComparator::class, (string) $container->getAlias(ProductAttributesComparatorInterface::class));
@@ -41,7 +41,7 @@ class ProductAttributesComparatorCompilerPassTest extends TestCase
         $container = $this->container();
         $container->setAlias(ProductAttributesComparatorInterface::class, 'app.comparator');
 
-        (new ProductAttributesComparatorCompilerPass())->process($container);
+        new ProductAttributesComparatorCompilerPass()->process($container);
 
         $this->assertSame('app.comparator', (string) $container->getAlias(ProductAttributesComparatorInterface::class));
     }
