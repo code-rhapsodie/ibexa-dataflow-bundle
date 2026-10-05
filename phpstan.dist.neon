@@ -17,7 +17,10 @@ parameters:
         # Classes from optional Ibexa packages that are not required by this bundle
         -
             identifier: class.notFound
-            path: src/Core/FieldComparator/*
+            paths:
+                - src/Core/FieldComparator/*
+                - src/Filter/ApiProductAttributesComparator.php
+                - src/DependencyInjection/Compiler/ProductAttributesComparatorCompilerPass.php
         # Defensive default if the user has no timezone preference
         -
             identifier: nullCoalesce.property

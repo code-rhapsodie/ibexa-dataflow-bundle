@@ -6,6 +6,7 @@ namespace CodeRhapsodie\IbexaDataflowBundle;
 
 use CodeRhapsodie\IbexaDataflowBundle\DependencyInjection\CodeRhapsodieIbexaDataflowExtension;
 use CodeRhapsodie\IbexaDataflowBundle\DependencyInjection\Compiler\FieldComparatorCompilerPass;
+use CodeRhapsodie\IbexaDataflowBundle\DependencyInjection\Compiler\ProductAttributesComparatorCompilerPass;
 use CodeRhapsodie\IbexaDataflowBundle\Security\PolicyProvider;
 use Ibexa\Bundle\Core\DependencyInjection\IbexaCoreExtension;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
@@ -30,6 +31,7 @@ class CodeRhapsodieIbexaDataflowBundle extends Bundle
         parent::build($container);
 
         $container->addCompilerPass(new FieldComparatorCompilerPass());
+        $container->addCompilerPass(new ProductAttributesComparatorCompilerPass());
 
         /** @var IbexaCoreExtension $ibexaExtension */
         $ibexaExtension = $container->getExtension('ibexa');

@@ -162,6 +162,20 @@ services:
       arguments:
         $notModifiedContentFilter: '@CodeRhapsodie\IbexaDataflowBundle\Filter\NotModifiedContentFilter'
         $connection: '@ibexa.persistence.connection'
+        $attributesComparator: '@CodeRhapsodie\IbexaDataflowBundle\Filter\ProductAttributesComparatorInterface'
+
+    CodeRhapsodie\IbexaDataflowBundle\Filter\ProductAttributesComparatorInterface: '@CodeRhapsodie\IbexaDataflowBundle\Filter\ApiProductAttributesComparator'
+    CodeRhapsodie\IbexaDataflowBundle\Filter\ApiProductAttributesComparator:
+        arguments:
+            $productService: '@Ibexa\Contracts\ProductCatalog\ProductServiceInterface'
+            $valueComparators: !tagged_iterator coderhapsodie.ibexa_dataflow.product_attribute_value_comparator
+            $fallback: '@CodeRhapsodie\IbexaDataflowBundle\Filter\ScalarAttributeValueComparator'
+
+    CodeRhapsodie\IbexaDataflowBundle\Filter\ScalarAttributeValueComparator: ~
+    CodeRhapsodie\IbexaDataflowBundle\Filter\DateTimeAttributeValueComparator:
+        tags: ['coderhapsodie.ibexa_dataflow.product_attribute_value_comparator']
+    CodeRhapsodie\IbexaDataflowBundle\Filter\MeasurementAttributeValueComparator:
+        tags: ['coderhapsodie.ibexa_dataflow.product_attribute_value_comparator']
 
     CodeRhapsodie\IbexaDataflowBundle\Core\FieldComparator\FieldComparatorInterface: '@CodeRhapsodie\IbexaDataflowBundle\Core\FieldComparator\DelegatorFieldComparator'
     CodeRhapsodie\IbexaDataflowBundle\Core\FieldComparator\DelegatorFieldComparator:

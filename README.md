@@ -290,6 +290,66 @@ App\FieldComparator\MyFieldComparator:
     - { name: 'coderhapsodie.ibexa_dataflow.field_comparator', fieldType: 'my_field_type_identifier' }
 ```
 
+## Product attributes and `NotModifiedProductFilter`
+
+`NotModifiedProductFilter` skips the update of a product when its content fields and its attributes are unchanged
+(`ProductUpdateStructure::setUpdateContent(false)`). Content fields are compared with the field comparators above.
+Attributes are compared by a `ProductAttributesComparatorInterface` service.
+
+The default implementation, `ApiProductAttributesComparator`, loads the product through the public
+`Ibexa\Contracts\ProductCatalog\ProductServiceInterface` and compares each imported attribute with the stored one.
+An attribute that is missing or has no value on the stored product is always considered modified. The comparison
+depends on the attribute type:
+
+| Attribute type | Comparison |
+|----------------|------------|
+| `datetime` | Same instant. Values can be `DateTimeInterface` or strings, time zones are ignored. |
+| `measurement` | Same value (or min/max for ranges) and same unit. Handled by duck typing, `ibexa/measurement` is not required. |
+| anything else (`checkbox`, `integer`, `float`, `color`, `selection`, `symbol`...) | Same scalar value. The PHP type is ignored (`3`, `3.0` and `'3'` are equal). |
+
+When in doubt (unknown object, unexpected format), the attribute is considered modified: the worst case is an
+unnecessary update. Without `ibexa/product-catalog`, attributes never trigger an update.
+
+### Add a custom attribute value comparator
+
+To handle an attribute type (for example one added by a third party package), implement
+`ProductAttributeValueComparatorInterface` and tag the service. The first comparator that supports the type is used.
+
+```php
+<?php
+
+use CodeRhapsodie\IbexaDataflowBundle\Filter\ProductAttributeValueComparatorInterface;
+
+class MyAttributeValueComparator implements ProductAttributeValueComparatorInterface
+{
+    public function supports(string $attributeType): bool
+    {
+        return $attributeType === 'my_attribute_type';
+    }
+
+    public function isSame(mixed $stored, mixed $expected): bool
+    {
+        // Return true if values are identical, false if values are different (or if unsure).
+    }
+}
+```
+
+```yaml
+# Service declaration
+App\AttributeComparator\MyAttributeValueComparator:
+  tags:
+    - { name: 'coderhapsodie.ibexa_dataflow.product_attribute_value_comparator' }
+```
+
+### Replace the attribute comparator
+
+Loading each product through the API can be slow on large catalogs. You can replace the whole strategy (for example
+with a single SQL query) by implementing `ProductAttributesComparatorInterface` and overriding the alias:
+
+```yaml
+CodeRhapsodie\IbexaDataflowBundle\Filter\ProductAttributesComparatorInterface: '@App\Dataflow\MyProductAttributesComparator'
+```
+
 # Admin UI
 
 ## Access to the Ibexa Dataflow UI

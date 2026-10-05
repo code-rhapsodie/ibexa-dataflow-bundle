@@ -10,7 +10,7 @@ use Doctrine\DBAL\Connection;
 
 readonly class NotModifiedProductFilter
 {
-    public function __construct(private NotModifiedContentFilter $notModifiedContentFilter, private Connection $connection)
+    public function __construct(private NotModifiedContentFilter $notModifiedContentFilter, private Connection $connection, private ProductAttributesComparatorInterface $attributesComparator)
     {
     }
 
@@ -29,7 +29,7 @@ readonly class NotModifiedProductFilter
 
         $result = $this->notModifiedContentFilter->__invoke(ContentUpdateStructure::createForContentId($contentId[0], $data->getLanguageCode(), $data->getFields()));
 
-        if ($result === false) {
+        if ($result === false && !$this->attributesComparator->hasModifiedAttributes($data)) {
             $data->setUpdateContent(false);
         }
 
