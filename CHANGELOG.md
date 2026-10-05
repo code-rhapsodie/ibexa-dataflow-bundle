@@ -1,3 +1,7 @@
+# Version 6.7.0
+* `NotModifiedProductFilter` now compares product attributes (per attribute type) and no longer skips the update of a product whose attributes changed or are unset, e.g. a null `checkbox` value
+* Add `ProductAttributesComparatorInterface` (default `ApiProductAttributesComparator`, using the public product catalog API) and `ProductAttributeValueComparatorInterface` (tag `coderhapsodie.ibexa_dataflow.product_attribute_value_comparator`) to customize the comparison
+
 # Version 6.6.0
 * Add "Information" and "Log" tabs in the job popin, with content kept in memory, an empty log message and a back button to the executions history
 * Add `?job=<id>` query parameter to open the job details popin directly (e.g. from an Ibexa notification)
