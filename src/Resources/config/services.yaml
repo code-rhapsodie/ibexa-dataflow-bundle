@@ -106,11 +106,6 @@ services:
     CodeRhapsodie\IbexaDataflowBundle\Form\CreateOneshotType:
         tags: ['form.type']
 
-    CodeRhapsodie\IbexaDataflowBundle\Form\UserTimezoneAwareDateTimeType:
-        arguments:
-            $userPreferenceService: '@Ibexa\Contracts\Core\Repository\UserPreferenceService'
-        tags: ['form.type']
-
     CodeRhapsodie\IbexaDataflowBundle\Gateway\ScheduledDataflowGateway:
         arguments:
             $scheduledDataflowRepository: '@CodeRhapsodie\DataflowBundle\Repository\ScheduledDataflowRepository'

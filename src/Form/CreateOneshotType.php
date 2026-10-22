@@ -29,7 +29,7 @@ class CreateOneshotType extends AbstractType
                     'placeholder' => 'coderhapsodie.dataflow.options.placeholder',
                 ],
             ])
-            ->add('requestedDate', UserTimezoneAwareDateTimeType::class, [
+            ->add('requestedDate', LocalDateTimePickerType::class, [
                 'label' => 'coderhapsodie.dataflow.requestedDate',
             ])
         ;

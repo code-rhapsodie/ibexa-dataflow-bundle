@@ -31,7 +31,7 @@ class UpdateScheduledType extends AbstractType
                 ],
                 'label' => 'coderhapsodie.dataflow.frequency',
             ])
-            ->add('next', UserTimezoneAwareDateTimeType::class, [
+            ->add('next', LocalDateTimePickerType::class, [
                 'label' => 'coderhapsodie.dataflow.update.next',
             ])
         ;
