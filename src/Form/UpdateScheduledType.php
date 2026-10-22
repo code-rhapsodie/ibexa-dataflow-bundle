@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace CodeRhapsodie\IbexaDataflowBundle\Form;
 
 use CodeRhapsodie\DataflowBundle\Entity\ScheduledDataflow;
+use Ibexa\AdminUi\Form\Type\DateTimePickerType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -31,7 +32,7 @@ class UpdateScheduledType extends AbstractType
                 ],
                 'label' => 'coderhapsodie.dataflow.frequency',
             ])
-            ->add('next', UserTimezoneAwareDateTimeType::class, [
+            ->add('next', DateTimePickerType::class, [
                 'label' => 'coderhapsodie.dataflow.update.next',
             ])
         ;

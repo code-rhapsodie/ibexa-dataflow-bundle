@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace CodeRhapsodie\IbexaDataflowBundle\Form;
 
 use CodeRhapsodie\DataflowBundle\Entity\Job;
+use Ibexa\AdminUi\Form\Type\DateTimePickerType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -29,7 +30,7 @@ class CreateOneshotType extends AbstractType
                     'placeholder' => 'coderhapsodie.dataflow.options.placeholder',
                 ],
             ])
-            ->add('requestedDate', UserTimezoneAwareDateTimeType::class, [
+            ->add('requestedDate', DateTimePickerType::class, [
                 'label' => 'coderhapsodie.dataflow.requestedDate',
             ])
         ;

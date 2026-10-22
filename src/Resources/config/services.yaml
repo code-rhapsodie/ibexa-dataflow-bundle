@@ -9,6 +9,10 @@ services:
 
     coderhapsodie.dataflow.connection: "@ibexa.persistence.connection"
 
+    CodeRhapsodie\IbexaDataflowBundle\Command\ConvertDatesTimezoneCommand:
+        arguments:
+            $connection: '@coderhapsodie.dataflow.connection'
+
     CodeRhapsodie\IbexaDataflowBundle\Controller\DashboardController:
         public: true
         arguments:
@@ -104,11 +108,6 @@ services:
         tags: ['form.type']
 
     CodeRhapsodie\IbexaDataflowBundle\Form\CreateOneshotType:
-        tags: ['form.type']
-
-    CodeRhapsodie\IbexaDataflowBundle\Form\UserTimezoneAwareDateTimeType:
-        arguments:
-            $userPreferenceService: '@Ibexa\Contracts\Core\Repository\UserPreferenceService'
         tags: ['form.type']
 
     CodeRhapsodie\IbexaDataflowBundle\Gateway\ScheduledDataflowGateway:

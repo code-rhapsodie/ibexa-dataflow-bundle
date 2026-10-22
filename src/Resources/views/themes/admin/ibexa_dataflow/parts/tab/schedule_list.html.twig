@@ -33,7 +33,7 @@
         {% set body_row_cols = body_row_cols|merge([
             {content: item.label},
             {content: item.frequency},
-            {content: date(item.next)|ibexa_short_datetime},
+            {content: date(item.next, 'UTC')|ibexa_short_datetime},
             {content: avg_time_display},
             {content: ('coderhapsodie.ibexa_dataflow.' ~ (item.enabled ? 'yes' : 'no'))|trans},
         ]) %}
