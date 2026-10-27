@@ -1,0 +1,8 @@
+<script>
+    {# flatpickr lit l'heure du navigateur, alors que le picker Ibexa l'interprète dans le fuseau de l'utilisateur #}
+    window.coderhapsodieDataflowPickerDate = window.coderhapsodieDataflowPickerDate || ((date) => {
+        const userDate = ibexa.helpers.timezone.convertDateToTimezone(date, ibexa.adminUiConfig.timezone);
+
+        return new Date(userDate.year(), userDate.month(), userDate.date(), userDate.hour(), userDate.minute(), userDate.second());
+    });
+</script>

@@ -107,8 +107,6 @@ services:
         tags: ['form.type']
 
     CodeRhapsodie\IbexaDataflowBundle\Form\UserTimezoneAwareDateTimeType:
-        arguments:
-            $userPreferenceService: '@Ibexa\Contracts\Core\Repository\UserPreferenceService'
         tags: ['form.type']
 
     CodeRhapsodie\IbexaDataflowBundle\Gateway\ScheduledDataflowGateway:

@@ -4,23 +4,17 @@ declare(strict_types=1);
 
 namespace CodeRhapsodie\IbexaDataflowBundle\Form;
 
-use Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException;
-use Ibexa\Contracts\Core\Repository\UserPreferenceService;
 use Symfony\Component\Form\DataTransformerInterface;
 
+/**
+ * Le picker Ibexa échange des timestamps et renvoie un DateTime en UTC.
+ * Les dates sont stockées dans le fuseau PHP : on y ramène la valeur saisie.
+ */
 class UserTimezoneAwareDateTimeTransformer implements DataTransformerInterface
 {
-    public function __construct(private readonly UserPreferenceService $userPreferenceService)
-    {
-    }
-
     public function transform($value): mixed
     {
-        if (!$value instanceof \DateTimeInterface) {
-            return $value;
-        }
-
-        return new \DateTime('now', $this->userTimezone())->setTimestamp($value->getTimestamp());
+        return $value;
     }
 
     public function reverseTransform($value): mixed
@@ -29,19 +23,6 @@ class UserTimezoneAwareDateTimeTransformer implements DataTransformerInterface
             return $value;
         }
 
-        $dateTimeWithUserTimeZone = new \DateTime($value->format('Y-m-d H:i:s'), $this->userTimezone());
-
-        return new \DateTime()->setTimestamp($dateTimeWithUserTimeZone->getTimestamp());
-    }
-
-    private function userTimezone(): \DateTimeZone
-    {
-        try {
-            $tz = $this->userPreferenceService->getUserPreference('timezone')->value ?? 'UTC';
-        } catch (NotFoundException) {
-            $tz = 'UTC';
-        }
-
-        return new \DateTimeZone($tz);
+        return \DateTime::createFromInterface($value)->setTimezone(new \DateTimeZone(date_default_timezone_get()));
     }
 }

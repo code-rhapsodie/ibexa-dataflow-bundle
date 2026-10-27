@@ -31,6 +31,7 @@
         }) }}
     {% endif %}
 
+    {{ include('@ibexadesign/ibexa_dataflow/parts/picker_date.html.twig') }}
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             document.querySelector('#modal-new-oneshot form').addEventListener('submit', function (e) {
@@ -75,7 +76,7 @@
                     const oneShotModal = document.getElementById('modal-new-oneshot');
                     oneShotModal.querySelector('#create_oneshot_label').value = '';
                     oneShotModal.querySelector('#create_oneshot_options').value = '';
-                    oneShotModal.querySelector('#create_oneshot_requestedDate').closest('.ibexa-picker').querySelector('.ibexa-date-time-picker').ibexaInstance.flatpickrInstance.setDate(new Date(), true);
+                    oneShotModal.querySelector('#create_oneshot_requestedDate').closest('.ibexa-picker').querySelector('.ibexa-date-time-picker').ibexaInstance.flatpickrInstance.setDate(window.coderhapsodieDataflowPickerDate(new Date()), true);
                 });
             }
         });
