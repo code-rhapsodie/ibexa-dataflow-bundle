@@ -1,3 +1,9 @@
+# Unreleased
+* [BC] Dates are now read and written in UTC, whatever the PHP default timezone is (requires a `code-rhapsodie/dataflow-bundle` version storing dates in UTC). Dates are displayed in the user timezone. See UPGRADE.md to convert the existing dates
+* Fix the dates filled by the forms, which depended on both the PHP timezone and the user timezone
+* Remove `UserTimezoneAwareDateTimeType` and `UserTimezoneAwareDateTimeTransformer`: the forms use the `DateTimePickerType` of Ibexa
+* Add the `code-rhapsodie:ibexa-dataflow:convert-dates` command to convert to UTC the dates filled by the forms
+
 # Version 6.7.0
 * `NotModifiedProductFilter` now compares product attributes (per attribute type) and no longer skips the update of a product whose attributes changed or are unset, e.g. a null `checkbox` value
 * Add `ProductAttributesComparatorInterface` (default `ApiProductAttributesComparator`, using the public product catalog API) and `ProductAttributeValueComparatorInterface` (tag `coderhapsodie.ibexa_dataflow.product_attribute_value_comparator`) to customize the comparison

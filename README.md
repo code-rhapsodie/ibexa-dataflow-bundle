@@ -1,7 +1,11 @@
 # Code Rhapsodie Ibexa Dataflow Bundle
 
+> [!WARNING]
+> **Breaking change: dates are now stored in UTC**, whatever the PHP default timezone is.
+> Existing dates must be converted with commands before running the new version: see [UPGRADE.md](UPGRADE.md).
+
 Ibexa DataflowBundle is a bundle
-integrating [Code Rhapsodie Dataflow bundle](https://github.com/code-rhapsodie/dataflow-bundle) into Ibexa 4.0+.
+integrating [Code Rhapsodie Dataflow bundle](https://github.com/code-rhapsodie/dataflow-bundle) into Ibexa 5.0+.
 Dataflows can be piloted from an interface integrated into the Ibexa backoffice.
 Ibexa Dataflow bundle is intended to manage content imports from external data sources.
 
@@ -13,6 +17,7 @@ Ibexa Dataflow bundle is intended to manage content imports from external data s
 
 | Ibexa Dataflow Version | Ibexa Content Version | Status                        |
 |------------------------|-----------------------|-------------------------------|
+| 7.x                    | 5.x                   | :white_check_mark: Maintained |
 | 6.x                    | 5.x                   | :white_check_mark: Maintained |
 
 ## User Interface (UI)
