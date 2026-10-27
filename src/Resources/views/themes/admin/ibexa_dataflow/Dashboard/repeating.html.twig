@@ -1,4 +1,6 @@
 {%- block content -%}
+    {{ include('@ibexadesign/ibexa_dataflow/parts/picker_date.html.twig') }}
+
     {% form_theme update_form '@ibexadesign/ibexa_dataflow/form_theme.html.twig' %}
 
     {{ include('@ibexadesign/ibexa_dataflow/parts/tab/schedule_list.html.twig', {
@@ -116,7 +118,7 @@
                             editModal.querySelector('#update_scheduled_options').value = node.querySelector('#update_scheduled_options').value;
                             editModal.querySelector('#update_scheduled_frequency').value = node.querySelector('#update_scheduled_frequency').value;
                             editModal.querySelector('#update_scheduled_next').closest('.ibexa-picker').querySelector('.ibexa-date-time-picker').ibexaInstance.flatpickrInstance.setDate(
-                                new Date(node.querySelector('#update_scheduled_next').value * 1000),
+                                window.coderhapsodieDataflowPickerDate(new Date(node.querySelector('#update_scheduled_next').value * 1000)),
                                 true
                             );
                         })

@@ -1,0 +1,8 @@
+<script>
+    // The Ibexa picker displays the wall time of the date it receives as a time in the user timezone, whatever the browser timezone is
+    window.coderhapsodieDataflowPickerDate = window.coderhapsodieDataflowPickerDate || ((date) => {
+        const userDate = ibexa.helpers.timezone.convertDateToTimezone(date, ibexa.adminUiConfig.timezone);
+
+        return new Date(userDate.year(), userDate.month(), userDate.date(), userDate.hour(), userDate.minute(), userDate.second());
+    });
+</script>

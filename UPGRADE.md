@@ -1,30 +1,51 @@
 # Upgrade to v7
 
 [BC] Dates (`next` of the scheduled dataflows, `requested_date`, `start_time` and `end_time` of the jobs) are now stored and read in UTC,
-whatever the PHP default timezone is. The existing dates must be converted. **Make a backup of the tables first: the commands are not idempotent.**
+whatever the PHP default timezone is. The existing dates must be converted.
+**Make a backup of the tables first: the commands are not idempotent, run each of them only once.**
 
-Dates are not written the same way depending on their origin, so two commands are needed:
+The dates written by PHP (`start_time`, `end_time`) were stored in the PHP timezone. The dates filled by the forms
+(`next`, `requested_date`) were stored differently depending on the version of the bundle that created the row.
 
-1. Dates written by PHP (`start_time`, `end_time`), in the PHP timezone: use the command of the dataflow-bundle
-   (see its [upgrade guide](https://github.com/code-rhapsodie/dataflow-bundle/blob/master/UPGRADE.md)):
+| Version when the row was created                                   | Stored value                                                        | Conversion to UTC                                                                         |
+|--------------------------------------------------------------------|---------------------------------------------------------------------|-------------------------------------------------------------------------------------------|
+| Ibexa 3 (`ezdataflow-bundle` 3.x, Symfony form)                    | Correct in the PHP timezone                                         | `code-rhapsodie:dataflow:convert-dates-to-utc --next --requested-date`                    |
+| Ibexa 4+ (Ibexa date time picker, `UserTimezoneAwareDateTimeType`) | Shifted by the difference between the PHP timezone and the user one | `code-rhapsodie:ibexa-dataflow:convert-dates --user-timezone=<tz> [--php-timezone=<tz>]`  |
 
-   ```shell
-   php bin/console code-rhapsodie:dataflow:convert-dates-to-utc --dry-run
-   ```
+## 1. Dates written by PHP
 
-2. Dates filled by the forms of this bundle (`next`, `requested_date`): the old forms stored the UTC wall time shifted by the difference
-   between the PHP timezone and the timezone of the user who filled the form. The original date can be recovered only if you tell
-   which timezone the users had (the same for all of them) and which PHP timezone was configured:
+`start_time` and `end_time` are always converted by the command of the dataflow-bundle
+(see its [upgrade guide](https://github.com/code-rhapsodie/dataflow-bundle/blob/master/UPGRADE.md)):
 
-   ```shell
-   php bin/console code-rhapsodie:ibexa-dataflow:convert-dates --user-timezone=Europe/Paris [--php-timezone=UTC] --dry-run
-   ```
+```shell
+php bin/console code-rhapsodie:dataflow:convert-dates-to-utc [--timezone=Europe/Paris] --dry-run
+```
 
-   `--php-timezone` defaults to the current PHP default timezone. Rows created by the CLI or by PHP code are not tagged and are converted too:
-   check the result with `--dry-run` first, and do not run the first command on `next` / `requested_date`
-   (do not use its `--next` and `--requested-date` options).
+## 2. Dates filled by the forms
 
-Run each command once, without `--dry-run`, when the result is the expected one, then deploy the new version.
+### Rows created with Ibexa 3 (`ezdataflow-bundle`)
+
+The value stored in the PHP timezone is correct: add the `--next` and `--requested-date` options to the command above.
+
+### Rows created with Ibexa 4+
+
+The old forms stored the UTC wall time shifted by the difference between the PHP timezone and the timezone of the user who filled the form.
+The original date can be recovered only if you tell which timezone the users had (the same for all of them) and which PHP timezone was configured:
+
+```shell
+php bin/console code-rhapsodie:ibexa-dataflow:convert-dates --user-timezone=Europe/Paris [--php-timezone=UTC] --dry-run
+```
+
+`--php-timezone` defaults to the current PHP default timezone.
+Do not use the `--next` and `--requested-date` options of the first command on these rows.
+
+### Tables mixing both origins
+
+Rows are not tagged by their origin and the commands convert every row: a table that contains rows from both cases
+(for example rows migrated from Ibexa 3 and rows created later with Ibexa 4+) would have a part of its rows shifted.
+Check the result with `--dry-run`, and fix the rows of the other origin separately (for example with an SQL query on a range of ids).
+
+Run each command without `--dry-run` when the result is the expected one, then deploy the new version.
 
 # Upgrade to v6
 
