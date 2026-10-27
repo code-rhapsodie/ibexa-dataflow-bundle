@@ -36,9 +36,9 @@ TXT,
 )]
 final class ConvertDatesTimezoneCommand extends Command
 {
-    private const BATCH_SIZE = 1000;
+    private const int BATCH_SIZE = 1000;
 
-    private const COLUMNS = [
+    private const array COLUMNS = [
         ScheduledDataflowRepository::TABLE_NAME => ['next'],
         JobRepository::TABLE_NAME => ['requested_date'],
     ];
